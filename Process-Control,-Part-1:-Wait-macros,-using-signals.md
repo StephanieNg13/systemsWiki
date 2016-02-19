@@ -57,7 +57,7 @@ In C, send a signal to the child using `kill` POSIX call,
 ```C
 kill(child, SIGUSR1); // Send a user-defined signal
 kill(child, SIGSTOP); // Stop the child process (the child cannot prevent this)
-kill(child, SIGTERM); // Terminate the child process (the child cannot prevent this)
+kill(child, SIGTERM); // Terminate the child process (the child can prevent this)
 kill(child, SIGINT); // Equivalent to CTRL-C (by default closes the process)
 ```
 
