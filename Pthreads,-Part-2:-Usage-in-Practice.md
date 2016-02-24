@@ -77,7 +77,7 @@ Both `pthread_exit` and `pthread_join` will let the other threads finish on thei
 ## Can you pass pointers to stack variables from one thread to another?
 Yes. However you need to be very careful about the lifetime of stack variables.
 ```
-pthread start_threads() {
+pthread_t start_threads() {
   int start = 42;
   pthread_t tid;
   pthread_create(&tid, 0, myfunc, &start); // ERROR!
