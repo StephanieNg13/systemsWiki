@@ -123,10 +123,10 @@ The above code suffers from a `race condition` - the value of i is changing. The
 To overcome this race-condition, we will give each thread a pointer to it's own data area. For example, for each thread we may want to store the id, a starting value and an output value:
 ```C
 struct T {
-  thread_t id;
+  pthread_t id;
   int start;
   char result[100];
-}
+};
 ```
 These can be stored in an array - 
 ```
