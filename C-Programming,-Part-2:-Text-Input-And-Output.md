@@ -59,7 +59,7 @@ The following code is vulnerable to buffer overflow. It assumes or trusts that t
 char buf[10];
 gets(buf); // Remember the array name means the first byte of the array
 ``` 
-`gets` is deprecated and will be removed in future versions of the C standard. Programs should use `fgets` or `getline` instead. 
+`gets` is deprecated in C99 standard and has been removed from the latest C standard (C11). Programs should use `fgets` or `getline` instead. 
 
 Where each have the following structure respectively:
 ``` 
