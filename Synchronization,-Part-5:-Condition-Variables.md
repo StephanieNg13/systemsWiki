@@ -125,7 +125,7 @@ Notice we lock and unlock the mutex so only one thread can be inside the critica
 sem_post(sem_t *s) {
   pthread_mutex_lock(&s->m);
   s->count++;
-  pthread_cond_signal(s->cv); /* See note */
+  pthread_cond_signal(&s->cv); /* See note */
   /* A woken thread must acquire the lock, so it will also have to wait until we call unlock*/
 
   pthread_mutex_unlock(&s->m);
