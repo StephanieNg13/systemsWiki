@@ -29,7 +29,7 @@ lock = 0;
 
 * Occasionally a waiting thread may appear to wake up for no reason (this is called a _spurious wake_)! This is not an issue because you always use `wait` inside a loop that tests a condition that must be true to continue.
 
-* Threads sleeping inside a condition variable are woken up calling `pthread_cond_broadcast` (wake up all) or `pthread_cond_signal` (wake up one). Note despite the function name, this has nothing to do with POSIX `signal`s!
+* Threads sleeping inside a condition variable are woken up by calling `pthread_cond_broadcast` (wake up all) or `pthread_cond_signal` (wake up one). Note despite the function name, this has nothing to do with POSIX `signal`s!
 
 ## What does `pthread_cond_wait` do?
 The call `pthread_cond_wait` performs three actions:
