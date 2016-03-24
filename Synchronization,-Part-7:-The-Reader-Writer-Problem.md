@@ -8,15 +8,15 @@ An incorrect attempt is shown below ("lock" is a shorthand for `pthread_mutex_lo
 
 <table><tr><td>
 <pre>read()
-  lock(m)
+  lock(&m)
   // do read stuff
-  unlock(m)
+  unlock(&m)
 </pre>
 </td><td>
 <pre>write()
-  lock(m)
+  lock(&m)
   // do write stuff
-  unlock(m)
+  unlock(&m)
 </pre></td></tr></table>
 
 At least our first attempt does not suffer from data corruption (readers must wait while a writer is writing and vice versa)! However readers must also wait for other readers. So let's try another implementation..
