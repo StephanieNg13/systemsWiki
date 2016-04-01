@@ -7,7 +7,7 @@ In modern systems, this is no longer the case. Instead each process is isolated;
 The Memory Management Unit is part of the CPU. It converts a virtual memory address into a physical address. The MMU may also interrupt the CPU if there is currently no mapping from a particular virtual address to a physical address or if the current CPU instruction attempts to write to location that the process only has read-access.
 
 ## So how do we convert a virtual address into a physical address?
-Imagine you had a 32 bit machine. Pointers can hold 32 bits i.e. they can address 2^32 different locations i.e. 4GB of memory (we will following the standard convention of one address can hold one byte).
+Imagine you had a 32 bit machine. Pointers can hold 32 bits i.e. they can address 2^32 different locations i.e. 4GB of memory (we will be following the standard convention of one address can hold one byte).
 
 Imagine we had a large table - here's the clever part - stored in memory! For every possible address (all 4 billion of them) we will store the 'real' i.e. physical address. Each physical address will need 4 bytes (to hold the 32 bits).
 This scheme would require 16 billion bytes to store all of entries. Oops - our lookup scheme would consume all of the memory that we could possibly buy for our 4GB machine.
