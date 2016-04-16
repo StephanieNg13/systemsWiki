@@ -39,7 +39,7 @@ Note pending signals for the child are _not_ inherited during forking.
 The signal disposition of a process is a table of actions. It defines what will happen when a particular signal is delivered to a process. For example, the default disposition of SIG-INT is to terminate the process. The signal disposition is per process not per thread. The signal disposition can be changed by calling signal() (which is simple but not portable as there are subtle variations in its implementation on different POSIX architectures and also not recommended for multi-threaded programs) or `sigaction` (discussed later)
 
 ## What happens during exec ?
-Remember that `exec` replaces the current image with a new program image. In addition the signal disposition is reset. Any pending signals are cleared.
+Remember that `exec` replaces the current image with a new program image. In addition the signal disposition is reset. Pending signals are preserved.
 
 ## What happens during fork ?
 The child process inherits a copy of the parent process's signal disposition and a copy of the parent's signal mask.
