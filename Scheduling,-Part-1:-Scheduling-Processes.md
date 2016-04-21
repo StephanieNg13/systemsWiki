@@ -1,6 +1,5 @@
 ## Scheduling
-# What is scheduling?
-https://en.wikipedia.org/wiki/Scheduling_(computing)
+
 
 # How is scheduling measured?
 Scheduling effects the performance of the system, specifically the *latency* and *throughput* of the system. The throughput might be measured by a system value, for example number of bytes written per second, or number of small processes that can complete per unit time, or using a higher level of abstraction for example number of customer records processed per minute. The latency might be measured by the response time (elapse time before a process can start to send a response) or total wait time or turn around time (the elapsed time to complete a task). Different schedulers offer different optimization trade-offs that may or may not be appropriate to desired use. For example 'shortest-job-first' will minimize total wait time across all jobs but in interactive (UI) environments it would be preferable to minimize response time (at the expense of some throughput).
@@ -56,9 +55,11 @@ If  `Tstart` and `Tend` are the start and end wall-clock times of the process an
 # What is the convoy effect?
 
 
-# For more information see the lecture notes
+# For more information see the lecture notes and wikipedia-
 
 * https://subversion.ews.illinois.edu/svn/sp15-cs241/_shared/lectures/  )
+
+* https://en.wikipedia.org/wiki/Scheduling_(computing)
 
 # Linux Scheduling
 As of February 2016, Linux by default uses the *Completely Fair Scheduler* for CPU scheduling and the Budget Fair Scheduling "BFQ" for I/O scheduling. Appropriate scheduling can have a significant impact on throughput and latency. Latency is particularly important for interactive and soft-real time applications such as audio and video streaming. See the discussion and comparative benchmarks here [https://lkml.org/lkml/2014/5/27/314] for more information.
