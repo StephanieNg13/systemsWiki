@@ -1,8 +1,20 @@
 ## Scheduling
 
+# Thinking about scheduling.
 
-# How is scheduling measured?
-Scheduling effects the performance of the system, specifically the *latency* and *throughput* of the system. The throughput might be measured by a system value, for example number of bytes written per second, or number of small processes that can complete per unit time, or using a higher level of abstraction for example number of customer records processed per minute. The latency might be measured by the response time (elapse time before a process can start to send a response) or total wait time or turn around time (the elapsed time to complete a task). Different schedulers offer different optimization trade-offs that may or may not be appropriate to desired use. For example 'shortest-job-first' will minimize total wait time across all jobs but in interactive (UI) environments it would be preferable to minimize response time (at the expense of some throughput).
+CPU Scheduling is the problem of efficiently selecting which process to run on a system's CPU cores. In a busy system there will be more ready-to-run processes than there are CPU cores, so the system kernel must evaluate which processes should be scheduled to run on the CPU and which processes should be placed in a ready queue to be executed later.
+
+The additional complexity of multi-threaded and multiple CPU cores are considered a distraction to this initial exposition so are ignored here.
+
+Another gotcha for non-native speakers is the dual meaings of "Time": The word "Time" can be used in both clock and elapsed duration context. For example "The arrival time of the first process was 9:00am." and, "The running time of the algorithm is 3 seconds".
+
+# How is scheduling measured and which scheduler is best?
+
+Scheduling effects the performance of the system, specifically the *latency* and *throughput* of the system. The throughput might be measured by a system value, for example the I/O throughput - the number of bytes written per second, or number of small processes that can complete per unit time, or using a higher level of abstraction for example number of customer records processed per minute. The latency might be measured by the response time (elapse time before a process can start to send a response) or wait time or turnaround time (the elapsed time to complete a task). Different schedulers offer different optimization trade-offs that may or may not be appropriate to desired use - there is no optimal scheduler for all possible environments and goals. For example 'shortest-job-first' will minimize total wait time across all jobs but in interactive (UI) environments it would be preferable to minimize response time (at the expense of some throughput), while FCFS seems intuitively fair and easy to implement but suffers from the Convoy Effect.
+
+# What is arrival time?
+
+The time at which a process first arrives at the ready queue, and is ready to start executing. If a CPU is idle, the arrival time would also be the starting time of execution.
 
 # What are some well known scheduling algorithms?
 
@@ -10,20 +22,30 @@ We will discuss four simple scheduling algorithms, Shortest Job First, First Com
 
 * Shortest Job First (SJF)
 
-The next process to be scheduled will be the process with the shortest total CPU time required. One disadvantage of this scheduler is that it needs to be clairvoyant. 
+The next process to be scheduled will be the process with the shortest total CPU time required. One disadvantage of this scheduler is that it needs to be clairvoyant. Note the SJF is not shortest _remaining_ time; processes are ordered by their total CPU needs not the remaining CPU need.
+
+SJF appears in both preemptive and non-preemptive versions. Preemptive SJF has the shortest total weight time when summed over all processes that have a known arrival time and execution time.
 
 * First Come First Served (FCFS)
 
-Processes are scheduled in the order of arrival i.e. the ready queue is a simple FIFO (first in first out) queue.
+Processes are scheduled in the order of arrival. One advantage of FCFS is that scheduling algorithm is simple: the ready queue is a just a FIFO (first in first out) queue.
+FCFS suffers from the Convoy effect (see below).
 
 * Priority
 
 Processes are scheduled in the order of priority value. For example a navigation process might be more important to execute than a logging process.
 
-* Round Robin (RR).
+* Round Robin (RR)
 
 Processes are scheduled in order of their arrival in the ready queue. However after a small time step a running process will be forcibly removed from the running state and placed back on the ready queue. This ensures that a long-running process can not starve all other processes from running.
 The maximum amount of time that a process can execute before being returned to the ready queue is called the time quanta. In the limit of large time quanta (where the time quanta is longer than the running time of all processes) round robin will be equivalent to FCFS.
+
+# What is preemption?
+
+Without preemption processes will run until they are unable to utilize the CPU any further. For example the following conditions would remove a process from the CPU and the CPU would be available to be scheduled for other processes: The process terminates due to a signal, is blocked waiting for concurrency primitive, or exits normally.
+Thus once a process is scheduled it will continue even if another process with a high priority (e.g. shorter job) appears on the ready queue.
+
+With preemption, the existing processes may be removed immediately if a more preferable process is added to the ready queue. For example, suppose at t=0 with a Shortest Job First scheduler there are two processes (P1 P2) with 10 and 20 ms execution times. P1 is scheduled. P1 immediately creates a new process P3, with execution time of 5 ms, which is added to the ready queue. Without preemption, P3 will run 10ms later (after P1 has completed). With preemption, P1 will be immediately evicted from the CPU and instead placed back in the ready queue, and P3 will be executed instead by the CPU.
 
 # Which schedulers suffer from starvation?
 Any scheduler that uses a form of prioritization can result in starvation because earlier processes may never be scheduled to run (assigned a CPU). For example with SJF, longer jobs may never be scheduled if the system continues to have many short jobs to schedule.
@@ -52,10 +74,15 @@ If  `Tstart` and `Tend` are the start and end wall-clock times of the process an
 `wait_time  = (Tend - Tstart) - run_time`
 
 
-# What is the convoy effect?
+# What is the Convoy Effect?
 
+"The Convoy Effect is where I/O intensive processes are continually backed up, waiting for CPU-intensive processes that hog the CPU. This results in poor I/O performance, even for processes that have tiny CPU needs."
 
-# For more information see the lecture notes and wikipedia-
+Suppose the CPU is currently assigned to a CPU intensive task and there is a set of I/O intensive processes that are in the ready queue. These processes require just a tiny amount of CPU time but they are unable to proceed because they are waiting for the CPU-intensive task to be removed from the processor. These processes are starved until the the CPU bound process releases the CPU. But the CPU will rarely be released (for example in the case of a FCFS scheduler, we must wait until the processes is blocked due to an I/O request). The I/O intensive processes can now finally satisfy their CPU needs, which they can do quickly because their CPU needs are small and the CPU is assigned back to the CPU-intensive process again. Thus the I/O performance of the whole system suffers through an indirect effect of starvation of CPU needs of all processes.
+
+This effect is usually discussed in the context of FCFS scheduler, however a round robin scheduler can also exhibit the Convoy effect for long time-quanta.
+
+# For more information see the lecture notes and Wikipedia-
 
 * https://subversion.ews.illinois.edu/svn/sp15-cs241/_shared/lectures/  )
 
