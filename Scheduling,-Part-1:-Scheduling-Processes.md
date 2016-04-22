@@ -53,13 +53,13 @@ Any scheduler that uses a form of prioritization can result in starvation becaus
 For more information see
 https://en.wikipedia.org/wiki/Scheduling_(computing)#Types_of_operating_system_schedulers
 
-# Why might a process be placed on the ready queue?
+# Why might a process (or thread) be placed on the ready queue?
 
 A process is placed on the ready queue when it is able to use a CPU. Some examples include:
-** A process was blocked waiting for a `read` from storage or socket to complete and data is now available.
-** A new process has been created and is ready to start.
-** A process was blocked on a synchronization primitive (condition variable, semaphore, mutex lock) but is now able to continue.
-** A process is blocked but a signal has been delivered and a signal handler needs to run.
+* A process was blocked waiting for a `read` from storage or socket to complete and data is now available.
+* A new process has been created and is ready to start.
+* A process thread was blocked on a synchronization primitive (condition variable, semaphore, mutex lock) but is now able to continue.
+* A process is blocked waiting for a system call to complete but a signal has been delivered and the signal handler needs to run.
 
 Similar examples can be generated when considering threads.
 
@@ -82,9 +82,9 @@ Suppose the CPU is currently assigned to a CPU intensive task and there is a set
 
 This effect is usually discussed in the context of FCFS scheduler, however a round robin scheduler can also exhibit the Convoy effect for long time-quanta.
 
-# For more information see the lecture notes and Wikipedia-
+# For more information see the lecture notes and Wikipedia -
 
-* https://subversion.ews.illinois.edu/svn/sp15-cs241/_shared/lectures/  )
+* https://subversion.ews.illinois.edu/svn/sp15-cs241/_shared/lectures_handouts/ 
 
 * https://en.wikipedia.org/wiki/Scheduling_(computing)
 
