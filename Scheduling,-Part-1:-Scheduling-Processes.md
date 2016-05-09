@@ -24,7 +24,7 @@ We will discuss four simple scheduling algorithms, Shortest Job First, First Com
 
 The next process to be scheduled will be the process with the shortest total CPU time required. One disadvantage of this scheduler is that it needs to be clairvoyant. Note the SJF is not shortest _remaining_ time; processes are ordered by their total CPU needs not the remaining CPU need.
 
-SJF appears in both preemptive and non-preemptive versions. Preemptive SJF has the shortest total weight time when summed over all processes that have a known arrival time and execution time.
+SJF appears in both preemptive and non-preemptive versions. Preemptive SJF has the shortest total wait time when summed over all processes that have a known arrival time and execution time.
 
 Technical Note: A realistic SJF implementation would not use the total execution time of the process but the burst time (the total CPU time including future computational execution before the process will no longer be ready to run). The expected burst time can be estimated by using an exponentially decaying weighted rolling average based on the previous burst time but for this exposition we will simplify this discussion to use the total running time of the process as a proxy for the burst time.
 
