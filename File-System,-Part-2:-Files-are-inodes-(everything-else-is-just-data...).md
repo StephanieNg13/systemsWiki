@@ -162,7 +162,7 @@ One final note of caution: `readdir` is not thread-safe! For multi-threaded sear
 
 See the man page of readdir for more details.
 
-## How I do determine if a directory entry is a directory?
+## How do I determine if a directory entry is a directory?
 Ans: Use `S_ISDIR` to check the mode bits stored in the stat structure
 
 And to check if a file is regular file use `S_ISREG`,
