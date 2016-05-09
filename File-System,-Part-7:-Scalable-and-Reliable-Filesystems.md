@@ -25,7 +25,7 @@ Note you can also request that all changes associated with a particular file des
 
 ## How likely is a disk failure?
 
-Disk failures are measured using "Mean-Time-Failure". For large arrays, the mean failure time can be surprising short. For example if the MTTF(single disk) = 30,000 hours, then the MTTF(100 disks)= 30000/100=300 hours  ie about 12 days!
+Disk failures are measured using "Mean-Time-Failure". For large arrays, the mean failure time can be surprisingly short. For example if the MTTF(single disk) = 30,000 hours, then the MTTF(100 disks)= 30000/100=300 hours  ie about 12 days!
 
 ## How do I protect my data from disk failure?
 
