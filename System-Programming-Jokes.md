@@ -28,6 +28,6 @@ Someone who never lets their code deadlock... but when it does, causes more prob
 
 Someone who believes zombies are real.
 
-Someone who doesn't trust their process to run correctly without testing with the same data, kernel, compiler, RAM, filesystem size,file system format, disk brand, core count, CPU load, weather, magnetic flux, orientation, pixie dust, horoscope sign, wall color, time of day, temperature, humidity...
+Someone who doesn't trust their process to run correctly without testing with the same data, kernel, compiler, RAM, filesystem size,file system format, disk brand, core count, CPU load, weather, magnetic flux, orientation, pixie dust, horoscope sign, wall color, wall gloss and reflectance,illumination, backup battery, time of day, temperature, humidity, lunar position, sun-moon co-position...
 
 
