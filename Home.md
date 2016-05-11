@@ -15,6 +15,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[Filesystem: Review Questions]]
 * [[Networking: Review Questions]]
 * [[Signals: Review Questions]] (todo)
+* [[System Programming Jokes]]
 
 ## Week 1 - 2
 * [[HW0]]
