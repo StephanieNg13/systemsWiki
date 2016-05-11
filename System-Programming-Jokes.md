@@ -25,6 +25,6 @@ A system programmer is...
 
 Someone who knows `sleepsort` is a bad idea but still dreams of an excuse to use it.
 
-Someone who never let's their code deadlock... but when it does causes more problems than everyone else's mistakes combined.
+Someone who never lets their code deadlock... but when it does, causes more problems than everyone else combined.
 
 
