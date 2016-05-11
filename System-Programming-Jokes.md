@@ -1,6 +1,5 @@
 # System Programming Jokes
-Warning: Authors are not responsible for any neuro-apoptosis caused by reading these 'jokes'.
-Authors: Please aim for gender neutrality; the only group we are poking fun at here are system programmers. Groaners are allowed.
+Warning: Authors are not responsible for any neuro-apoptosis caused by these "jokes." - Groaners are allowed.
 
 # Light bulb jokes
 Q. How many system programmers does it take to change a lightbulb?
@@ -29,5 +28,6 @@ Someone who never lets their code deadlock... but when it does, causes more prob
 
 Someone who believes zombies are real.
 
+Someone who doesn't trust their process to run correctly without testing with the same data, kernel, compiler, RAM, filesystem size,file system format, disk brand, core count, CPU load, weather, magnetic flux, orientation, pixie dust, horoscope sign, wall color, time of day, temperature, humidity...
 
 
