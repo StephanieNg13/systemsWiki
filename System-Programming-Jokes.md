@@ -27,4 +27,7 @@ Someone who knows `sleepsort` is a bad idea but still dreams of an excuse to use
 
 Someone who never lets their code deadlock... but when it does, causes more problems than everyone else combined.
 
+Someone who believes zombies are real.
+
+
 
