@@ -44,7 +44,8 @@ The following code is an incorrect implementation. What will happen? Will `enque
 For clarity `pthread_mutex` is shortened to `p_m` and we assume sem_wait cannot be interrupted.
 
 ```C
-void *b[16]
+#define N 16
+void *b[N]
 int in = 0, out = 0
 p_m_t lock
 sem_t s1,s2
@@ -69,7 +70,7 @@ enqueue(void *value) {
 void *dequeue(){
     p_m_lock(&lock)
     sem_wait(&s2)
-    void *result = b[(out++) & 15]
+    void *result = b[(out++) & (N-1) ]
     sem_post(&s2)
     p_m_unlock(&lock)
     return result
