@@ -21,7 +21,7 @@ void func() {
    int* ptr3 = calloc( 1, sizeof(int) );
    int* ptr4 = calloc( sizeof(int) , 1);
    
-   printf("%d %d %d %d\n",*ptr1,*ptr2,*ptr3,*ptr);
+   printf("%d %d %d %d\n",*ptr1,*ptr2,*ptr3,*ptr4);
 }
 ````
 ## Q 1.3
