@@ -94,7 +94,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
   - What does `sizeof("Hello\0World")` return?
   - What does `strlen("Hello\0World")` return?
   - Give an example of X such that `sizeof(X)` is 3
-  - Give an example of Y such at `sizeof(Y)` might be 4 or 8 depending on the machine.
+  - Give an example of Y such that `sizeof(Y)` might be 4 or 8 depending on the machine.
 
 ### Chapter 3
 - Program arguments `argc` `argv`
