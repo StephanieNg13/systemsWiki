@@ -31,7 +31,7 @@ snprintf returns the number of characters written excluding the terminating byte
 Use `scanf` (or `fscanf` or `sscanf`) to get input from the default input stream, an arbitrary file stream or a C string respectively.
 It's a good idea to check the return value to see how many items were parsed.
 `scanf` functions require valid pointers. It's a common source of error to pass in an incorrect pointer value. For example,
-```
+```C
 int *data = (int *) malloc(sizeof(int));
 char *line = "v 10";
 char type;
@@ -55,14 +55,14 @@ scanf("%9s", buffer); // reads upto 9 charactes from input (leave room for the 1
 
 ## Why is `gets` dangerous? What should I use instead?
 The following code is vulnerable to buffer overflow. It assumes or trusts that the input line will be no more than 10 characters, including the terminating byte.
-```
+```C
 char buf[10];
 gets(buf); // Remember the array name means the first byte of the array
 ``` 
 `gets` is deprecated in C99 standard and has been removed from the latest C standard (C11). Programs should use `fgets` or `getline` instead. 
 
 Where each have the following structure respectively:
-``` 
+```C 
 char *fgets (char *str, int num, FILE *stream); 
 
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
