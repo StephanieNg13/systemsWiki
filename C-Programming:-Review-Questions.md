@@ -98,9 +98,9 @@ char* strcpy(const char* dest, const char* src) {
 
 # Printing
 ## Q 2.1
-Spot the error!
+Spot the two errors!
 ````
-fprintf(stdout, "You scored 100%");
+fprintf("You scored 100%");
 ````
 # Formatting and Printing to a file
 ## Q 3.1
