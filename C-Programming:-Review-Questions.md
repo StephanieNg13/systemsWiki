@@ -99,7 +99,7 @@ char* strcpy(const char* dest, const char* src) {
 # Printing
 ## Q 2.1
 Spot the error!
-````C
+````
 fprintf(stdout, "You scored 100%");
 ````
 # Formatting and Printing to a file
