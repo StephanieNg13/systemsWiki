@@ -55,10 +55,6 @@ Similarly, we also need to check the previous block, too. If that exists and rep
 
 To be able to coalesce a free block with a previous free block we will also need to find the previous block, so we store the block's size at the end of the block, too. These are called "boundary tags" (ref Knuth73). As the blocks are contiguous, the end of one blocks sits right next to the start of the next block. So the current block (apart from the first one) can look a few bytes further back to lookup the size of the previous block. With this information you can now jump backwards!
 
-http://www.eecs.harvard.edu/~mdw/course/cs61/mediawiki/images/5/53/Lectures-malloc1.pdf 
-Slide 29
-(Hey world - an open source licensed diagram of the above would be nice)
--Not sure if the above link is open source or licensed. Confirmation pending.
 ## Performance
 With the above description it's possible to build a memory allocator. It's main advantage is simplicity - at least simple compared to other allocators!
 Allocating memory is a worst-case linear time operation (search linked lists for a sufficiently large free block) and de-allocation is constant time (no more than 3 blocks will need to be coalesced into a single block). Using this allocator it is possible to experiment with different placement strategies. For example, you could start searching from where you last free'd a block, or where you last allocated from. If you do store pointers to blocks, you need to be very careful that they always remain valid (e.g. when coalescing blocks or other malloc or free calls that change the heap structure)
@@ -90,7 +86,7 @@ A well known allocator of this type is the buddy allocator. We'll discuss the bi
 
 Buddy allocators are fast because the neighboring blocks to coalesce with can be calculated from the free'd block's address, rather than traversing the size tags. Ultimate performance often requires a small amount of assembler code to use a specialized CPU instruction to find the lowest non-zero bit. 
 
-The main disadvantage of the Buddy allocator is that they suffer from internal fragmentation, because allocations are rounded up to the nearest block size. For example, a 68-byte allocation will require a 128-byte block.
+The main disadvantage of the Buddy allocator is that they suffer from *internal fragmentation*, because allocations are rounded up to the nearest block size. For example, a 68-byte allocation will require a 128-byte block.
 
 
 
