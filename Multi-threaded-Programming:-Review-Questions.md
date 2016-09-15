@@ -5,7 +5,7 @@ Is the following code thread-safe? Redesign the following code to be thread-safe
 
 ````C
 static char message[20];
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZAER;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void format(int v) {
   pthread_mutex_lock(&mutex);
