@@ -38,9 +38,9 @@ When `fork()` is executed the entire process memory is duplicated including the 
 
 ## How do you write code that is different for the parent and child process?
 
-Check the return value of `fork()`. Return value -1= failed; 0= in child process; positive = in parent process (and the return value is the child process id).  Here's one way to remember which is which:
+Check the return value of `fork()`. Return value `-1` = failed; `0` = in child process; positive = in parent process (and the return value is the child process id).  Here's one way to remember which is which:
 
-The child process can find its parent - the original process that was duplicated -  by calling getppid() - so does not need any additional return information from `fork()`. The parent process however can only find out the id of the new child process from the return value of `fork`:
+The child process can find its parent - the original process that was duplicated -  by calling `getppid()` - so does not need any additional return information from `fork()`. The parent process however can only find out the id of the new child process from the return value of `fork`:
 ```C
 pid_t id = fork();
 if (id == -1) exit(1); // fork failed 
@@ -56,7 +56,7 @@ if (id > 0)
 
 ## What is a fork bomb ?
 A 'fork bomb' is when you attempt to create an infinite number of processes. A simple example is shown below:
-```
+```C
 while (1) fork();
 ```
 This will often bring a system to a near-standstill as it attempts to allocate CPU time and memory to a very large number of processes that are ready to run. Comment: System administrators don't like fork-bombs and may set upper limits on the number of processes each user can have or may revoke login rights because it creates a disturbance in the force for other users' programs. You can also limit the number of child processes created by using `setrlimit()`.
@@ -114,18 +114,18 @@ int main(int argc, char**argv) {
 }
 ```
 ## A simpler way to execute another program
-Use `system`!!! Here is how to use it:
+Use `system`. Here is how to use it:
 ```C
 
 #include <unistd.h>
 #include <stdlib.h>
 
 int main(int argc, char**argv) {
-  system("/bin/ls");
+  system("ls");
   return 0;
 }
 ```
-The `system` call would fork, exec the command passed by parameter and the parent process would wait for this to finish. This also means that `system` is a blocking call - The parent process can't continue until the process started by `system` exits. This may be useful or it may not be, use with caution.
+The `system` call will fork, execute the command passed by parameter and the original parent process will wait for this to finish. This also means that `system` is a blocking call: The parent process can't continue until the process started by `system` exits. This may or may not be useful. Also, `system` actually creates a shell which is then given the string, which is more overhead than just using `exec` directly. The standard shell will use the `PATH` environment variable to search for a filename that matches the command. Using system will usually be sufficient for many simple run-this-command problems but can quickly become limiting for more complex or subtle problems, and it hides the mechanics of the fork-exec-wait pattern so we encourage you to learn and use `fork` `exec` and `waitpid` instead.
  
 ## What is the silliest fork example?
 A slightly silly example is shown below. What will it print? Try it with multiple arguments to your program.
