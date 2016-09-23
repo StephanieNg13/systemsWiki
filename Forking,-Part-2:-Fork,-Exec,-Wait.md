@@ -58,7 +58,7 @@ A long running program could create many zombies by continually creating process
 Eventually there would be insufficient space in the kernel process table to create a new processes. Thus `fork()` would fail and could make the system difficult / impossible to use - for example just logging in requires a new process!
 
 ## What does the system do to help prevent zombies?
-Once a process completes, any of its children will be assigned to "init" - the first process with pid of 1. Thus these children would see getppid() return a value of 1. The init process automatically waits for all of its children, thus removing zombies from the system.
+Once a process completes, any of its children will be assigned to "init" - the first process with pid of 1. Thus these children would see getppid() return a value of 1. These orphans will eventually finish and for a breif moment become a zombie. Fortunately, the init process automatically waits for all of its children, thus removing these zombies from the system.
 
 ## How do I prevent zombies? (Warning: Simplified answer)
 Wait on your child!
