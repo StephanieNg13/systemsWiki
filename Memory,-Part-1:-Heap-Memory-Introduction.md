@@ -91,7 +91,7 @@ void * realloc(void * ptr, size_t newsize) {
 An INCORRECT use of realloc is shown below:
 ```C
 int *array = malloc(sizeof(int) * 2);
-array[0] = 10; array[1]; = 20;
+array[0] = 10; array[1] = 20;
 // Ooops need a bigger array - so use realloc..
 realloc (array, 3); // ERRORS!
 array[2] = 30; 
