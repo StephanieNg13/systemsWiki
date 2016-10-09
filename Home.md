@@ -57,9 +57,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[Deadlock, Part 2: Deadlock Conditions]]
 
 ## Week 9
-* Todo Analysis of Dining Philosophers (for now see the discussion section handout)
-** Breaking Circular Wait. Using a global mutex to break hold-and-wait
-** Beware of starvation if all philosophers hold their left chopstick and try+release their right chopstick
+* [Dining Philosophers](https://github.com/angrave/SystemProgramming/wiki/Dining-Philosphers)
 * [[Virtual Memory, Part 1: Introduction to Virtual Memory]]
 * [[Pipes, Part 1: Introduction to pipes]]
 * [[Pipes, Part 2: Pipe programming secrets]]
