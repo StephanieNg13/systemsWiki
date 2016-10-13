@@ -84,8 +84,9 @@ This is Dijkstra's solution (he was the one to propose this problem on an exam).
 Let's run through the deadlock condition again. Everyone tries to pick up their lower number fork first. Philosopher 1 gets fork 1, Philosopher 2 gets fork 2, and so on until we get to Philosopher n. They have to choose between fork 1 and n. fork 1 is already held up by philosopher 1, so they can't pick up that fork, meaning he won't pick up fork n. We have broken circular wait! Meaning deadlock isn't possible.
 
 ### Problems:
-- Again, needs to know the number of resources
-- Prioritizes philosopher who have already eaten
+- The philosopher needs to know the set of resources in order before grabbing any resources.
+- You need to define a partial order to all of the resources.
+- Prioritizes philosopher who have already eaten.
 
 ## Advanced Solutions
 
