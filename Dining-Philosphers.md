@@ -56,7 +56,7 @@ But, there is a problem. What if all the philosophers pick up their left at the 
 # Solutions
 ## Arbitrator (Naive and Advanced).
 
-The naive arbitrator solution is have one arbitrator (a mutex for example). Have each of the philosopher ask the arbitrator for permission to eat. This solution allows on philosopher to eat at a time. When they are done, another philosopher can ask for permission to eat.
+The naive arbitrator solution is have one arbitrator (a mutex for example). Have each of the philosopher ask the arbitrator for permission to eat. This solution allows one philosopher to eat at a time. When they are done, another philosopher can ask for permission to eat.
 
 This prevents deadlock because there is no circular wait! No philosopher has to wait on any other philosopher.
 
