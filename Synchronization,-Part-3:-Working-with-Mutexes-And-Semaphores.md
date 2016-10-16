@@ -6,7 +6,7 @@ Incrementing a variable (`i++`) is _not_ atomic because it requires three distin
 
 
 ## How do I use mutex lock to make my data-structure thread-safe?
-Note, this is just an introduction - writing high-performance thread-safe data-structures requires it's own book! Here's a simple data structure (a stack) that is not thread-safe:
+Note, this is just an introduction - writing high-performance thread-safe data structures requires its own book! Here's a simple data structure (a stack) that is not thread-safe:
 ```C
 // A simple fixed-sized stack (version 1)
 int count;
