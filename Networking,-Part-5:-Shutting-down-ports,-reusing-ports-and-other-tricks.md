@@ -1,3 +1,9 @@
+## What is the difference shutdown and close?
+Use the `shutdown` call when you no longer need to read any more data from the socket, write more data, or have finished doing both.
+Use `close` when your process no longer needs the socket file descriptor. If you `fork`-ed after creating a socket file descriptor, all processes need to close the socket before the socket resources can be re-used. However a shutting down a socket for further read would affect all processes.
+
+Well written code will `shutdown` a socket before calling `close` it.
+
 ## When I re-run my server code it doesn't work! Why?
 
 By default, after a socket is closed the port enters a time-out state during which time it cannot be re-used ('bound to a new socket').
