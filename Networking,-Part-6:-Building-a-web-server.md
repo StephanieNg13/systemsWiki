@@ -1,4 +1,4 @@
-## How can you serve a simple web page?
+## How can you serve a simple static web page?
 
 A web server needs to implement HTTP (Hypertext transfer protocol), which is a specification of how client machine can request resources from a server and how a server can respond to a client message.
 
@@ -29,10 +29,16 @@ Now that we've bound to a port, we can find out the actual port number used. Not
   printf("Listening on port %d\n", ntohs(sin.sin_port)) 
 ````
   
-Now call `accept` block until we have a client request to service. For client wait for the web browser's request then always send a friendly message back. Note this code demonstrates use of Linux's dprintf which allows printf-like formatting directly to a file descriptor.
+Now call `accept` block until we have a client request to service. For each client, wait for the web browser's request then always send a friendly message back. This starts with the response header that includes the MIMETYPE - the type of data that is represented by the bytes that follow. The response header, like the request header is terminated by two blank lines together `\r\n\r\n`/ Note this code also demonstrates use of Linux's `dprintf` which allows printf-like formatting directly to a file descriptor.
 ```C
   while(1) {
-    int client_fd = accept(sock_fd, (struct sockaddr*) &client_info, &size); 
+    int client_fd = accept(sock_fd, (struct sockaddr*) &client_info, &size);
+
+    char *connected_ip= inet_ntoa(client_info.sin_addr);
+  // ^^^^ Does this look thread-safe to you?
+    int port = ntohs(client_info.sin_port);
+
+
     char buffer[1000];
     read(client_fd, buffer, sizeof(buffer)-1);
     dprintf(client_fd, "HTTP/1.0 200 OK\r\n");
@@ -41,4 +47,32 @@ Now call `accept` block until we have a client request to service. For client wa
     shutdown(client_fd , SHUT_RDWR);
     close(client_fd);
   }
+```
+
+## How can you serve a simple static image file?
+```C
+  FILE*file = fopen("apicture.jpg","r");
+  if(file) {
+    fseek(file,0, SEEK_END);
+    long size = ftell(file);
+    fseek(file,0,SEEK_SET);
+    printf("Sending %ld bytes\n", size);
+
+    char*buf = malloc(size);
+    fread(buf,1,size,file);
+
+    char response[2048];
+    
+    sprintf( response, "HTTP/1.0 200 OK\r\n"
+             "Content-Type: image/jpeg\r\n"
+             "Content-Length: %ld\r\n\r\n" , size);
+
+    write(client_fd, response, strlen(response));
+    
+    write(client_fd, buf, size);
+    fclose(file);
+    free(buf);
+  }		
+  shutdown(client_fd , SHUT_RDWR);
+  close(client_fd);
 ```
