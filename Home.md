@@ -72,7 +72,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 
 ## Week 11
 * [[ Networking, Part 4: Building a simple TCP Server ]]
-* [[ Networking, Part 5: Reusing ports ]]
+* [[ Networking, Part 5: Shutting down ports, reusing ports and other tricks ]]
 * [[ Scheduling, Part 1: Scheduling Processes ]]
 * [[ Networking, Part 6: Creating a UDP server ]]
 * [[ Nonblocking I O, select(), and epoll ]]
