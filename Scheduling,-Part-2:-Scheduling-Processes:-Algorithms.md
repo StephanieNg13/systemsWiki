@@ -1,20 +1,22 @@
 # What are some well known scheduling algorithms?
 
-We will discuss four simple scheduling algorithms, Shortest Job First, First Come First Served, Priority and Round Robin.
+For all the problems,
 
 # Shortest Job First (SJF)
 
 ![](http://i.imgur.com/jGLvjqT.png)
 
-The next process to be scheduled will be the process with the shortest total CPU time required. One disadvantage of this scheduler is that it needs to be clairvoyant. Note the SJF is not shortest _remaining_ time; processes are ordered by their total CPU needs not the remaining CPU need.
+The processes all arrive at the start and the scheduler schedules the job with the shortest total CPU time. The glaring problem is that this scheduler needs to know how long this program will run over time
 
-SJF appears in both preemptive and non-preemptive versions. Preemptive SJF has the shortest total wait time when summed over all processes that have a known arrival time and execution time.
+
 
 Technical Note: A realistic SJF implementation would not use the total execution time of the process but the burst time (the total CPU time including future computational execution before the process will no longer be ready to run). The expected burst time can be estimated by using an exponentially decaying weighted rolling average based on the previous burst time but for this exposition we will simplify this discussion to use the total running time of the process as a proxy for the burst time.
 
 # Pre-emptive Shortest Job First (PSJF)
 
 ![](http://i.imgur.com/jGLvjqT.png)
+
+Let's say that there is an ordering to how the processes come in. P2
 
 # First Come First Served (FCFS)
 
