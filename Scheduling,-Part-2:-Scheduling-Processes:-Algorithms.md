@@ -4,6 +4,8 @@ We will discuss four simple scheduling algorithms, Shortest Job First, First Com
 
 # Shortest Job First (SJF)
 
+![](http://i.imgur.com/jGLvjqT.png)
+
 The next process to be scheduled will be the process with the shortest total CPU time required. One disadvantage of this scheduler is that it needs to be clairvoyant. Note the SJF is not shortest _remaining_ time; processes are ordered by their total CPU needs not the remaining CPU need.
 
 SJF appears in both preemptive and non-preemptive versions. Preemptive SJF has the shortest total wait time when summed over all processes that have a known arrival time and execution time.
