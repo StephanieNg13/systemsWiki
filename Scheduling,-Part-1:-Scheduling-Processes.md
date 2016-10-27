@@ -39,15 +39,32 @@ A process is placed on the ready queue when it is able to use a CPU. Some exampl
 
 Similar examples can be generated when considering threads.
 
-# What is 'wait time'? 
+# Some Measures
+
+`start_time` is the wall-clock start time of the process (CPU starts working on it)
+`end_time` is the end wall-clock of the process (CPU finishes the process)
+`run_time` is the total amount of CPU time required
+`arrival_time` is the time the process enters the scheduler (CPU may not start working on it)
+
+## What is 'turnaround time'?
+
+The total time from when you start the process to when it ends.
+
+`turnaround_time = end_time - arrival_time`
+
+## What is 'response time'?
+
+The total latency (time) that it takes from when the process arrives to when the CPU actually starts working on it.
+
+`response_time = start_time - arrival_time`
+
+## What is 'wait time'?
 
 Wait time is the *total* wait time i.e. the total time that a process is on the ready queue. A common mistake is to believe it is only the initial waiting time in the ready queue.
 
 If a CPU intensive process with no I/O takes 7 minutes of CPU time to complete but required 9 minutes of wall-clock time to complete we can conclude that it was placed on the ready-queue for 2 minutes. For those 2 minutes the process was ready to run but had no CPU assigned. It does not matter when the job was waiting, the wait time is 2 minutes.
 
-If  `Tstart` and `Tend` are the start and end wall-clock times of the process and `run_time` is the total amount of CPU time required then,
-
-`wait_time  = (Tend - Tstart) - run_time`
+`wait_time  = (end_time - start_time) - run_time`
 
 
 # What is the Convoy Effect?
