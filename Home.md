@@ -74,6 +74,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[ Networking, Part 4: Building a simple TCP Server ]]
 * [[ Networking, Part 5: Shutting down ports, reusing ports and other tricks ]]
 * [[ Scheduling, Part 1: Scheduling Processes ]]
+* [[ Scheduling, Part 2: Scheduling Processes: Algorithms ]]
 * [[ Networking, Part 6: Creating a UDP server ]]
 * [[ Nonblocking I O, select(), and epoll ]]
 
