@@ -1,22 +1,36 @@
 # What are some well known scheduling algorithms?
 
-For all the problems,
+For all the examples,
+
+Process 1: Runtime 1000ms
+Process 2: Runtime 2000ms
+Process 3: Runtime 3000ms
+Process 4: Runtime 4000ms
+Process 5: Runtime 5000ms
 
 # Shortest Job First (SJF)
 
 ![](http://i.imgur.com/jGLvjqT.png)
 
-The processes all arrive at the start and the scheduler schedules the job with the shortest total CPU time. The glaring problem is that this scheduler needs to know how long this program will run over time
-
+The processes all arrive at the start and the scheduler schedules the job with the shortest total CPU time. The glaring problem is that this scheduler needs to know how long this program will run over time before it ran the program.
 
 
 Technical Note: A realistic SJF implementation would not use the total execution time of the process but the burst time (the total CPU time including future computational execution before the process will no longer be ready to run). The expected burst time can be estimated by using an exponentially decaying weighted rolling average based on the previous burst time but for this exposition we will simplify this discussion to use the total running time of the process as a proxy for the burst time.
 
 # Pre-emptive Shortest Job First (PSJF)
 
+Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the remaining runtime of the process, run that. (If it is equal like our example our algorithm can choose).
+
 ![](http://i.imgur.com/jGLvjqT.png)
 
-Let's say that there is an ordering to how the processes come in. P2
+Let's say that there is an ordering to how the processes come in. 
+P2 at 0ms
+P1 at 1000ms
+P5 at 3000ms
+P4 at 4000ms
+P3 at 5000ms
+
+Here's what our algorithm does. It runs P2 because it is the only thing to run. Then P1 comes in at 1000ms, P2 still has 1000ms to go, so our scheduler preemptively stops P2, and let's P1 run all the way through (this is completely up to the algorithm because the times are equal). Then, P5 Comes in -- since there are no processes running it will run process 5. P4 comes in, and since the runtimes are equal P5, the scheduler stops P5 and runs P4. Finally P3 comes in, preempts P4, and runs to completion. Then P4 runs, then P5 runs.
 
 # First Come First Served (FCFS)
 
