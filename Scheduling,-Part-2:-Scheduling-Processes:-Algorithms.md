@@ -26,7 +26,7 @@ Technical Note: A realistic SJF implementation would not use the total execution
 
 Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the remaining runtime of the process, run that. (If it is equal like our example our algorithm can choose).
 
-![](http://i.imgur.com/jGLvjqT.png)
+![](http://i.imgur.com/QvoX7Ia.png)
 
 Let's say that there is an ordering to how the processes come in. 
 P2 at 0ms
