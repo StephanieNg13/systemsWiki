@@ -1,12 +1,10 @@
-## Scheduling
-
 # Thinking about scheduling.
 
 CPU Scheduling is the problem of efficiently selecting which process to run on a system's CPU cores. In a busy system there will be more ready-to-run processes than there are CPU cores, so the system kernel must evaluate which processes should be scheduled to run on the CPU and which processes should be placed in a ready queue to be executed later.
 
 The additional complexity of multi-threaded and multiple CPU cores are considered a distraction to this initial exposition so are ignored here.
 
-Another gotcha for non-native speakers is the dual meaings of "Time": The word "Time" can be used in both clock and elapsed duration context. For example "The arrival time of the first process was 9:00am." and, "The running time of the algorithm is 3 seconds".
+Another gotcha for non-native speakers is the dual meanings of "Time": The word "Time" can be used in both clock and elapsed duration context. For example "The arrival time of the first process was 9:00am." and, "The running time of the algorithm is 3 seconds".
 
 # How is scheduling measured and which scheduler is best?
 
