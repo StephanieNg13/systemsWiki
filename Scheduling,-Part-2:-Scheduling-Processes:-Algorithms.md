@@ -50,6 +50,8 @@ Here's what our algorithm does. It runs P2 because it is the only thing to run. 
 Processes are scheduled in the order of arrival. One advantage of FCFS is that scheduling algorithm is simple: the ready queue is a just a FIFO (first in first out) queue.
 FCFS suffers from the Convoy effect.
 
+Here P2 Arrives, then P1 arrives, then P5, then P4, then P3. You can see the convoy effect for P5.
+
 **Advantages**
 * Simple implementation
 
