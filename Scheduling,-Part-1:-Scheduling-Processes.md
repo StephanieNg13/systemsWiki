@@ -62,7 +62,7 @@ Wait time is the *total* wait time i.e. the total time that a process is on the 
 
 If a CPU intensive process with no I/O takes 7 minutes of CPU time to complete but required 9 minutes of wall-clock time to complete we can conclude that it was placed on the ready-queue for 2 minutes. For those 2 minutes the process was ready to run but had no CPU assigned. It does not matter when the job was waiting, the wait time is 2 minutes.
 
-`wait_time  = (end_time - start_time) - run_time`
+`wait_time  = (end_time - arrival_time) - run_time`
 
 
 # What is the Convoy Effect?
