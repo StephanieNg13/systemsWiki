@@ -24,7 +24,7 @@ Technical Note: A realistic SJF implementation would not use the total execution
 
 # Preemptive Shortest Job First (PSJF)
 
-Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the remaining runtime of the process, run that. (If it is equal like our example our algorithm can choose).
+Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the remaining runtime of the process, run that. (If it is equal like our example our algorithm can choose). The scheduler uses the total runtime of the process, if you want the shortest _remaining_ time left, that is a variant of PSJF called Shortest Remaining Time First.
 
 ![](http://i.imgur.com/QvoX7Ia.png)
 
@@ -35,7 +35,7 @@ P5 at 3000ms
 P4 at 4000ms
 P3 at 5000ms
 
-Here's what our algorithm does. It runs P2 because it is the only thing to run. Then P1 comes in at 1000ms, P2 still has 1000ms to go, so our scheduler preemptively stops P2, and let's P1 run all the way through (this is completely up to the algorithm because the times are equal). Then, P5 Comes in -- since there are no processes running it will run process 5. P4 comes in, and since the runtimes are equal P5, the scheduler stops P5 and runs P4. Finally P3 comes in, preempts P4, and runs to completion. Then P4 runs, then P5 runs.
+Here's what our algorithm does. It runs P2 because it is the only thing to run. Then P1 comes in at 1000ms, P2 runs for 2000ms, so our scheduler preemptively stops P2, and let's P1 run all the way through (this is completely up to the algorithm because the times are equal). Then, P5 Comes in -- since there are no processes running, the scheduler will run process 5. P4 comes in, and since the runtimes are equal P5, the scheduler stops P5 and runs P4. Finally P3 comes in, preempts P4, and runs to completion. Then P4 runs, then P5 runs.
 
 **Advantages**
 * Ensures shorter jobs get run first
