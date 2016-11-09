@@ -11,7 +11,7 @@ From a shell, use `ls` with the `-i` option
 
 ```
 $ ls -i
-12983989 dirlist.c		12984068 sandwhich.c
+12983989 dirlist.c		12984068 sandwich.c
 ```
 
 From C, call one of the stat functions (introduced below).
