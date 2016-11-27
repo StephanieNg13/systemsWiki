@@ -2,7 +2,7 @@
 
 Imagine you had a key-value map data structure which is used by many threads. Multiple threads should be able to look up (read) values at the same time provided the data structure is not being written to. The writers are not so gregarious - to avoid data corruption, only one thread at a time may modify (`write`) the data structure (and no readers may be reading at that time). 
 
-The is an example of the _Reader Writer Problem_. Namely how can we efficiently synchronize multiple readers and writers such that multiple readers can read together but a writer gets exclusive access?
+This is an example of the _Reader Writer Problem_. Namely how can we efficiently synchronize multiple readers and writers such that multiple readers can read together but a writer gets exclusive access?
 
 An incorrect attempt is shown below ("lock" is a shorthand for `pthread_mutex_lock`):
 
