@@ -95,7 +95,7 @@ No. Error handling with `getaddrinfo` is a little different:
 ```C
 int result = getaddrinfo(...);
 if(result) { 
-   char *mesg = gai_strerror(result); 
+   const char *mesg = gai_strerror(result); 
    ...
 }
 ```
