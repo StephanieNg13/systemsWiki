@@ -180,7 +180,7 @@ ie.
 ```
 
 ## How can I copy bytes from one file to another?
-Use  the versatile `dd` command. For example, the following command copies 1mb of data from the file `/dev/urandom` to the file `/dev/null`. The data is copied as 1024 blocks of blocksize 1024 bytes.
+Use  the versatile `dd` command. For example, the following command copies 1 MB of data from the file `/dev/urandom` to the file `/dev/null`. The data is copied as 1024 blocks of blocksize 1024 bytes.
 ```
 $ dd if=/dev/urandom of=/dev/null bs=1k count=1024
 ```
