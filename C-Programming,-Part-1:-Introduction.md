@@ -214,7 +214,7 @@ void mystrcpy(char*dest, char* src) {
   while( *src ) { dest = src; src ++; dest++; }  
 }
 ```
-In the above code it simply changes the dest pointer to point to source string. Also the nul bytes is not copied. Here's a better version - 
+In the above code it simply changes the dest pointer to point to source string. Also the nuls bytes are not copied. Here's a better version - 
 ```
   while( *src ) { *dest = *src; src ++; dest++; } 
   *dest = *src;
