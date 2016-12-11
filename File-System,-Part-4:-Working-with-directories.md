@@ -56,7 +56,7 @@ $ readlink myfile.txt
 
 To read the meta-(stat) information of a symbolic link use `lstat` not `stat`
 ```C
-struct stat s;
+struct stat s1, s2;
 stat("myfile.txt", &s1); // stat info about  the notes.txt file
 lstat("myfile.txt", &s2); // stat info about the symbolic link
 ```
