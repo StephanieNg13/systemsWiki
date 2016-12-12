@@ -177,4 +177,10 @@ And to check if a file is regular file use `S_ISREG`,
       perror("stat failed - are you sure I can read this file's meta data?");
    }
 ```
-[Go to File System, Part 3](https://github.com/angrave/SystemProgramming/wiki/File-System,-Part-3:-Permissions)
+---
+<p align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction">
+    Back: File System, Part 1</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/File-System,-Part-3:-Permissions">
+    Next: File System, Part 3</a>
+</p>
