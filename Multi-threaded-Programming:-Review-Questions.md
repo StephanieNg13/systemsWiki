@@ -37,11 +37,11 @@ void* func(void* ptr) {
   return NULL;
 }
 
-int main(int argv, char**argc) {
+int main(int argv, char** argc) {
   sem_init(s,0, a);
-  while(b--) pthread_create(&tid,NULL,func,"W"); 
-  while(c--) pthread_create(&tid,NULL,func,"P"); 
-  while(d--) pthread_create(&tid,NULL,func,"W"); 
+  while(b--) pthread_create(&tid, NULL, func, "W"); 
+  while(c--) pthread_create(&tid, NULL, func, "P"); 
+  while(d--) pthread_create(&tid, NULL, func, "W"); 
   pthread_exit(NULL); 
   /*Process will finish when all threads have exited */
 }
