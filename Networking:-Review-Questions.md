@@ -10,15 +10,12 @@ What is a socket?
 
 ## Q2 
 
-@MCQ
 What is special about listening on port 1000 vs port 2000?
-Think about security. @HINT
-Correct! Root privileges are required to listen to ports below 1024. @EXP
+
 - Port 2000 is twice as slow as port 1000
 - Port 2000 is twice as fast as port 1000
-- Port 1000 requires root privileges @ANS
+- Port 1000 requires root privileges
 - Nothing
-@END
 
 
 ## Q3 
