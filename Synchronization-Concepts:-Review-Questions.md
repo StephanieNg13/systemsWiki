@@ -30,15 +30,15 @@ if( pthread_mutex_trylock( b ) ) { /*failed*/
 ## Q4
 How many processes are blocked?
 
-P1 acquires R1
-P2 acquires R2
-P1 acquires R3
-P2 waits for R3
-P3 acquires R5
-P1 acquires for R4
-P3 waits for R1
-P4 waits for R5
-P5 waits for R1
+* P1 acquires R1
+* P2 acquires R2
+* P1 acquires R3
+* P2 waits for R3
+* P3 acquires R5
+* P1 acquires R4
+* P3 waits for R1
+* P4 waits for R5
+* P5 waits for R1
 
 ## Q5 
 How many of the following statements are true for the reader-writer problem?
