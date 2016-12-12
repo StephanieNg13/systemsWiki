@@ -97,7 +97,7 @@ void sub(int value) {
 A non-threadsafe data structure has `size()` `enq` and `deq` methods. Use condition variable and mutex lock to complete the thread-safe, blocking versions.
 ````C
 void enqueue(void* data) {
-  // should block if the size() would be become greater than 256
+  // should block if the size() would become greater than 256
   enq(data);
 }
 void* dequeue() {
