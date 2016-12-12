@@ -9,7 +9,7 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void format(int v) {
   pthread_mutex_lock(&mutex);
-  sprintf(message,":%d:",v);
+  sprintf(message, ":%d:" ,v);
   pthread_mutex_unlock(&mutex);
   return message;
 }
@@ -55,13 +55,15 @@ pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
 
 void* turn;
 
-void* func(void*mesg) {
+void* func(void* mesg) {
   while(1) {
 // Add mutex lock and condition variable calls ...
 
-    while(turn == mesg) { /* poll again ... Change me - This busy loop burns CPU time!*/ }
+    while(turn == mesg) { 
+        /* poll again ... Change me - This busy loop burns CPU time! */ 
+    }
 
-    /* Do stuff on this thread*/
+    /* Do stuff on this thread */
     puts( (char*) mesg);
     turn = mesg;
     
@@ -69,9 +71,9 @@ void* func(void*mesg) {
   return 0;
 }
 
-int main(int argc, char**argv){
+int main(int argc, char** argv){
   pthread_t tid1;
-  pthread_create(&tid1,NULL, func, "A");
+  pthread_create(&tid1, NULL, func, "A");
   func("B"); // no need to create another thread - just use the main thread
   return 0;
 }
@@ -82,11 +84,11 @@ Identify the critical sections in the given code. Add mutex locking to make the 
 ````C
 int total;
 void add(int value) {
- if(value) <1) return;
+ if(value < 1) return;
  total += value;
 }
 void sub(int value) {
- if(value) <1) return;
+ if(value < 1) return;
  total -= value;
 }
 ````
