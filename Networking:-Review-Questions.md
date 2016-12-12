@@ -38,7 +38,6 @@ What is the SYN ACK ACK-SYN handshake?
 
 ## Q9
 Which one of the following is NOT a feature of TCP? 
-Nice! https://en.wikipedia.org/wiki/OSI_model
 - Packet re-ordering
 - Flow control
 - Packet re-tranmission
