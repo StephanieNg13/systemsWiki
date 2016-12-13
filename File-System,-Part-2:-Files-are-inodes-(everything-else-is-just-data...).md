@@ -178,9 +178,11 @@ And to check if a file is regular file use `S_ISREG`,
    }
 ```
 ---
-<p align="center">
+<div align="center">
 <a href="https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction">
-    Back: File System, Part 1</a> |
+Back: File System, Part 1
+</a> |
 <a href="https://github.com/angrave/SystemProgramming/wiki/File-System,-Part-3:-Permissions">
-    Next: File System, Part 3</a>
-</p>
+Next: File System, Part 3
+</a>
+</div>
