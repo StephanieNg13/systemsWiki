@@ -46,7 +46,7 @@ Similar examples can be generated when considering threads.
 
 ## What is 'turnaround time'?
 
-The total time from when you start the process to when it ends.
+The total time from when you the process arrives to when it ends.
 
 `turnaround_time = end_time - arrival_time`
 
