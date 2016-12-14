@@ -115,7 +115,7 @@ Peterson published his novel and surprisingly simple solution in a 2 page paper 
 \\ Candidate #5
 raise my flag
 turn = myid
-wait until your flag is lowered or turn is yourid
+wait until your flag is lowered and turn is yourid
 // Do Critical Section stuff
 lower my flag
 ```
