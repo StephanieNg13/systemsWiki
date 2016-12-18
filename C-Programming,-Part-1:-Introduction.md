@@ -2,11 +2,11 @@
 * Keep reading for the quick crash-course to C Programming below
 * Then see the [[C Gotchas wiki page|C Programming, Part 3: Common Gotchas]].
 * And learn about [[text I/O|C Programming, Part 2: Text Input And Output]].
-* Kick back relax with [Lawrence's intro videos](http://cs-education.github.io/sys/#)
-* ^ and the same link includes a virtual machine-in-a-browser you can play with
+* Kick back relax with [Lawrence's intro videos](http://cs-education.github.io/sys/#) (Also there is a virtual machine-in-a-browser you can play with!)
 * Or current CS241 students may wish to review some old CS241 slides [CS241 2013 Slides](https://subversion.ews.illinois.edu/svn/sp16-cs241/_shared/past_lectures/) (requires logon)
 
 # External resources
+* [Learn X in Y](https://learnxinyminutes.com/docs/c/) (Highly recommended to skim through!)
 * [C for C++/Java Programmers](http://www.ccs.neu.edu/course/com3620/parent/C-for-Java-C++/c-for-c++-alt.html)
 * [C Tutorial by Brian Kernighan](http://www.lysator.liu.se/c/bwk-tutor.html)
 * [c faq](http://c-faq.com/)
@@ -28,31 +28,44 @@ int main(void) {
     return 0; 
 }
 ```
-## Why do we use '`#include stdio.h`'?
-We're lazy! We don't want to declare the `printf` function. It's already done for us inside the file '`stdio.h`'. The #include includes the text of the file as part of our file to be compiled.
+## Why do we use '`#include <stdio.h>`'?
+We're lazy! We don't want to declare the `printf` function. It's already done for us inside the file '`stdio.h`'. The `#include` includes the text of the file as part of our file to be compiled.
+
+Specifically, the `#include` directive takes the file `stdio.h` (which stands for **st**an**d**ard **i**nput and **o**utput) located somewhere in your operating system, copies the text, and substitutes it where the `#include` was.
 
 ## How are C strings represented?
-As characters in memory.  The end of the string includes a NULL (0) byte. So "ABC" requires four(4) bytes. The only way to find out the length of a C string is to keep reading memory until you find the NULL byte. C characters are always exactly one byte each.
+They are represented as characters in memory.  The end of the string includes a NULL (0) byte. So "ABC" requires four(4) bytes `['A','B','C','\0']`. The only way to find out the length of a C string is to keep reading memory until you find the NULL byte. C characters are always exactly one byte each.
 
-When you write a string literal `"ABC"` in an expression the string literal evaluates to a char pointer (char *), which points to the first byte/char of the string.  This means `ptr` in the example below will hold the memory address of the first character in the string.
+When you write a string literal `"ABC"` in an expression the string literal evaluates to a char pointer (`char *`), which points to the first byte/char of the string.  This means `ptr` in the example below will hold the memory address of the first character in the string.
 ```C
 char *ptr = "ABC"
 ```
 
 
 ## How do you declare a pointer? 
-A pointer refers to a memory address. The type of the pointer is useful - it tells the compiler how many bytes need to be read/written.
-```
+A pointer refers to a memory address. The type of the pointer is useful - it tells the compiler how many bytes need to be read/written. You can declare a pointer as follows.
+```C
 int *ptr1;
 char *ptr2;
 ```
 
+Due to C's grammar, a `int*` or any pointer is not actually its own type. You have to precede each pointer variable with an asterisk. As a common gotcha, the following
+```C
+int* ptr3, ptr4;
+```
+Will only declare `*ptr3` as a pointer. `ptr4` will actually be a regular int variable. To fix this declaration, keep the `*` preceding to the pointer
+```C
+int *ptr3, *ptr4;
+```
+
 ## How do you use a pointer to read/write some memory?
-if 'p' is a pointer then use "*p" to write to the memory address(es) pointed to by p.
+Let's say that we declare a pointer `int *ptr`. For the sake of discussion, let's say that `ptr` points to memory address `0x1000`. If we want to write to a pointer, we can deference and assign `*ptr`.
+
 ```C
 *ptr = 0; // Writes some memory.
 ``` 
-The number of bytes written depends on the pointer type.
+
+What C will do is take the type of the pointer which is an `int` and writes `sizeof(int)` bytes from the start of the pointer, meaning that bytes `0x1000`, `0x1004`, `0x1008`, `0x100a` will all be zero. The number of bytes written depends on the pointer type. It is the same for all primitive types but structs are a little different.
 
 ## What is pointer arithmetic?
 You can add an integer to a pointer. However the pointer type is used to determine how much to increment the pointer. For char pointers this is trivial because characters are always one byte:
