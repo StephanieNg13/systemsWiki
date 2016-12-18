@@ -26,6 +26,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[C Programming, Part 1: Introduction]]
 * [[C Programming, Part 2: Text Input And Output]]
 * [[C Programming, Part 3: Common Gotchas]]
+* [[C Programming, Part 4: Strings and Structs]]
 
 ## Week 3
 * [[Forking, Part 1: Introduction]]
