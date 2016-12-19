@@ -9,5 +9,16 @@ Here's another example, that shows Processes 1 and 2 acquiring resources 1 and 2
 ![ResourceAllocationGraph-Ex1.png](https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/ResourceAllocationGraph-Ex1.png)
 
 
+## Deadlock!
 
-Todo: More complicated example
+A lot of times, we don't know the specific order that a resource may be acquired so we can draw the graph directed.
+
+![](http://i.imgur.com/V16FfnX.png)
+
+As a possibility matrix. Then we can draw arrows and see if there is a directed version that would lead us to a deadlock.
+
+![RAG Deadlock](http://i.imgur.com/6duq0PD.png)
+
+Consider the following resource allocation graph (assume that the processes ask for exclusive access to the file). If you have a bunch of processes running and they request resources and the operating system ends up in this state, you deadlock! You may not see this because the operating system may **preempt* some processes breaking the cycle but there is still a change that your three lonely processes could deadlock. You can also make these kind of graphs with `make` and rule dependencies (with our parmake MP for example).
+
+![](http://cs241.cs.illinois.edu/images/ColorfulDeadlock.svg)
