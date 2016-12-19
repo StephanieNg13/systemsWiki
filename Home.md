@@ -21,6 +21,8 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[HW0]]
 * [[Informal Glossary of basic terms|#Informal Glossary]]
 * [[#Piazza: When And How to Ask For Help]]
+* [[ Programming Tricks, Part 1 ]]
+* [[ System Programming Short Stories and Songs ]]
 
 ## Week 1 - 2
 * [[C Programming, Part 1: Introduction]]
@@ -72,7 +74,6 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[ Networking, Part 1: Introduction]]
 * [[ Networking, Part 2: Using getaddrinfo ]]
 * [[ Networking, Part 3: Building a simple TCP Client ]]
-* [[ Programming Tricks, Part 1 ]]
 
 ## Week 11
 * [[ Networking, Part 4: Building a simple TCP Server ]]
@@ -108,6 +109,5 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 ## Other content
 
 * [[#Example Markdown]]
-* [[ System Programming Short Stories and Songs ]]
 
 
