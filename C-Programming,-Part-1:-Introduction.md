@@ -3,7 +3,6 @@
 * Then see the [[C Gotchas wiki page|C Programming, Part 3: Common Gotchas]].
 * And learn about [[text I/O|C Programming, Part 2: Text Input And Output]].
 * Kick back relax with [Lawrence's intro videos](http://cs-education.github.io/sys/#) (Also there is a virtual machine-in-a-browser you can play with!)
-* Or current CS241 students may wish to review some old CS241 slides [CS241 2013 Slides](https://subversion.ews.illinois.edu/svn/sp16-cs241/_shared/past_lectures/) (requires logon)
 
 # External resources
 * [Learn X in Y](https://learnxinyminutes.com/docs/c/) (Highly recommended to skim through!)
@@ -86,11 +85,33 @@ return 0;
 ```
 Because pointer arithmetic in C is always automatically scaled by the size of the type that is pointed to, you can't perform pointer arithmetic on void pointers.
 
+You can think of pointer arithmetic in C as essentially doing the following
+
+If I want to do
+```C
+int *ptr1 = ...;
+int *offset = ptr1 + 4;
+```
+
+Think
+```C
+int *ptr1 = ...;
+char *temp_ptr1 = (char*) ptr1;
+int *offset = (int*)(temp_ptr1 + sizeof(int)*4);
+```
+To get the value. **Every time you do pointer arithmetic, take a deep breath and make sure that you are shifting over the number of bytes you think you are shifting over.**
+
 ## What is a void pointer?
-A pointer without a type (very similar to a void variable). You can think of this as a raw pointer, or just a memory address. You cannot directly read or write to it because the void type does not have a size.
+A pointer without a type (very similar to a void variable). Void pointers are used when either a datatype you're dealing with is unknown or when you're interfacing C code with other programming languages. You can think of this as a raw pointer, or just a memory address. You cannot directly read or write to it because the void type does not have a size. For Example
 
-This is often used when either a datatype you're dealing with is unknown or when you're interfacing C code with other programming languages.
+```C
+void *give_me_space = malloc(10);
+char *string = give_me_space;
+```
+This does not require a cast because C automatically promotes `void*` to its appropriate type.
+**Note:**
 
+gcc and clang are not total ISO-C compliant, meaning that they will let you do arithmetic on a void pointer. They will treat it as a char pointer but do not do this because it may not work with all compilers!
 
 ## Does `printf` call write or does write call `printf`?
 `printf` calls `write`. `printf` includes an internal buffer so, to increase performance `printf` may not call `write` everytime you call `printf`. `printf` is a C library function. `write` is a system call and as we know system calls are expensive. On the other hand `printf` uses a buffer which suits our needs better at that point
