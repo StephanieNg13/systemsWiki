@@ -27,6 +27,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[C Programming, Part 2: Text Input And Output]]
 * [[C Programming, Part 3: Common Gotchas]]
 * [[C Programming, Part 4: Strings and Structs]]
+* [[C Programming, Part 5: Debugging]]
 
 ## Week 3
 * [[Forking, Part 1: Introduction]]
@@ -106,7 +107,6 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 
 ## Other content
 
-* [[C Programming, Part 4: Debugging]]
 * [[#Example Markdown]]
 * [[ System Programming Short Stories and Songs ]]
 
