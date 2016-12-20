@@ -159,7 +159,7 @@ cat output.txt
 More complicated way: close(1) and then use open to re-open the file descriptor.
 See [[http://cs-education.github.io/sys/#chapter/0/section/3/activity/0]]
 ## What's the difference between a pointer and an array? Give an example of something you can do with one but not the other.
-```
+```C
 char ary[] = "Hello";
 char *ptr = "Hello";
 ```
@@ -176,13 +176,13 @@ printf("%p : %s\n", ptr, ptr);
 The array is mutable, so we can change its contents (be careful not to write bytes beyond the end of the array though). Fortunately 'World' is no longer than 'Hello"
 
 In this case, the char pointer `ptr` points to some read only memory (where the statically allocated string literal is stored), so we cannot change those contents.
-```
+```C
 strcpy(ary, "World"); // OK
 strcpy(ptr, "World"); // NOT OK - Segmentation fault (crashes)
 
 ```
 We can, however, unlike the array, we change `ptr` to point to another piece of memory,
-```
+```C
 ptr = "World"; // OK!
 ptr = ary; // OK!
 ary = (..anything..) ; // WONT COMPILE
@@ -196,6 +196,17 @@ What to take away from this is that pointers * can point to any type of memory w
 ## `sizeof()` returns the number of bytes. So using above code, what is sizeof(ary) and sizeof(ptr)?
 `sizeof(ary)`: `ary` is an array. Returns the number of bytes required for the entire array (5 chars + zero byte = 6 bytes)
 `sizeof(ptr)`: Same as sizeof(char *). Returns the number bytes required for a pointer (e.g. 4 or 8 for a 32 bit or 64 bit machine)
+
+`sizeof` is a special operator. Really it's something the compiler substitutes in before compiling the program because the size of all types is known at compile time. When you have `sizeof(char*)` that takes the size of a pointer on your machine (8 bytes for a 64 bit machine and 4 for a 32 bit and so on). When you try `sizeof(char[])`, the compiler looks at that and substitutes the number of bytes that the **entire** array contains because the total size of the array is known at compile time.
+
+```C
+char str1[] = "will be 11";
+char* str2 = "will be 8";
+sizeof(str1) //11 because it is an array
+sizeof(str2) //8 because it is a pointer
+```
+
+Be careful, using sizeof for the length of a string!
 
 ## Which of the following code is incorrect or correct and why?
 ```C
@@ -312,3 +323,19 @@ real gravity = 10;
 typedef struct link link_t; 
 //With structs, include the keyword 'struct' as part of the original types
 ```
+
+In this class, we regularly typedef functions. A typedef for a function can be this for example
+
+```C
+typedef int (*comparator)(void*,void*);
+
+int greater_than(void* a, void* b){
+    return a > b;
+}
+comparator gt = greater_than;
+```
+
+This declares a function type comparator that accepts two `void*` params and returns an integer.
+
+## Wow that was a lot of C
+Don't worry more to come!
