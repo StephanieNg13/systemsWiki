@@ -109,3 +109,28 @@ void cleanup(int signal) {
   while (waitpid((pid_t) (-1), 0, WNOHANG) > 0) {}
 }
 ```
+
+## So what are environment variables?
+
+Environment variables are variables that the system keeps for all processes to use. Your system has these set up right now! In Bash, you can check some of these
+
+```
+$ echo $HOME
+/home/bhuvy
+$ echo $PATH
+/usr/local/sbin:/usr/bin:...
+```
+
+How would you get these in C/C++? You can use the `getenv` and `setenv` function
+
+```C
+char* home = getenv("HOME"); // Will return /home/bhuvy
+setenv("HOME", "/home/bhuvan", 1 /*set overwrite to true*/ );
+```
+
+## Right, so how do these environment variables mean anything to parent/child?
+
+Well each process gets its own dictionary of environment variables that are copied over to the child. Meaning, if the parent changes their environment variables it won't be transferred to the child and vice versa. This is important in the fork-exec-wait trilogy if you want to exec a program with different environment variables than your parent (or any other process).
+
+For example, you can write a C program that loops through all of the time zones and executes the `date` command to print out the date and time in all locals. Environment variables are used for all sorts of programs so modifying them is important.
+
