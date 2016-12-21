@@ -177,7 +177,23 @@ for(int i = 0; i < 5; i++){
 }
 ```
 It is OK to have this kind of code, because the C language uses semicolons (;) to separate statements. If there is no statement in between semicolons, then there is nothing to do and the compiler moves on to the next statement
+
 # Other Gotchas
+## Preprocessor
+
+What is the preprocessor? It is an operation that the compiler performs **before** actually compiling the program. It is a copy and paste command. Meaning that if I do the following.
+
+```C
+#define MAX_LENGTH 10
+char buffer[MAX_LENGTH]
+```
+
+After preprocessing, it'll look like this.
+
+```C
+char buffer[10]
+```
+
 ## C Preprocessor macros and side-effects
 ```C
 #define min(a,b) ((a)<(b) ? (a) : (b))
@@ -193,6 +209,15 @@ int x = 99;
 int r = 10 + min(99, 100); // r is 100!
 ```
 Macros are simple text substitution so the above example expands to `10 + 99 < 100 ? 99 : 100`
+
+## C Preprocessor logical gotcha
+```C
+#define ARRAY_LENGTH(A) (sizeof((A)) / sizeof((A)[0]))
+int static_array[10]; // ARRAY_LENGTH(static_array) = 10
+int* dynamic_array = malloc(10); // ARRAY_LENGTH(dynamic_array) = 2 or 1
+```
+
+What is wrong with the macro? Well it works if we have a static array like the first array because sizeof a static array returns the bytes that array takes up, and dividing it by the sizeof(an_element) would give you the number of entries. But if we use a pointer to a piece of memory, taking the sizeof the pointer and dividing it by the size of the first entry won't always give us the size of the array.
 
 ## Assignments in Conditions
 
