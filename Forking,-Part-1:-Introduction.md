@@ -85,7 +85,17 @@ if (child_id > 0) {
 ## Can I make the child process execute another program?
 Yes. Use one of the [`exec`](http://man7.org/linux/man-pages/man3/exec.3.html) functions after forking. The `exec` set of functions replaces the process image with the the process image of what is being called. This means that any lines of code after the `exec` call are replaced. Any other work you want the child process to do should be done before the `exec` call.  
 
-The [Wikipedia article](https://en.wikipedia.org/wiki/Exec_(system_call)#C_language_prototypes) does a great job helping you make sense of the unintelligible names of the exec family.
+The [Wikipedia article](https://en.wikipedia.org/wiki/Exec_(system_call)#C_language_prototypes) does a great job helping you make sense of the names of the exec family.
+
+The naming schemes can be shortened like this
+
+> The base of each is exec (execute), followed by one or more letters:
+>
+> e – An array of pointers to environment variables is explicitly passed to the new process image.
+> l – Command-line arguments are passed individually (a list) to the function.
+> p – Uses the PATH environment variable to find the file named in the file argument to be executed.
+> v – Command-line arguments are passed to the function as an array (vector) of pointers.
+
 ```C
 #include <unistd.h>
 #include <sys/types.h> 
@@ -155,10 +165,12 @@ int main(int c, char **v)
 }
 ```
 
+Note: The algorithm isn't actually O(N) because of how the system scheduler works. Though there are parallel algorithms that run in O(log(N)) per process, this is sadly not one of them.
+
 ## What is different in the child process than the parent process?
 The key differences include:
 * The process id returned by `getpid()`. The parent process id returned by `getppid()`.
-* The parent is notified via a signal when the child process finishes but not vice versa.
+* The parent is notified via a signal, SIGCHILD, when the child process finishes but not vice versa.
 * The child does not inherit pending signals or timer alarms.
 For a complete list see the [fork man page](http://man7.org/linux/man-pages/man2/fork.2.html)
 
