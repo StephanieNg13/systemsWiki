@@ -21,6 +21,41 @@ There's no error checking in the above code (we assume close,open,chdir etc work
 * execl : Replace the program image with /bin/ls and call its main() method
 * perror : We don't expect to get here - if we did then exec failed.
 
+## Subtle forkbomb bug
+
+What's wrong with this code
+
+```C
+#include <unistd.h>
+#define HELLO_NUMBER 10
+
+int main(){
+    pid_t children[HELLO_NUMBER];
+    int i;
+    for(i = 0; i < HELLO_NUMBER; i++){
+        pid_t child = fork();
+        if(child == -1){
+            break;
+        }
+        if(child == 0){ //I am the child
+             execlp("echo", "echo", "hello");
+        }
+        else{
+            children[i] = child;
+        }
+    }
+
+    int j;
+    for(j = 0; j < i; j++){
+        waitpid(children[j], NULL, 0);
+    }
+    return 0;
+}
+
+```
+
+echo is not a command so we can't `exec` it. What does this mean? Instead of creating 10 processes we just created 2**10 processes, fork bombing our machine. How could we prevent this? Put an exit right after exec so in case exec fails we won't end up fork bombing our machine.
+
 ## What does the child inherit from the parent?
 * Open filehandles. If the parent later seeks, say, to the back to the beginning of the file then this will affect the child too (and vice versa). 
 * Signal handlers
