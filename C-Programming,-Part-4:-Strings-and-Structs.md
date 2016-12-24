@@ -37,15 +37,72 @@ strcpy(hello_string, "Hello Bhuvan!");
 
 ## Remember the NULL byte!
 
-Forgetting to NULL terminate a string is a big affect on the strings! Bounds checking
+Forgetting to NULL terminate a string is a big affect on the strings! Bounds checking is important. The heartbleed bug mentioned earlier in the wikibook is partially because of this.
+
+## Where can I find an In-Depth and Assignment-Comprehensive explanation of all of these functions?
+
+[Right Here!](https://linux.die.net/man/3/string)
 
 ## String Information/Comparison: `strlen` `strcmp`
 
+`int strlen(const char *s)` returns the length of the string not including the null byte
+
+`int strcmp(const char *s1, const char *s2)` returns an integer determining the lexicographic order of the strings. If s1 where to come before s2 in a dictionary, then a -1 is returned. If the two strings are equal, then 0. Else, -1. 
+
+With most of these functions, they expect the strings to be readable and not NULL but there is undefined behavior when you pass them NULL.
+
 ## String Alteration: `strcpy` `strcat` `strdup`
+
+`char *strcpy(char *dest, const char *src)` Copies the string at `src` to `dest`. **assumes dest has enough space for src**
+
+`char *strcat(char *dest, const char *src)` Concatenates the string at `src` to the end of destination. **This function assumes that there is enough space for `src` at the end of destination including the NULL byte**
+
+`char *strdup(const char *dest)` Returns a `malloc`'ed copy of the string.
 
 ## String Search: `strchr` `strstr`
 
+`char *strchr(const char *haystack, int needle)` Returns a pointer to the first occurrence of `needle` in `haystack`. If none found, `NULL` is returned.
+
+`char *strchr(const char *haystack, const char *needle)` Same as above but this time a string!
+
 ## String Tokenize: `strtok`
+
+A dangerous but useful function strtok takes a string and tokenizes it. Meaning that it will transform the strings into separate strings. This function has a lot of specs so please read the man pages a contrived examples is below.
+
+```C
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char* upped = strdup("strtok,is,tricky,!!");
+    char* start = strtok(upped, ",");
+    do{
+        printf("%s\n", start);
+    }while((start = strtok(NULL, ",")));
+    return 0;
+}
+```
+
+**Output**
+```C
+strtok
+is
+tricky
+!!
+```
+
+What happens when I change `upped` like this?
+```C
+char* upped = strdup("strtok,is,tricky,,,!!");
+```
+
+## Memory Movement: `memcpy` and `memmove`
+
+Why are `memcpy` and `memmove` both in `<string.h>`? Because strings are essentially raw memory with a null byte at the end of them!
+
+`void *memcpy(void *dest, const void *src, size_t n)` moves `n` bytes starting at `str` to `dest`. **Be careful** There is undefined behavior when the memory regions overlap. This is one of the classic works on my machine examples because many times valgrind won't be able to pick it up because it will look like it works on your machine. When the autograder hits, fail. Consider the safer version which is.
+
+`void *memmove(void *dest, const void *src, size_t n)` does the same thing as above, but if the memory regions overlap then it is guaranteed that all the bytes will get copied over correctly.
 
 # So what's a `struct`?
 
@@ -72,7 +129,7 @@ typedef struct contact contact;
 contact bhuvan;
 
 /* You can also declare the struct like this to get
- it done in one statement
+ it done in one statement */
 typedef struct optional_name {
     ...
 } contact;
