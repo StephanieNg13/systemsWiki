@@ -38,7 +38,7 @@ int main(){
             break;
         }
         if(child == 0){ //I am the child
-             execlp("echo", "echo", "hello");
+             execlp("echo", "echo", "hello" ,NULL);
         }
         else{
             children[i] = child;
