@@ -2,7 +2,7 @@
 
 ## Give the name of a signal that can not be caught by a signal 
 
-
+## Why is it unsafe to call any function (something that it is not signal handler safe) in a signal handler?
 
 Coding Questions
 
