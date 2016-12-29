@@ -17,35 +17,35 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[Signals: Review Questions]] (todo)
 * [[System Programming Jokes]]
 
-## HW0/Resources
+## 0. HW0/Resources
 * [[HW0]]
 * [[Informal Glossary of basic terms|#Informal Glossary]]
 * [[#Piazza: When And How to Ask For Help]]
 * [[ Programming Tricks, Part 1 ]]
 * [[ System Programming Short Stories and Songs ]]
 
-## Learning C
+## 1. Learning C
 * [[C Programming, Part 1: Introduction]]
 * [[C Programming, Part 2: Text Input And Output]]
 * [[C Programming, Part 3: Common Gotchas]]
 * [[C Programming, Part 4: Strings and Structs]]
 * [[C Programming, Part 5: Debugging]]
 
-## Process Control
+## 2. Process Control
 * [[Forking, Part 1: Introduction]]
 * [[Forking, Part 2: Fork, Exec, Wait]]
 * [[Process Control, Part 1: Wait macros, using signals]]
 
-## Memory and Allocators
+## 3. Memory and Allocators
 * [[Memory, Part 1: Heap Memory Introduction]]
 * [[Memory, Part 2: Implementing a Memory Allocator]]
 * [[Memory, Part 3: Smashing the Stack Example]]
 
-## Intro to Pthreads
+## 4. Intro to Pthreads
 * [[Pthreads, Part 1: Introduction]]
 * [[Pthreads, Part 2: Usage in Practice]]
 
-## Synchronization
+## 6. Synchronization
 * [[Synchronization, Part 1: Mutex Locks]]
 * [[Synchronization, Part 2: Counting Semaphores]]
 * [[Synchronization, Part 3: Working with Mutexes And Semaphores]]
@@ -56,18 +56,18 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[Synchronization, Part 8: Ring Buffer Example]]
 * [[Synchronization, Part 9: The Reader Writer Problem (part 2)]]
 
-## Deadlock
+## 7. Deadlock
 * [[Deadlock, Part 1: Resource Allocation Graph]]
 * [[Deadlock, Part 2: Deadlock Conditions]]
 * [Dining Philosophers](https://github.com/angrave/SystemProgramming/wiki/Dining-Philosphers)
 
-## Inter process Communication
+## 8. Inter process Communication
 * [[Virtual Memory, Part 1: Introduction to Virtual Memory]]
 * [[Pipes, Part 1: Introduction to pipes]]
 * [[Pipes, Part 2: Pipe programming secrets]]
 * [[Files, Part 1: Working with files]]
 
-## Networking
+## 9. Networking
 * [[ POSIX, Part 1: Error handling]]
 * [[ Networking, Part 1: Introduction]]
 * [[ Networking, Part 2: Using getaddrinfo ]]
@@ -80,7 +80,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[ Nonblocking I O, select(), and epoll ]]
 * [[ RPC, Part 1: Introduction to Remote Procedure Calls ]]
 
-## File Systems
+## 10. File Systems
 * [[ File System, Part 1: Introduction ]]
 * [[ File System, Part 2: Files are inodes (everything else is just data...) ]]
 * [[ File System, Part 3: Permissions ]]
@@ -91,14 +91,10 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[ File System, Part 8: Removing preinstalled malware from an Android device ]]
 * [[ File System, Part 8: Disk blocks example ]]
 
-## Signals
+## 11. Signals
 * [[Process Control, Part 1: Wait macros, using signals]]
 * [[ Signals, Part 2: Pending Signals and Signal Masks ]]
 * [[ Signals, Part 3: Raising signals ]]
 * [[ Signals, Part 4: Sigaction ]]
-
-## Other content
-
-* [[#Example Markdown]]
 
 
