@@ -1,3 +1,5 @@
+# Printing to output Streams
+
 ## How do I print strings, ints, chars to the standard output stream? 
 Use `printf`. The first parameter is a format string that includes placeholders for the data to be printed. Common format specifiers are `%s` treat the argument as a c string pointer, keep printing all characters until the NULL-character is reached; `%d` print the argument as an integer; `%p` print the argument as a memory address. 
 
@@ -19,6 +21,9 @@ Use `puts( name );` and `putchar( c )`  where name is a pointer to a C string an
 Use `fprintf( _file_ , "Hello %s, score: %d", name, score);`
 Where \_file\_ is either predefined 'stdout' 'stderr' or a FILE pointer that was returned by `fopen` or `fdopen`
 
+## Can I use file descriptors?
+Yes! Just use `dprintf(int fd, char* format_string, ...);` Just remember the stream may be buffered, so you will need to assure that the data is written to the file descriptor.
+
 ## How do I print data into a C string?
 Use `sprintf` or better `snprintf`.
 ```C
@@ -26,6 +31,63 @@ char result[200];
 int len = snprintf(result, sizeof(result), "%s:%d", name, score);
 ```
 snprintf returns the number of characters written excluding the terminating byte. In the above example this would be a maximum of 199.
+
+## What if I really really want `printf` to call `write` without a newline?
+
+Use `fflush( FILE* inp )`. The contents of the file will be written. If I wanted to write "Hello World" with no newline, I could write it like this.
+
+```C
+int main(){
+    fprintf(stdout, "Hello World");
+    fflush(stdout);
+    return 0;
+}
+```
+
+## How is `perror` helpful?
+Let's say that you have a function call that just failed (because you checked the man page and it is a failing return code). `perror(const char* message)` will print the english version of the error to stderr
+```C
+int main(){
+    int ret = open("IDoNotExist.txt", O_RDONLY);
+    if(ret < 0){
+        perror("Opening IDoNotExist:");
+    }
+    //...
+    return 0;
+}
+```
+
+# Parsing Input
+
+## How do I parse numbers from strings?
+
+Use `long int strtol(const char *nptr, char **endptr, int base);` or `long long int strtoll(const char *nptr, char **endptr, int base);`.
+
+What these functions do is take the pointer to your string `*nptr` and a `base` (ie binary, octal, decimal, hexadecimal etc) and an optional pointer `endptr` and returns a parsed int.
+
+```C
+int main(){
+    const char *num = "1A2436";
+    char* endptr;
+    long int parsed = strtol(num, &endptr, 16);
+    return 0;
+}
+```
+
+Be careful though! Error handling is kinda tricky because the function won't return an error code. On error, it'll return 0, and you have to manually check errno, but that could lead to trouble.
+
+```C
+int main(){
+    const char *zero = "0";
+    char* endptr;
+    printf("Parsing number"); //printf sets errno
+    long int parsed = strtol(num, &endptr, 16);
+    if(parsed == 0){
+        perror("Error: "); //oops strtol actually worked!
+    }
+    return 0;
+}
+```
 
 ## How do I parse input using `scanf` into parameters?
 Use `scanf` (or `fscanf` or `sscanf`) to get input from the default input stream, an arbitrary file stream or a C string respectively.
