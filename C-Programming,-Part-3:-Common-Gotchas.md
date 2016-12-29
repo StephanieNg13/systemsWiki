@@ -219,12 +219,16 @@ int* dynamic_array = malloc(10); // ARRAY_LENGTH(dynamic_array) = 2 or 1
 
 What is wrong with the macro? Well it works if we have a static array like the first array because sizeof a static array returns the bytes that array takes up, and dividing it by the sizeof(an_element) would give you the number of entries. But if we use a pointer to a piece of memory, taking the sizeof the pointer and dividing it by the size of the first entry won't always give us the size of the array.
 
-## Assignments in Conditions
+## Does `sizeof` do anything?
 
 ```C
 int a = 0;
-if (a = 1) {
-    printf("What is a?\n");
-}
+size_t size = sizeof(a++);
+printf("size: %lu, a: %d", size, a);
 ```
-Notice the second line--`a = 1` vs. `a == 1`. What happens here? The assignment operator in C returns the value on the right. So in this case, `if (a = 1)` evaluates to `if (1)`.
+
+What does the code print out?
+```
+size: 4, a: 0
+```
+Because sizeof is not actually evaluated at runtime. The compiler assigns the type of all expressions and discards the extra results of the expression.
