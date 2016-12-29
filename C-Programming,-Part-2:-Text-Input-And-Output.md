@@ -1,4 +1,4 @@
-# Printing to output Streams
+# Printing to Streams
 
 ## How do I print strings, ints, chars to the standard output stream? 
 Use `printf`. The first parameter is a format string that includes placeholders for the data to be printed. Common format specifiers are `%s` treat the argument as a c string pointer, keep printing all characters until the NULL-character is reached; `%d` print the argument as an integer; `%p` print the argument as a memory address. 
