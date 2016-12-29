@@ -16,7 +16,12 @@ Rather than requiring an existing paper-based book this semester, we will build 
    * [Printing to Streams](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output#printing-to-streams)
    * [Parsing Input](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output#parsing-input)
 * [[C Programming, Part 3: Common Gotchas]]
+   * [Memory Mistakes](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-3%3A-Common-Gotchas#memory-mistakes)
+   * [Logic/Programming Flow](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-3%3A-Common-Gotchas#logic-and-program-flow-mistakes)
+   * [Other Gotchas](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-3%3A-Common-Gotchas#other-gotchas)
 * [[C Programming, Part 4: Strings and Structs]]
+   * [Strings](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-4%3A-Strings-and-Structs#strings-structs-and-gotchas)
+   * [Structs](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-4%3A-Strings-and-Structs#so-whats-a-struct)
 * [[C Programming, Part 5: Debugging]]
 * [[C Programming, Review Questions]]
 
