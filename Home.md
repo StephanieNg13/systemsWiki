@@ -3,20 +3,6 @@ This wiki is being built by students and faculty from the University of Illinois
 
 Rather than requiring an existing paper-based book this semester, we will build our own set of resources here.
 
-## Exam Practice Questions
-Warning these are good practice but not comprehensive. The CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
-
-* [[Exam Topics]]
-* [[C Programming: Review Questions]]
-* [[Multi-threaded Programming: Review Questions]]
-* [[Synchronization Concepts: Review Questions]]
-* [[Memory: Review Questions]]
-* [[Pipe: Review Questions]]
-* [[Filesystem: Review Questions]]
-* [[Networking: Review Questions]]
-* [[Signals: Review Questions]] (todo)
-* [[System Programming Jokes]]
-
 ## 0. HW0/Resources
 * [[HW0]]
 * [[Informal Glossary of basic terms|#Informal Glossary]]
@@ -30,6 +16,7 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[C Programming, Part 3: Common Gotchas]]
 * [[C Programming, Part 4: Strings and Structs]]
 * [[C Programming, Part 5: Debugging]]
+* C Programming, Review and Questions
 
 ## 2. Process Control
 * [[Forking, Part 1: Introduction]]
@@ -97,4 +84,16 @@ Warning these are good practice but not comprehensive. The CS241 final assumes y
 * [[ Signals, Part 3: Raising signals ]]
 * [[ Signals, Part 4: Sigaction ]]
 
+## Exam Practice Questions
+Warning these are good practice but not comprehensive. The CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
 
+* [[Exam Topics]]
+* [[C Programming: Review Questions]]
+* [[Multi-threaded Programming: Review Questions]]
+* [[Synchronization Concepts: Review Questions]]
+* [[Memory: Review Questions]]
+* [[Pipe: Review Questions]]
+* [[Filesystem: Review Questions]]
+* [[Networking: Review Questions]]
+* [[Signals: Review Questions]] (todo)
+* [[System Programming Jokes]]
