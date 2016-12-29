@@ -16,7 +16,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[C Programming, Part 3: Common Gotchas]]
 * [[C Programming, Part 4: Strings and Structs]]
 * [[C Programming, Part 5: Debugging]]
-* C Programming, Review and Questions
+* [[C Programming, Review Questions]]
 
 ## 2. Process Control
 * [[Forking, Part 1: Introduction]]
