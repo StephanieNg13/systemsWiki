@@ -25,21 +25,24 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[C Programming, Part 5: Debugging]]
 * [[C Programming, Review Questions]]
 
-## 2. Process Control
+## 2. Processes
 * [[Forking, Part 1: Introduction]]
 * [[Forking, Part 2: Fork, Exec, Wait]]
 * [[Process Control, Part 1: Wait macros, using signals]]
+* [[Processes Review Questions]]
 
 ## 3. Memory and Allocators
 * [[Memory, Part 1: Heap Memory Introduction]]
 * [[Memory, Part 2: Implementing a Memory Allocator]]
 * [[Memory, Part 3: Smashing the Stack Example]]
+* [[Memory Review Questions]]
 
 ## 4. Intro to Pthreads
 * [[Pthreads, Part 1: Introduction]]
 * [[Pthreads, Part 2: Usage in Practice]]
+* [[Pthread Review Questions]]
 
-## 6. Synchronization
+## 5. Synchronization
 * [[Synchronization, Part 1: Mutex Locks]]
 * [[Synchronization, Part 2: Counting Semaphores]]
 * [[Synchronization, Part 3: Working with Mutexes And Semaphores]]
@@ -49,19 +52,22 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[Synchronization, Part 7: The Reader Writer Problem]]
 * [[Synchronization, Part 8: Ring Buffer Example]]
 * [[Synchronization, Part 9: The Reader Writer Problem (part 2)]]
+* [[Synchronization Review Questions]]
 
-## 7. Deadlock
+## 6. Deadlock
 * [[Deadlock, Part 1: Resource Allocation Graph]]
 * [[Deadlock, Part 2: Deadlock Conditions]]
 * [Dining Philosophers](https://github.com/angrave/SystemProgramming/wiki/Dining-Philosphers)
+* [[Deadlock Review Questions]]
 
-## 8. Inter process Communication
+## 7. Inter process Communication
 * [[Virtual Memory, Part 1: Introduction to Virtual Memory]]
 * [[Pipes, Part 1: Introduction to pipes]]
 * [[Pipes, Part 2: Pipe programming secrets]]
 * [[Files, Part 1: Working with files]]
+* [[IPC Review Questions]]
 
-## 9. Networking
+## 8. Networking
 * [[ POSIX, Part 1: Error handling]]
 * [[ Networking, Part 1: Introduction]]
 * [[ Networking, Part 2: Using getaddrinfo ]]
@@ -73,8 +79,9 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ Networking, Part 6: Creating a UDP server ]]
 * [[ Nonblocking I O, select(), and epoll ]]
 * [[ RPC, Part 1: Introduction to Remote Procedure Calls ]]
+* [[ Networking Review Questions ]]
 
-## 10. File Systems
+## 9. File Systems
 * [[ File System, Part 1: Introduction ]]
 * [[ File System, Part 2: Files are inodes (everything else is just data...) ]]
 * [[ File System, Part 3: Permissions ]]
@@ -84,12 +91,14 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ File System, Part 7: Scalable and Reliable Filesystems ]]
 * [[ File System, Part 8: Removing preinstalled malware from an Android device ]]
 * [[ File System, Part 8: Disk blocks example ]]
+* [[ File Systems Review Questions ]]
 
-## 11. Signals
+## 10. Signals
 * [[Process Control, Part 1: Wait macros, using signals]]
 * [[ Signals, Part 2: Pending Signals and Signal Masks ]]
 * [[ Signals, Part 3: Raising signals ]]
 * [[ Signals, Part 4: Sigaction ]]
+* [[ Signals Review Questions ]]
 
 ## Exam Practice Questions
 Warning these are good practice but not comprehensive. The CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
