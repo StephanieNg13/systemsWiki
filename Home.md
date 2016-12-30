@@ -47,7 +47,10 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 3. Memory and Allocators
 * [[Memory, Part 1: Heap Memory Introduction]]
+   * [C Dynamic Memory Allocation](https://github.com/angrave/SystemProgramming/wiki/Memory,-Part-1:-Heap-Memory-Introduction#c-dynamic-memory-allocation)
+   * [Introduction to Allocating](https://github.com/angrave/SystemProgramming/wiki/Memory,-Part-1:-Heap-Memory-Introduction#intro-to-allocating)
 * [[Memory, Part 2: Implementing a Memory Allocator]]
+   * [Memory Allocator Tutorial](https://github.com/angrave/SystemProgramming/wiki/Memory%2C-Part-2%3A-Implementing-a-Memory-Allocator#memory-allocator-tutorial)
 * [[Memory, Part 3: Smashing the Stack Example]]
 * [[Memory Review Questions]]
 
