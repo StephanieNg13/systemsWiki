@@ -1,15 +1,15 @@
 ## Topics
-Correct use of fork, exec and waitpid
-Using exec with a path
-Understanding what fork and exec and waitpid do. E.g. how to use their return values.
-SIGKILL vs SIGSTOP vs SIGINT. 
-What signal is sent when you press CTRL-C
-Using kill from the shell or the kill POSIX call.
-Process memory isolation.
-Process memory layout (where is the heap, stack etc; invalid memory addresses).
-What is a fork bomb, zombie and orphan? How to create/remove them.
-getpid vs getppid
-How to use the WAIT exit status macros WIFEXITED etc.
+* Correct use of fork, exec and waitpid
+* Using exec with a path
+* Understanding what fork and exec and waitpid do. E.g. how to use their return values.
+* SIGKILL vs SIGSTOP vs SIGINT. 
+* What signal is sent when you press CTRL-C
+* Using kill from the shell or the kill POSIX call.
+* Process memory isolation.
+* Process memory layout (where is the heap, stack etc; invalid memory addresses).
+* What is a fork bomb, zombie and orphan? How to create/remove them.
+* getpid vs getppid
+* How to use the WAIT exit status macros WIFEXITED etc.
 
 
 # Questions/Exercises 
