@@ -25,6 +25,32 @@ In practice though, we typically do two changes. One, once the array gets small 
 
 We know that CPUs have a finite amount of cores. A lot of times we start up a number of threads and give them tasks as they idle.
 
+## Another problem, Parallel Map
+
+Say we want to apply a function to an entire array, one element at a time.
+
+```C
+
+int *map(int (*func)(int), int *arr, size_t len){
+    int *ret = malloc(len*sizeof(*arr));
+    for(size_t i = 0; i < len; ++i) 
+        ret[i] = func(arr[i]);
+    return ret;
+}
+```
+
+Since none of the elements depend on any other element, how would you go about parallelizing this? What do you think would be the best way to split up the work between threads.
+
+## Scheduling
+
+There are a few ways to split up the work.
+* static scheduling: break up the problems into fixed size chunks (predetermined) and have each thread work on each of the chunks. This works well when each of the subproblems take roughly the same time because there is no additional overhead. All you need to do is write a loop and give the map function to each subarray.
+* dynamic scheduling: as a new problem becomes available have a thread serve it. This is useful when you don't know how long the scheduling will take
+* guided scheduling: This is a mix of the above with a mix of the benefits and the tradeoffs. You start with a static scheduling and move slowly to dynamic if needed
+* runtime scheduling: You have absolutely no idea how long the problems are going to take. Instead of deciding it yourself, let the program decide what to do!
+
+[source](https://software.intel.com/en-us/articles/openmp-loop-scheduling), but no need to memorize.
+
 ## Few Drawbacks
 
 You won't see the speedup right away because of things like cache coherency and scheduling extra threads.
