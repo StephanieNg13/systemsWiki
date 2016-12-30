@@ -1,3 +1,4 @@
+# Memory Allocator Tutorial
 A memory allocator needs to keep track of which bytes are currently allocated and which are available for use. This page introduces the implementation and conceptual details of building an allocator, i.e. the actual code that implements `malloc` and `free`.
 
 ## This page talks about links of blocks - do I malloc memory for them instead?
@@ -17,9 +18,9 @@ In the implementation, remember that pointer arithmetic depends on type. For exa
 ## Implementing malloc
 The simplest implementation uses first fit: Start at the first block, assuming it exists, and iterate until a block that represents unallocated space of sufficient size is found, or we've checked all the blocks.
 
-If no suitable block is found then it's time to call `sbrk()` again to sufficiently extend the size of the heap. A fast implementation might extend it a significant amount so that we will not need to request more heap memory in the near future.
+If no suitable block is found, it's time to call `sbrk()` again to sufficiently extend the size of the heap. A fast implementation might extend it a significant amount so that we will not need to request more heap memory in the near future.
 
-When a free block is found it may be larger than the space we need. If so, we will create two entries in our implicit list. The first entry is the allocated block, the second entry is the remaining space.
+When a free block is found, it may be larger than the space we need. If so, we will create two entries in our implicit list. The first entry is the allocated block, the second entry is the remaining space.
 
 There are two simple ways to note if a block is in use or available. The first is to store it as a byte in the header information along with the size and the second to encode it as the lowest bit in the size!
 Thus block size information would be limited to only even values:
@@ -42,6 +43,12 @@ For example, if you need to calculate how many 16 byte units are required, don't
 int s = (requested_bytes + tag_overhead_bytes + 15) / 16
 ```
 The additional constant ensures incomplete units are rounded up. Note, real code is more likely to symbol sizes e.g. `sizeof(x) - 1`, rather than coding numerical constant 15.
+
+## A note about internal fragmentation
+
+Internal fragmentation happens when the block you give them is larger than their allocation size. Let's say that we have a free block of size 16B (not including metadata). If they allocate 7 bytes, you may want to round up to 16B and just return the entire block.
+
+This gets very sinister when you implementing coalescing and splitting (next section). If you don't implement either, then you may end up returning a block of size 64B for a 7B allocation! There is a _lot_ of overhead for that allocation which is what we are trying to avoid.
 
 ## Implementing free
 When `free` is called we need to re-apply the offset to get back to the 'real' start of the block (remember we didn't give the user a pointer to the actual start of the block?), i.e. to where we stored the size information.
