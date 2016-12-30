@@ -37,3 +37,4 @@ int main() {
 }
 ````
 
+There are [a lot](https://en.wikipedia.org/wiki/Stack_buffer_overflow) of ways that computers tend to get around this.
