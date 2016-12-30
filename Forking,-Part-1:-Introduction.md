@@ -6,6 +6,8 @@ When testing fork() code, ensure that you have either root and/or physical acces
 
 TL;DR: Fork can be **extremely** dangerous if you aren't prepared for it. **You have been warned.**
 
+# Intro to Fork
+
 ## What does fork do?
 
 The `fork` system call clones the current process to create a new process. It creates a new process (the child process) by duplicating the state of the existing process with a few minor differences (discussed below). The child process does not start from main. Instead it returns from `fork()` just as the parent process does.
@@ -65,6 +67,8 @@ fork bombs are not necessarily malicious - they occasionally occur due to studen
 
 Angrave suggests that the Matrix trilogy, where the machine and man finally work together to defeat the multiplying Agent-Smith, was a cinematic plot based on an AI-driven fork-bomb.
 
+# Waiting and Execing
+
 ## How does the parent process wait for the child to finish?
 Use `waitpid` (or `wait`).
 
@@ -92,8 +96,11 @@ The naming schemes can be shortened like this
 > The base of each is exec (execute), followed by one or more letters:
 >
 > e – An array of pointers to environment variables is explicitly passed to the new process image.
+>
 > l – Command-line arguments are passed individually (a list) to the function.
+>
 > p – Uses the PATH environment variable to find the file named in the file argument to be executed.
+>
 > v – Command-line arguments are passed to the function as an array (vector) of pointers.
 
 ```C
