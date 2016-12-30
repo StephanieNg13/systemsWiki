@@ -1,3 +1,5 @@
+# Wait Macros
+
 ## Can I find out the exit value of my child?
 
 You can find the lowest 8 bits of the child's exit value (the return value of `main()` or value included in `exit()`): Use the "Wait macros" - typically you will use "WIFEXITED" and "WEXITSTATUS" . See `wait`/`waitpid` man page for more information).
@@ -16,6 +18,52 @@ if (child > 0) { /* I am the parent - wait for the child to finish */
   execl("/bin/ls", "/bin/ls", ".", (char *) NULL); // "ls ."
 }
 ```
+
+A process can only have 256 return values, the rest of the bits are informational.
+
+## Bit Shifting
+
+Note there is no need to memorize this, this is just a high level overview of how information is stored inside the status variables
+
+[Android source code](https://android.googlesource.com/platform/prebuilts/gcc/linuxx86/host/i686-linux-glibc2.7-
+4.6/+/tools_r20/sysroot/usr/include/bits/waitstatus.h)
+
+/* If WIFEXITED(STATUS), the low-order 8 bits of the status. */
+
+\#define __WEXITSTATUS(status) (((status) & 0xff00) >> 8)
+
+/* If WIFSIGNALED(STATUS), the terminating signal. */
+
+\#define __WTERMSIG(status) ((status) & 0x7f)
+
+/* If WIFSTOPPED(STATUS), the signal that stopped the child. */
+
+\#define __WSTOPSIG(status) __WEXITSTATUS(status)
+
+/* Nonzero if STATUS indicates normal termination. */
+
+\#define __WIFEXITED(status) (__WTERMSIG(status) == 0)
+
+The kernel has an internal way of keeping track of signaled, exited, or stopped. That API is abstracted so that that the kernel developers are free to change at will.
+
+## Being careful.
+
+Remember that the the macros only make sense if the precondition is met. Meaning that a process' exit status won't be defined if the process is signaled. The macros will not do the checking for you, so it's up to the programming to make sure the logic checks out.
+
+# Signals
+
+## What's a signal?
+
+A signal is a construct provided to us by the kernel. It allows one process to asynchronously send a signal (think a message) to another process. If that process wants to accept the signal, it can, and then, for most signals, can decide what to do with that signal. Here is a short list (non comprehensive) of signals.
+
+|   Name   |             Default Action             | Usual Use Case |
+|----------|----------------------------------------|--------------------------------|
+| SIGINT   | Terminate Process (Can be caught)      | Tell the process to stop nicely |
+| SIGQUIT  | Terminate Process (Can be caught)      | Tells the process to stop harshly |
+| SIGSTOP  | Stop Process (Can be caught)           | Stops the process to be continued |
+| SIGCONT  | Continues a Process                    | Continues to run the process |
+| SIGKILL  | Terminate Process (Cannot be Ignored)  | You want your process gone |
+
 
 ## Can I pause my child?
 
@@ -49,8 +97,6 @@ My pid is 403
 >kill -SIGSTOP 403
 >kill -SIGCONT 403
 ```
-
-
 
 ## How do I kill/stop/suspend my child from C?
 In C, send a signal to the child using `kill` POSIX call,
