@@ -54,6 +54,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 ## 4. Intro to Pthreads
 * [[Pthreads, Part 1: Introduction]]
 * [[Pthreads, Part 2: Usage in Practice]]
+* [[ Pthreads, Part 3: Parallel Problems (Bonus) ]]
 * [[Pthread Review Questions]]
 
 ## 5. Synchronization
