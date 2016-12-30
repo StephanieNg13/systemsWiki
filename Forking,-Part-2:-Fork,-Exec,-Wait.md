@@ -1,3 +1,5 @@
+# The Pattern
+
 ## What does the following 'exec' example do?
 ```C
 #include <unistd.h>
@@ -81,6 +83,7 @@ Don't wait for them! Your parent process can continue to execute code without ha
 
 However child processes that finish before their parent finishes can become zombies. See the zombie page for more information.
 
+# Zombies
 
 ## Good parents don't let their children become zombies!
 When a child finishes (or terminates) it still takes up a slot in the kernel process table. 
