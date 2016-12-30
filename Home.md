@@ -23,6 +23,10 @@ Rather than requiring an existing paper-based book this semester, we will build 
    * [Strings](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-4%3A-Strings-and-Structs#strings-structs-and-gotchas)
    * [Structs](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-4%3A-Strings-and-Structs#so-whats-a-struct)
 * [[C Programming, Part 5: Debugging]]
+   * [In Code Debugging](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#in-code-debugging)
+   * [Valgrind](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#valgrind)
+   * [Tsan](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#tsan)
+   * [GDB](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#gdb)
 * [[C Programming, Review Questions]]
 
 ## 2. Processes
