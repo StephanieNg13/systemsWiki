@@ -56,8 +56,12 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 4. Intro to Pthreads
 * [[Pthreads, Part 1: Introduction]]
+   * [Intro to Threads](https://github.com/angrave/SystemProgramming/wiki/Pthreads,-Part-1:-Introduction#intro-to-threads)
+   * [Simple Pthreads](https://github.com/angrave/SystemProgramming/wiki/Pthreads,-Part-1:-Introduction#simple-usage)
 * [[Pthreads, Part 2: Usage in Practice]]
-* [[ Pthreads, Part 3: Parallel Problems (Bonus) ]]
+   * [More pthread Functions](https://github.com/angrave/SystemProgramming/wiki/Pthreads,-Part-2:-Usage-in-Practice#more-pthread-functions)
+   * [Intro to Race Conditions](https://github.com/angrave/SystemProgramming/wiki/Pthreads,-Part-2:-Usage-in-Practice#intro-to-race-conditions)
+* [[Pthreads, Part 3: Parallel Problems (Bonus) ]]
 * [[Pthread Review Questions]]
 
 ## 5. Synchronization
