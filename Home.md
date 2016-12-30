@@ -26,6 +26,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[C Programming, Review Questions]]
 
 ## 2. Processes
+* [[Processes, Part 1: Introduction]]
 * [[Forking, Part 1: Introduction]]
 * [[Forking, Part 2: Fork, Exec, Wait]]
 * [[Process Control, Part 1: Wait macros, using signals]]
