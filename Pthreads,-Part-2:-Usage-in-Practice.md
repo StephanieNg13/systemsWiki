@@ -1,16 +1,18 @@
+# More pthread functions
+
 ## How do I create a pthread?
 See [Pthreads Part 1](https://github.com/angrave/SystemProgramming/wiki/Pthreads,-Part-1:-Introduction) which introduces `pthread_create` and `pthread_join`
 
-## If I call `pthread_create` twice how many stacks does my process have?
-Your process will contain three stacks - one for each thread. The first thread is created when the process starts and you created two more. Actually there can be more stacks than this but let's ignore that complication for now. The important idea is that each thread requires a stack because the stack contains automatic variables and the old CPU PC register so that it can back to executing the calling function after the function is finished.
+## If I call `pthread_create` twice, how many stacks does my process have?
+Your process will contain three stacks - one for each thread. The first thread is created when the process starts, and you created two more. Actually there can be more stacks than this, but let's ignore that complication for now. The important idea is that each thread requires a stack because the stack contains automatic variables and the old CPU PC register, so that it can back to executing the calling function after the function is finished.
 
-## What is the difference between a process and a thread?
+## What is the difference between a full process and a thread?
 In addition, unlike processes, threads within the same process can share the same global memory (data and heap segments).
 
 ## What does `pthread_cancel` do?
 Stops a thread. Note the thread may not actually be stopped immediately. For example it can be terminated when the thread makes an operating system call (e.g. `write`).
 
-In practice `pthread_cancel` is rarely used because it does not give a thread an opportunity to clean up after itself (for example, it may have opened some files).
+In practice, `pthread_cancel` is rarely used because it does not give a thread an opportunity to clean up after itself (for example, it may have opened some files).
 An alternative implementation is to use a boolean (int) variable whose value is used to inform other threads that they should finish and clean up.
 
 ## What is the difference between `exit` and `pthread_exit`?
@@ -63,7 +65,8 @@ Note the pthread_exit version creates thread zombies, however this is not a long
 
 ## What is the purpose of pthread_join?
 * Wait for a thread to finish
-* Clean up thread resources.
+* Clean up thread resources
+* Grabs the return value of the thread
 
 ## What happens if you don't call `pthread_join`?
 Finished threads will continue to consume resources. Eventually, if enough threads are created, `pthread_create` will fail.
@@ -97,6 +100,9 @@ void start_threads() {
   pthread_join(tid, &result);
 }
 ```
+
+# Intro to Race Conditions
+
 ## How can I create ten threads with different starting values.
 The following code is supposed to start ten threads with values 0,1,2,3,...9
 However, when run prints out `1 7 8 8 8 8 8 8 8 10`! Can you see why?
@@ -158,7 +164,7 @@ Time | Thread 1 | Thread 2| Comments
 
 
 ## What are condition variables, semaphores, mutexes?
-These are synchronization locks that are used to prevent race conditions and ensure proper synchronization between threads running in the same program. In addition these locks are conceptually identical to the primitives used inside the kernel.
+These are synchronization locks that are used to prevent race conditions and ensure proper synchronization between threads running in the same program. In addition, these locks are conceptually identical to the primitives used inside the kernel.
 
 
 ## Are there any advantages of using threads over forking processes?
@@ -214,12 +220,13 @@ int main() {
 8973:Main thread finished
 ```
 
-In practice creating threads before forking can lead to unexpected errors because (as demonstrated above) the other threads are immediately terminated when forking. Another thread might have just lock a mutex (e.g. by calling malloc) and never unlock it again. Advanced users may find `pthread_atfork` useful however we suggest you usually try to avoid creating threads before forking unless you fully understand the limitations and difficulties of this approach.
+In practice, creating threads before forking can lead to unexpected errors because (as demonstrated above) the other threads are immediately terminated when forking. Another thread might have just lock a mutex (e.g. by calling malloc) and never unlock it again. Advanced users may find `pthread_atfork` useful however we suggest you usually try to avoid creating threads before forking unless you fully understand the limitations and difficulties of this approach.
 
 ## Are there other reasons where `fork` might be preferable to creating a thread.
 Creating separate processes is useful 
 * When more security is desired (for example, Chrome browser uses different processes for different tabs)
 * When running an existing and complete program then a new process is required (e.g. starting 'gcc')
+* When you are running into synchronization primitives and each process is operating on something in the system
  
 ## How can I find out more?
 See the complete example in the [man page](http://man7.org/linux/man-pages/man3/pthread_create.3.html)
