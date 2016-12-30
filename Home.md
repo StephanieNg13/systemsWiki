@@ -27,8 +27,15 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 2. Processes
 * [[Processes, Part 1: Introduction]]
+   * [Overview](https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction#overview)
+   * [Process Contents](https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction#process-contents)
+   * [Bonus: More Contents](https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction#process-functionslimitations-bonus)
 * [[Forking, Part 1: Introduction]]
+   * [Introduction](https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-1%3A-Introduction#intro-to-fork)
+   * [Waiting and Execing](https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-1%3A-Introduction#waiting-and-execing)
 * [[Forking, Part 2: Fork, Exec, Wait]]
+   * [The Pattern](https://github.com/angrave/SystemProgramming/wiki/Forking,-Part-2:-Fork,-Exec,-Wait#the-pattern)
+   * [Zombies](https://github.com/angrave/SystemProgramming/wiki/Forking,-Part-2:-Fork,-Exec,-Wait#zombies)
 * [[Process Control, Part 1: Wait macros, using signals]]
 * [[Processes Review Questions]]
 
