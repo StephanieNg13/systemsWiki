@@ -1,3 +1,5 @@
+# C Dynamic Memory Allocation
+
 ## What happens when I call malloc?
 The function `malloc` is a C library call and is used to reserve a contiguous block of memory. Unlike stack memory, the memory remains allocated until `free` is called with the same pointer. There is also `calloc` and `realloc` which are discussed below.
 
@@ -111,6 +113,8 @@ See [the man page](http://man7.org/linux/man-pages/man3/malloc.3.html)!
 ## How important is that memory allocation is fast?
 Very! Allocating and de-allocating heap memory is a common operation in most applications.
 
+# Intro to Allocating
+
 ## What is the silliest malloc and free implementation and what is wrong with it?
 
 ```C
@@ -158,13 +162,13 @@ A first-fit strategy finds the first available hole that is of sufficient size (
 ---|---|---|---|---|---|---|---
 
 
-## What is fragmentation?
+## What is external fragmentation?
 In the example below, of the 64KB of heap memory, 17KB is allocated, and 47KB is free. However the largest available block is only 30KB because our available unallocated heap memory is fragmented into smaller pieces. 
 
  `16KB free` | 10KB allocated | 1KB free | 1KB allocated | 30KB free | 4KB allocated | 2KB free 
 ---|---|---|---|---|---|---
 
-## What effect do placement strategies have on fragmentation and performance?
+## What effect do placement strategies have on external fragmentation and performance?
 Different strategies affect the fragmentation of heap memory in non-obvious ways, which only are discovered by mathematical analysis or careful simulations under real-world conditions (for example simulating the memory allocation requests of a database or webserver).
 For example, best-fit at first glance appears to be an excellent strategy however, if we can not find a perfectly-sized hole then this placement creates many tiny unusable holes, leading to high fragmentation. It also requires a scan of all possible holes.
 
