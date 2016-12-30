@@ -72,7 +72,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 ## 6. Deadlock
 * [[Deadlock, Part 1: Resource Allocation Graph]]
 * [[Deadlock, Part 2: Deadlock Conditions]]
-* [Dining Philosophers](https://github.com/angrave/SystemProgramming/wiki/Dining-Philosphers)
+* [[Deadlock, Part 3: Dining Philosophers]]
 * [[Deadlock Review Questions]]
 
 ## 7. Inter process Communication
