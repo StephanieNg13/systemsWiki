@@ -37,6 +37,8 @@ Rather than requiring an existing paper-based book this semester, we will build 
    * [The Pattern](https://github.com/angrave/SystemProgramming/wiki/Forking,-Part-2:-Fork,-Exec,-Wait#the-pattern)
    * [Zombies](https://github.com/angrave/SystemProgramming/wiki/Forking,-Part-2:-Fork,-Exec,-Wait#zombies)
 * [[Process Control, Part 1: Wait macros, using signals]]
+   * [Wait Macros](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#wait-macros)
+   * [Signals](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#signals)
 * [[Processes Review Questions]]
 
 ## 3. Memory and Allocators
@@ -103,6 +105,8 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 10. Signals
 * [[Process Control, Part 1: Wait macros, using signals]]
+   * [Wait Macros](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#wait-macros)
+   * [Signals](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#signals)
 * [[ Signals, Part 2: Pending Signals and Signal Masks ]]
 * [[ Signals, Part 3: Raising signals ]]
 * [[ Signals, Part 4: Sigaction ]]
