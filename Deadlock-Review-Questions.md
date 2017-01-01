@@ -35,14 +35,14 @@ and another threads calls
 What happens and why? What happens if a third thread calls `pthread_mutex_lock(m1)` ?
 
 * How many processes are blocked? As usual assume that a process is able to complete if it is able to acquire all of the resources listed below.
-P1 acquires R1
-P2 acquires R2
-P1 acquires R3
-P2 waits for R3
-P3 acquires R5
-P1 waits for R4
-P3 waits for R1
-P4 waits for R5
-P5 waits for R1
+     * P1 acquires R1
+     * P2 acquires R2
+     * P1 acquires R3
+     * P2 waits for R3
+     * P3 acquires R5
+     * P1 waits for R4
+     * P3 waits for R1
+     * P4 waits for R5
+     * P5 waits for R1
 
 (Draw out the resource graph!)
