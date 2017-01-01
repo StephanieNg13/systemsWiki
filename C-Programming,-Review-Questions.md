@@ -72,3 +72,9 @@ char *foo(int var){
 ```
 * Write a function that accepts a string and opens that file prints out the file 40 bytes at a time but every other print reverses the string (try using POSIX API for this).
 * What are some differences between the POSIX filedescriptor model and C's `FILE*` (ie what function calls are used and which is buffered)? Does POSIX use C's `FILE*` internally or vice versa?
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging">
+Back: C Programming, Part 5: Debugging
+</a>
+</div>
