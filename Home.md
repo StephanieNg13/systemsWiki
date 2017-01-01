@@ -77,6 +77,8 @@ Rather than requiring an existing paper-based book this semester, we will build 
     * [Working Solutions](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-4%3A-The-Critical-Section-Problem#working-solutions)
     * [Hardware Solutions](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-4%3A-The-Critical-Section-Problem#hardware-solutions)
 * [[Synchronization, Part 5: Condition Variables]]
+    * [Intro To Condition Variables](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-5%3A-Condition-Variables#intro-to-condition-variables)
+    * [Implementing a Counting Semaphore](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-5%3A-Condition-Variables#implementing-counting-semphore)
 * [[Synchronization, Part 6: Implementing a barrier]]
 * [[Synchronization, Part 7: The Reader Writer Problem]]
 * [[Synchronization, Part 8: Ring Buffer Example]]
