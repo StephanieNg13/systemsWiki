@@ -1,4 +1,4 @@
-## What is Virtual Memory?
+# What is Virtual Memory?
 
 In very simple embedded systems and early computers, processes directly access memory i.e. "Address 1234" corresponds to a particular byte stored in a particular part of physical memory.
 In modern systems, this is no longer the case. Instead each process is isolated; and there is a translation process between the address of a particular CPU instruction or piece of data of a process and the actual byte of physical memory ("RAM"). Memory addresses are no longer 'real'; the process runs inside virtual memory. Virtual memory not only keeps processes safe (because one process cannot directly read or modify another process's memory) it also allows the system to efficiently allocate and re-allocate portions of memory to different processes.
@@ -17,7 +17,7 @@ The solution is to chunk memory into small regions called 'pages' and 'frames' a
 
 A page is a block of virtual memory. A typical block size on Linux operating system is 4KB (i.e. 2^12 addresses), though you can find examples of larger blocks.
 
-So rather than talking about individual bytes we can talk about blocks of 4KBs. Each block is called a page. We can also number our pages ("Page 0" "Page 1" etc)
+So rather than talking about individual bytes we can talk about blocks of 4KBs, each block is called a page. We can also number our pages ("Page 0" "Page 1" etc)
 
 ## EX: How many pages are there in a 32bit machine (assume page size of 4KB)?
 Answer: 2^32 address / 2^12 = 2^20 pages.
@@ -25,6 +25,7 @@ Answer: 2^32 address / 2^12 = 2^20 pages.
 Remember that 2^10 is 1024, so 2^20 is a bit more than one million.
 
 For a 64 bit machine, 2^64 / 2^12 = 2^52, which is roughly 10^15 pages.
+
 ## What is a frame?
 A frame (or sometimes called a 'page frame') is a block of _physical memory_ or RAM (=Random Access Memory). This kind of memory is occasionally called 'primary storage' (and contrasted with slower, secondary storage such as spinning disks that have lower access times)
 
@@ -41,6 +42,10 @@ For a 32 bit machine with 4KB pages, each entry needs to hold a frame number - i
 For a 64 bit machine with 4KB pages, each entry needs 52 bits. Let's round up to 64 bits (8 bytes) per entry. With 2^52 entries thats 2^55 bytes (roughly 40 peta bytes...) Oops our page table is too large.
 
 In 64 bit architectures memory addresses are sparse, so we need a mechanism to reduce the page table size, given that most of the entries will never be used.
+
+![](http://www.cs.odu.edu/~cs471w/spring12/lectures/MainMemory_files/image028.jpg)
+
+A visual example of the page table is here. Imagine accessing an array and grabbing array elements.
 
 ## What is the offset and how is it used?
 Remember our page table maps pages to frames, but each page is a block of contiguous addresses. How do we calculate which particular byte to use inside a particular frame? The solution is to re-use the lowest bits of the virtual memory address directly. For example, suppose our process is reading the following address-
@@ -68,18 +73,32 @@ Compared to reading or writing memory directly.
 For a single page table, our machine is now twice as slow! (Two memory accesses are required)
 For a two-level page table, memory access is now three times as slow. (Three memory accesses are required)
 
-To overcome this overhead the MMU includes an associative cache of recently-used  virtual-page-to-frame lookups. This cache is called the TLB ("translation lookaside buffer"). Everytime a virtual address needs to be translated into a physical memory location, the TLB is queried in parallel to the page table. For most memory accesses of most programs, there is a significant chance that the TLB has cached the results. However if a program does not have good cache coherence (for example is reading from random memory locations of many different pages) then the TLB will not have the result cache and now the MMU must use the much slower page table to determine the physical frame.
+To overcome this overhead, the MMU includes an associative cache of recently-used  virtual-page-to-frame lookups. This cache is called the TLB ("translation lookaside buffer"). Everytime a virtual address needs to be translated into a physical memory location, the TLB is queried in parallel to the page table. For most memory accesses of most programs, there is a significant chance that the TLB has cached the results. However if a program does not have good cache coherence (for example is reading from random memory locations of many different pages) then the TLB will not have the result cache and now the MMU must use the much slower page table to determine the physical frame.
 
-Can frames be shared between processes?
-Yes! In addition to storing the frame number, the page table can be used to store whether a process can write or only read a particular frame. Read only frames can then be safely shared between multiple processes. For example, the C-library instruction code can be shared between all processes that dynamically load the code into the process memory. Each process can only read that memory.
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/X86_Paging_4K.svg/440px-X86_Paging_4K.svg.png)
 
-In addition, processes can share a page with a child process using the `mmap` system call.
+This may be how one splits up a multi level page table.
+
+# Advanced Frames and Page Protections
+
+## Can frames be shared between processes? Can they be specialized
+Yes! In addition to storing the frame number, the page table can be used to store whether a process can write or only read a particular frame. Read only frames can then be safely shared between multiple processes. For example, the C-library instruction code can be shared between all processes that dynamically load the code into the process memory. Each process can only read that memory. Meaning that if you try to write to a read-only page in memory you will get a `SEGFAULT`. That is why sometimes memory accesses segfault and sometimes they don't, it all depends on if your hardware says that you can access.
+
+In addition, processes can share a page with a child process using the `mmap` system call. `mmap` is an interesting call because instead of trying each virtual address to a physical frame, it ties it to something else. That something else can be a file, a GPU unit, or any other memory mapped operation that you can think of! Writing to the memory address may write through to the device or the write may be paused by the operating system but this is a very powerful abstraction because often the operating system is able to perform optimizations (multiple processes memory mapping the same file can have the kernel create one mapping).
 
 ## What else is stored in the page table and why?
 In addition to read-only bit and usage statistics discussed above, it is common to store at least read-only, modification and execution information. 
 
 ## What's a page fault?
-A page fault is when a running program tries to access some virtual memory in its address space that is not mapped to physical memory. Page faults will also occur in other situations, including in the next section.
+A page fault is when a running program tries to access some virtual memory in its address space that is not mapped to physical memory. Page faults will also occur in other situations.
+
+There are three types of Page Faults
+
+**Minor** If there is no mapping yet for the page, but it is a valid address. This could be memory asked for by `sbrk(2)` but not written to yet meaning that the operating system can wait for the first write before allocating space. The OS simply makes the page, loads it into memory, and moves on.
+
+**Major** If the mapping to the page is not in memory but on disk. What this will do is swap the page into memory and swap another page out. If this happens frequently enough, your program is said to _thrash_ the MMU.
+
+**Invalid** When you try to write to a non-writable memory address or read to a non-readable memory address. The MMU generates an invalid fault and the OS will usually generate a `SIGSEGV` meaning segmentation violation meaning that you wrote outside the segment that you could write to.
 
 ### Read-only bit
 The read-only bit marks the page as read-only. Attempts to write to the page will cause a page fault. The page fault will then be handled by the Kernel. Two examples of the read-only page include sharing the c runtime library between multiple processes (for security you wouldn't want to allow one process to modify the library); and Copy-On-Write where the cost of duplicating a page can be delayed until the first write occurs. 
