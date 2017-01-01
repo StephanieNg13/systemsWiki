@@ -1,3 +1,5 @@
+# Signals In Depth
+
 ## How can I learn more about signals?
 
 The linux man pages discusses signal system calls in section 2. There is also a longer article in section 7 (though not in OSX/BSD):
@@ -27,6 +29,8 @@ It _is_ possible to have more than one signal of a different type in a pending s
 
 ## How do I block signals?
 Signals can be blocked (meaning they will stay in the pending state) by setting the process signal mask or, when you are writing a multi-threaded program, the thread signal mask.
+
+# Disposition in Threads/Children
 
 ## What happens when creating a new thread?
 The new thread inherits a copy of the calling thread's mask
