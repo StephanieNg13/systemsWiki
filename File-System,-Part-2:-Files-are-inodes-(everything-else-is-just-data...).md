@@ -6,6 +6,15 @@ It is common to think of the file name as the 'actual' file. It's not! Instead c
 A directory is just a mapping of names to inode numbers.
 POSIX provides a small set of functions to read the filename and inode number for each entry (see below)
 
+Let's think about what it looks like in the actual file system. Theoretically, directories are just like actual files. The disk blocks will contain _directory entries_ or _dirents_. What that means is that our disk block can look like this
+
+| inode_num | name |
+|-----------|------|
+| 2043567   | hi.txt |
+...
+
+Each directory entry could either be a fixed size, or a variable c-string. It depends on how the particular filesystem implements it at the lower level.
+
 ## How can I find the inode number of a file?
 From a shell, use `ls` with the `-i` option
 
