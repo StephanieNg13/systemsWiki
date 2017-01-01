@@ -193,3 +193,11 @@ Now our string is filled in correctly at the end of the struct
 strcmp(bhuvan_name->c_str, "bhuvan") == 0 //The strings are equal!
 ```
 
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming,-Part-3:-Common-Gotchas">
+Back: C Programming, Part 3: Common Gotchas
+</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging">
+Next: C Programming, Part 5: Debugging
+</a>
+</div>
