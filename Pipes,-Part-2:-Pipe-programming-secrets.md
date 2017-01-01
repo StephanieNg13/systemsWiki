@@ -1,4 +1,4 @@
-## Pipe Gotchas
+# Pipe Gotchas
 Here's a complete example that doesn't work! The child reads one byte at a time from the pipe and prints it out - but we never see the message! Can you see why?
 
 ```C
@@ -170,3 +170,65 @@ Yes! Pipe write are atomic up to the size of the pipe. Meaning that if two proce
 Unnamed pipes (the kind we've seen up to this point) live in memory (do not take up any disk space) and are a simple and efficient form of inter-process communication (IPC) that is useful for streaming data and simple messages. Once all processes have closed, the pipe resources are freed.
 
 An alternative to _unamed_ pipes is _named_ pipes created using `mkfifo`.
+
+# Named Pipes
+
+## How do I create named pipes?
+
+From the command line: `mkfifo`
+From C: `int mkfifo(const char *pathname, mode_t mode);`
+
+You give it the path name and the operation mode, it will be ready to go! Named pipes take up no space on the disk. What the operating system is essentially telling you when you have a named pipe is that it will create an unnamed pipe that refers to the named pipe, and that's it! There is no additional magic. This is just for programming convenience if processes are started without forking (meaning that there would be no way to get the file descriptor to the child process for an unnamed pipe)
+
+## Why is my pipe hanging?
+Reads and writes hang on Named Pipes until there is at least one reader and one writer, take this
+```bash
+1$ mkfifo fifo
+1$ echo Hello > fifo
+# This will hang until I do this on another terminal or another process
+2$ cat fifo
+Hello
+```
+Any `open` is called on a named pipe the kernel blocks until another process calls the opposite open. Meaning, echo calls `open(.., O_RDONLY)` but that blocks until cat calls `open(.., O_WRONLY)`, then the programs are allowed to continue.
+
+## Race condition with named pipes.
+What is wrong with the following program?
+
+```C
+//Program 1
+
+int main(){
+	int fd = open("fifo", O_RDWR | O_TRUNC);
+	write(fd, "Hello!", 6);
+	close(fd);
+	return 0;
+}
+
+//Program 2
+int main() {
+	char buffer[7];
+	int fd = open("fifo", O_RDONLY);
+	read(fd, buffer, 6);
+	buffer[6] = '\0';
+	printf("%s\n", buffer);
+	return 0;
+}
+```
+
+This may never print hello because of a race condition. Since you opened the pipe in the first process under both permissions, open won't wait for a reader because you told the operating system that you are a reader! Sometimes it looks like it works because the execution of the code looks something like this.
+
+| Process 1 | Process 2 |
+|-----------|-----------|
+|  open(O_RDWR) & write()  |           |
+|           |   open(O_RDONLY) & read()  |
+|  close() & exit()   |           |
+|           | print() & exit() |
+
+
+Sometimes it won't
+
+| Process 1 | Process 2 |
+|-----------|-----------|
+|  open(O_RDWR) & write()  |           |
+|  close() & exit()   |  (Named pipe is destroyed)  |
+|   (Blocks indefinitely)        |    open(O_RDONLY)       |
