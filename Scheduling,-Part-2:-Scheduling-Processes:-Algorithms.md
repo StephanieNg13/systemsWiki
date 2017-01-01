@@ -3,14 +3,24 @@
 For all the examples,
 
 Process 1: Runtime 1000ms
+
 Process 2: Runtime 2000ms
+
 Process 3: Runtime 3000ms
+
 Process 4: Runtime 4000ms
+
 Process 5: Runtime 5000ms
 
 # Shortest Job First (SJF)
 
 ![](http://i.imgur.com/jGLvjqT.png)
+
+* P1 Arrival: 0ms
+* P2 Arrival: 0ms
+* P3 Arrival: 0ms
+* P4 Arrival: 0ms
+* P5 Arrival: 0ms
 
 The processes all arrive at the start and the scheduler schedules the job with the shortest total CPU time. The glaring problem is that this scheduler needs to know how long this program will run over time before it ran the program.
 
@@ -28,12 +38,11 @@ Preemptive shortest job first is like shortest job first but if a new job comes 
 
 ![](http://i.imgur.com/QvoX7Ia.png)
 
-Let's say that there is an ordering to how the processes come in. 
-P2 at 0ms
-P1 at 1000ms
-P5 at 3000ms
-P4 at 4000ms
-P3 at 5000ms
+* P2 at 0ms
+* P1 at 1000ms
+* P5 at 3000ms
+* P4 at 4000ms
+* P3 at 5000ms
 
 Here's what our algorithm does. It runs P2 because it is the only thing to run. Then P1 comes in at 1000ms, P2 runs for 2000ms, so our scheduler preemptively stops P2, and let's P1 run all the way through (this is completely up to the algorithm because the times are equal). Then, P5 Comes in -- since there are no processes running, the scheduler will run process 5. P4 comes in, and since the runtimes are equal P5, the scheduler stops P5 and runs P4. Finally P3 comes in, preempts P4, and runs to completion. Then P4 runs, then P5 runs.
 
@@ -43,9 +52,17 @@ Here's what our algorithm does. It runs P2 because it is the only thing to run. 
 **Disadvantages**
 * Need to know the runtime again
 
+**Note:** This algorithm compares the total runtime _not_ the remaining runtime for historical reasons. If you want to take the remaining time into account you will use Preemptive Shortest Remaining Time First (PSRTF).
+
 # First Come First Served (FCFS)
 
 ![](http://i.imgur.com/lcMpUZz.png)
+
+* P2 at 0ms
+* P1 at 1000ms
+* P5 at 3000ms
+* P4 at 4000ms
+* P3 at 5000ms
 
 Processes are scheduled in the order of arrival. One advantage of FCFS is that scheduling algorithm is simple: the ready queue is a just a FIFO (first in first out) queue.
 FCFS suffers from the Convoy effect.
@@ -65,6 +82,12 @@ The maximum amount of time that a process can execute before being returned to t
 
 ![](http://i.imgur.com/AlBYi0Y.png)
 
+* P1 Arrival: 0ms
+* P2 Arrival: 0ms
+* P3 Arrival: 0ms
+* P4 Arrival: 0ms
+* P5 Arrival: 0ms
+
 Quantum = 1000ms
 
 Here all processes arrive at the same time. P1 is run for 1 quantum and is finished. P2 for one quantum; then, it is stopped for P3. After all other processes run for a quantum we cycle back to P2 until all the processes are finished.
@@ -77,4 +100,4 @@ Here all processes arrive at the same time. P1 is run for 1 quantum and is finis
 
 # Priority
 
-Processes are scheduled in the order of priority value. For example a navigation process might be more important to execute than a logging process.
+Processes are scheduled in the order of priority value. For example, a navigation process might be more important to execute than a logging process.
