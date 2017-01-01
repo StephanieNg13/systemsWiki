@@ -53,7 +53,8 @@ Now our philosopher picks up the left fork and tries to grab the right. If it's 
 
 But, there is a problem. What if all the philosophers pick up their left at the same time, try to grab their right, put their left down, pick up their left, try to grab their right.... We have now livelocked our solution! Our poor philosopher are still starving, so let's give them some proper solutions.
 
-# Solutions
+# Viable Solutions
+
 ## Arbitrator (Naive and Advanced).
 
 The naive arbitrator solution is have one arbitrator (a mutex for example). Have each of the philosopher ask the arbitrator for permission to eat. This solution allows one philosopher to eat at a time. When they are done, another philosopher can ask for permission to eat.
