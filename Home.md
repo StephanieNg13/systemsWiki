@@ -66,9 +66,16 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 5. Synchronization
 * [[Synchronization, Part 1: Mutex Locks]]
+    * [Solving Critical Sections](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-1:-Mutex-Locks#solving-critical-sections)
+    * [Mutex Gotchas](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-1:-Mutex-Locks#mutex-gotchas)
 * [[Synchronization, Part 2: Counting Semaphores]]
 * [[Synchronization, Part 3: Working with Mutexes And Semaphores]]
+    * [Thread Safe Stack](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-3%3A-Working-with-Mutexes-And-Semaphores#thread-safe-stack)
+    * [Stack Semaphores](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-3%3A-Working-with-Mutexes-And-Semaphores#stack-semaphores)
 * [[Synchronization, Part 4: The Critical Section Problem]]
+    * [Candidate Solutions](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-4%3A-The-Critical-Section-Problem#candidate-solutions)
+    * [Working Solutions](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-4%3A-The-Critical-Section-Problem#working-solutions)
+    * [Hardware Solutions](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-4%3A-The-Critical-Section-Problem#hardware-solutions)
 * [[Synchronization, Part 5: Condition Variables]]
 * [[Synchronization, Part 6: Implementing a barrier]]
 * [[Synchronization, Part 7: The Reader Writer Problem]]
