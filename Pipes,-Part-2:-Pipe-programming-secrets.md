@@ -1,4 +1,4 @@
-## Pipe Gotchas (1)
+## Pipe Gotchas
 Here's a complete example that doesn't work! The child reads one byte at a time from the pipe and prints it out - but we never see the message! Can you see why?
 
 ```C
@@ -99,7 +99,7 @@ change:   fprintf(writer, "Score %d", 10 + 10);
 to:       fprintf(writer, "Score %d\n", 10 + 10);
 ```
 
-So do we need to `fflush` too?
+## So do we need to `fflush` too?
 Yes, if you want your bytes to be sent to the pipe immediately! At the beginning of this course we assumed that file streams are always _line buffered_ i.e. the C library will flush its buffer everytime you send a newline character. Actually this is only true for terminal streams - for other filestreams the C library attempts to improve performance by only flushing when it's internal buffer is full or the file is closed.
 
 
@@ -155,7 +155,18 @@ The mistake in above code is that there is still a reader for the pipe! The chil
 
 When forking, _It is common practice_ to close the unnecessary (unused) end of each pipe in the child and parent process. For example the parent might close the reading end and the child might close the writing end (and vice versa if you have two pipes)
 
+## What is filling up the pipe? What happens when the pipe becomes full?
+
+A pipe gets filled up when the writer writes too much to the pipe without the reader reading any of it. When the pipes become full, all writes fail until a read occurs. Even then, a write may partial fail if the pipe has a little bit of space left but not enough for the entire message.
+
+To avoid this, usually two things are done. Either increase the size of the pipe. Or more commonly, fix your program design so that the pipe is constantly being read from.
+
+## Are pipes process safe?
+
+Yes! Pipe write are atomic up to the size of the pipe. Meaning that if two processes try to write to the same pipe, the kernel has internal mutexes with the pipe that it will lock, do the write, and return. The only gotcha is when the pipe is about to become full. If two processes are trying to write and the pipe can only satisfy a partial write, that pipe write is not atomic -- be careful about that!
+
 ## The lifetime of pipes
+
 Unnamed pipes (the kind we've seen up to this point) live in memory (do not take up any disk space) and are a simple and efficient form of inter-process communication (IPC) that is useful for streaming data and simple messages. Once all processes have closed, the pipe resources are freed.
 
-An alternative to _unamed_ pipes is _named_ pipes created using `mkfifo` - more about these in a future lecture.
+An alternative to _unamed_ pipes is _named_ pipes created using `mkfifo`.
