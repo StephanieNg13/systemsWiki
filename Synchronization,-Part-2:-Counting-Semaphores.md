@@ -31,6 +31,17 @@ Yes - though the overhead of a semaphore is greater. To use a semaphore:
 * Replace `...lock` with `sem_wait`
 * Replace `...unlock` with `sem_post`
 
+A mutex is a semaphore that always `waits` before it `posts`
+
+```C
+sem_t s;
+sem_init(&s, 0, 1);
+
+sem_wait(&s);
+// Critical Section
+sem_post(&s);
+```
+
 ## Can I use sem_post inside a signal handler?
 Yes! `sem_post` is one of a handful of functions that can be correctly used inside a signal handler.
 This means we can release a waiting thread which can now make all of the calls that we were not
@@ -73,7 +84,8 @@ int main()
 Note robust programs do not use `signal()` in a multi-threaded program ("The effects of signal() in a multithreaded process are unspecified." - the signal man page); a more correct program will need to use `sigaction`.
 
 ## How do I find out more?
-Play using a real linux system! (9/19/14: Linux-In-the-Browser project is missing semaphore.h - this will be fixed in the next update). Read the man pages:
+
+Read the man pages:
 * [sem_init](http://man7.org/linux/man-pages/man3/sem_init.3.html)
 * [sem_wait](http://man7.org/linux/man-pages/man3/sem_wait.3.html)
 * [sem_post](http://man7.org/linux/man-pages/man3/sem_post.3.html)
