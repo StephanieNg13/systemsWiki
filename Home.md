@@ -100,10 +100,12 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[Pipes, Part 2: Pipe programming secrets]]
     * [Pipe Gotchas](https://github.com/angrave/SystemProgramming/wiki/Pipes%2C-Part-2%3A-Pipe-programming-secrets#pipe-gotchas)
     * [Named Pipes](https://github.com/angrave/SystemProgramming/wiki/Pipes%2C-Part-2%3A-Pipe-programming-secrets#named-pipes)
-* [[Files, Part 1: Working with files]]
+* [[ Files, Part 1: Working with files]]
 * [[ Scheduling, Part 1: Scheduling Processes ]]
+    * [Thinking about Scheduling](https://github.com/angrave/SystemProgramming/wiki/Scheduling%2C-Part-1%3A-Scheduling-Processes#thinking-about-scheduling)
+    * [Measures of Efficiency](https://github.com/angrave/SystemProgramming/wiki/Scheduling%2C-Part-1%3A-Scheduling-Processes#measures-of-efficiency)
 * [[ Scheduling, Part 2: Scheduling Processes: Algorithms ]]
-* [[IPC Review Questions]]
+* [[ IPC Review Questions]]
 
 ## 8. Networking
 * [[ POSIX, Part 1: Error handling]]
