@@ -1,6 +1,9 @@
+# Thread Safe Stack
+
 ## What is an atomic operation?
-To paraphrase Wikipedia, "An operation (or set of operations) is atomic or uninterruptible if it appears to the rest of the system to occur instantaneously."
-Without locks, only simple CPU instructions ("read this byte from memory") are atomic (indivisible). On a single CPU system one could temporarily disable interrupts (so a sequence of operations cannot be interrupted) but in practice atomicity is achieved by using synchronization primitives, typically a mutex lock.
+To paraphrase Wikipedia, 
+> An operation (or set of operations) is atomic or uninterruptible if it appears to the rest of the system to occur instantaneously.
+Without locks, only simple CPU instructions ("read this byte from memory") are atomic (indivisible). On a single CPU system, one could temporarily disable interrupts (so a sequence of operations cannot be interrupted) but in practice atomicity is achieved by using synchronization primitives, typically a mutex lock.
 
 Incrementing a variable (`i++`) is _not_ atomic because it requires three distinct steps: Copying the bit pattern from memory into the CPU; performing a calculation using the CPU's registers; copying the bit pattern back to memory. During this increment sequence, another thread or process can still read the old value and other writes to the same memory would also be over-written when the increment sequence completes.
 
@@ -9,12 +12,21 @@ Incrementing a variable (`i++`) is _not_ atomic because it requires three distin
 Note, this is just an introduction - writing high-performance thread-safe data structures requires its own book! Here's a simple data structure (a stack) that is not thread-safe:
 ```C
 // A simple fixed-sized stack (version 1)
+#define STACK_SIZE 20
 int count;
-double values[count];
+double values[STACK_SIZE];
 
-void push(double v) { values[count++] = v; }
-double pop() { return values[--count]; }
-int is_empty() { return count == 0; }
+void push(double v) { 
+    values[count++] = v; 
+}
+
+double pop() {
+    return values[--count];
+}
+
+int is_empty() {
+    return count == 0;
+}
 ```
 Version 1 of the stack is not thread-safe because if two threads call push or pop at the same time then the results or the stack can be inconsistent. For example, imagine if two threads call pop at the same time then both threads may read the same value, both may read the original count value.
 
@@ -25,14 +37,33 @@ While `push` (and `pop`) is executing, the datastructure is an inconsistent stat
 A candidate 'solution' is shown below. Is it correct? If not, how will it fail?
 ```C
 // An attempt at a thread-safe stack (version 2)
+#define STACK_SIZE 20
 int count;
-double values[count];
+double values[STACK_SIZE];
+
 pthread_mutex_t m1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t m2 = PTHREAD_MUTEX_INITIALIZER;
 
-void push() { pthread_mutex_lock(&m1); values[count++] = values; pthread_mutex_unlock(&m1); }
-double pop() { pthread_mutex_lock(&m2); double v=values[--count]; pthread_mutex_unlock(&m2); return v;}
-int is_empty() { pthread_mutex_lock(&m1); return count == 0; pthread_mutex_unlock(&m1); }
+void push(double v) { 
+    pthread_mutex_lock(&m1);
+    values[count++] = v;
+    pthread_mutex_unlock(&m1);
+}
+
+double pop() {
+    pthread_mutex_lock(&m2);
+    double v = values[--count];
+    pthread_mutex_unlock(&m2);
+
+    return v;
+}
+
+int is_empty() {
+    pthread_mutex_lock(&m1);
+    return count == 0;
+    pthread_mutex_unlock(&m1);
+}
+
 ```
 The above code ('version 2') contains at least one error. Take a moment to see if you can the error(s) and work out the consequence(s).
 
@@ -129,32 +160,7 @@ int main() {
     stack_destroy(s1);
 }
 ```
-## When can I destroy the mutex?
-You can only destroy an unlocked mutex
-
-## Can I copy a pthread_mutex_t to a new memory locaton?
-No, copying the bytes of the mutex to a new memory location and then using the copy is _not_ supported.
-
-## What would a simple implementation of a mutex look like?
-
-A simple (but incorrect!) suggestion is shown below. The `unlock` function simply unlocks the mutex and returns. The lock function first checks to see if the lock is already locked. If it is currently locked, it will keep checking again until another thread has unlocked the mutex.
-```C
-// Version 1 (Incorrect!)
-
-void lock(mutex_t *m) {
-  while(m->locked) { /*Locked? Nevermind - just loop and check again!*/ }
-
-  m->locked = 1;
-}
-void unlock(mutex_t *m) {
-  m->locked = 0;
-}
-```
-Version 1 uses 'busy-waiting' (unnecessarily wasting CPU resources) however there is a more serious problem: We have a race-condition! 
-
-If two threads both called `lock` concurrently it is possible that both threads would read 'm_locked' as zero. Thus both threads would believe they have exclusive access to the lock and both threads will continue. Ooops!
-
-We might attempt to reduce the CPU overhead a little by calling `pthread_yield()` inside the loop  - pthread_yield suggests to the operating system that the thread does not use the CPU for a short while, so the CPU may be assigned to threads that are waiting to run. But does not fix the race-condition. We need a better implementation - can you work how to prevent the race-condition?
+# Stack Semaphores
 
 ## How can I force my threads to wait if the stack is empty or full?
 Use counting semaphores! Use a counting semaphore to keep track of how many spaces remain and another semaphore to keep to track the number of items in the stack. We will call these two semaphores 'sremain' and 'sitems'. Remember `sem_wait` will wait if the semaphore's count has been decremented to zero (by another thread calling sem_post).
