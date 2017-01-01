@@ -92,11 +92,17 @@ Rather than requiring an existing paper-based book this semester, we will build 
     * [Viable Solutions](https://github.com/angrave/SystemProgramming/wiki/Deadlock,-Part-3:-Dining-Philosophers#viable-solutions)
 * [[Deadlock Review Questions]]
 
-## 7. Inter process Communication
+## 7. Inter-process Communication & Scheduling
 * [[Virtual Memory, Part 1: Introduction to Virtual Memory]]
+    * [What is Virtual Memory?](https://github.com/angrave/SystemProgramming/wiki/Virtual-Memory%2C-Part-1%3A-Introduction-to-Virtual-Memory#what-is-virtual-memory)
+    * [Advanced Frames and Protections](https://github.com/angrave/SystemProgramming/wiki/Virtual-Memory%2C-Part-1%3A-Introduction-to-Virtual-Memory#advanced-frames-and-page-protections)
 * [[Pipes, Part 1: Introduction to pipes]]
 * [[Pipes, Part 2: Pipe programming secrets]]
+    * [Pipe Gotchas](https://github.com/angrave/SystemProgramming/wiki/Pipes%2C-Part-2%3A-Pipe-programming-secrets#pipe-gotchas)
+    * [Named Pipes](https://github.com/angrave/SystemProgramming/wiki/Pipes%2C-Part-2%3A-Pipe-programming-secrets#named-pipes)
 * [[Files, Part 1: Working with files]]
+* [[ Scheduling, Part 1: Scheduling Processes ]]
+* [[ Scheduling, Part 2: Scheduling Processes: Algorithms ]]
 * [[IPC Review Questions]]
 
 ## 8. Networking
@@ -106,8 +112,6 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ Networking, Part 3: Building a simple TCP Client ]]
 * [[ Networking, Part 4: Building a simple TCP Server ]]
 * [[ Networking, Part 5: Shutting down ports, reusing ports and other tricks ]]
-* [[ Scheduling, Part 1: Scheduling Processes ]]
-* [[ Scheduling, Part 2: Scheduling Processes: Algorithms ]]
 * [[ Networking, Part 6: Creating a UDP server ]]
 * [[ Nonblocking I O, select(), and epoll ]]
 * [[ RPC, Part 1: Introduction to Remote Procedure Calls ]]
