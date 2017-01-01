@@ -52,6 +52,21 @@ return (ssize_t)buf.st_size;
 buf.st_size is of type off_t which is big enough for _insanely_ large files.
 
 ## What happens if a child process closes a filestream using `fclose` or `close`?
-Unlike position, closing a file stream is unique to each process. Other processes can continue to use their own file-handle.
+Closing a file stream is unique to each process. Other processes can continue to use their own file-handle. Remember, everything is copied over when a child is created, even the relative positions of the files.
+
+## How about mmap for files?
+
+One of the general uses for mmap is to map a file to memory. This does not mean that the file is malloc'ed to memory right away. Take the following code for example.
+
+```
+int fd = open(...); //File is 2 Pages
+char* addr = mmap(..fd..);
+addr[0] = 'l';
+```
+The kernel may say, "okay I see that you want to mmap the file into memory, so I'll reserve some space in your address space that is the length of the file". That means when you write to addr[0] that you are actually writing to the first byte of the file. The kernel can actually do some optimizations too. Instead of loading the file into memory, it may only load pages at a time because if the file is 1024 pages; you may only access 3 or 4 pages making loading the entire file a waste of time (that is why page faults are so powerful! They let the operating system take control of how much you use your files).
+
+## For every mmap
+
+Remember that once you are done `mmap`ping that you `munmap` to tell the operating system that you are no longer using the pages allocated, so the OS can write it back to disk and give you the addresses back in case you need to malloc later.
 
 
