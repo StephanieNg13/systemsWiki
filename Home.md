@@ -136,6 +136,8 @@ Rather than requiring an existing paper-based book this semester, we will build 
    * [Wait Macros](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#wait-macros)
    * [Signals](https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals#signals)
 * [[ Signals, Part 2: Pending Signals and Signal Masks ]]
+   * [Signals in Depth](https://github.com/angrave/SystemProgramming/wiki/Signals,-Part-2:-Pending-Signals-and-Signal-Masks#signals-in-depth)
+   * [Disposition in Threads/Children](https://github.com/angrave/SystemProgramming/wiki/Signals,-Part-2:-Pending-Signals-and-Signal-Masks#disposition-in-threadschildren)
 * [[ Signals, Part 3: Raising signals ]]
 * [[ Signals, Part 4: Sigaction ]]
 * [[ Signals Review Questions ]]
