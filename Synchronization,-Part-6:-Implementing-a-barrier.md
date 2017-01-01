@@ -1,6 +1,6 @@
 ## How do I wait for N threads to reach a certain point before continuing onto the next step?
 
-Suppose we wanted to perform a multi-threaded calculation that has two stages but we don't want to advance to the second stage until the first stage is completed.
+Suppose we wanted to perform a multi-threaded calculation that has two stages, but we don't want to advance to the second stage until the first stage is completed.
 
 We could use a synchronization method called a **barrier**. When a thread reaches a barrier, it will wait at the barrier until all the threads reach the barrier, and then they'll all proceed together.  
 
@@ -51,8 +51,8 @@ void *calc(void *ptr) {
   for(x = start; x < end; x++) for (y = 0; y < 8192; y++) { /* do calc #1 */ }
 ```
 
-After calculation 1 completes we need to wait for the slower threads (unless we are the last thread!).
-So keep track of the number of threads that have arrived at our barrier aka 'checkpoint':
+After calculation 1 completes, we need to wait for the slower threads (unless we are the last thread!).
+So, keep track of the number of threads that have arrived at our barrier aka 'checkpoint':
 ```C
 // Global: 
 int remain = N;
@@ -93,4 +93,6 @@ else {
 }
 pthread_mutex_unlock(&m);
 ```
-When a thread enters `pthread_cond_wait` it releases the mutex and sleeps. At some point in the future it will be awoken. Once we bring a thread back from its sleep, before returning it must wait until it can lock the mutex. Notice that even if a sleeping thread wakes up early, it will check the while loop condition and re-enter wait if necessary.
+When a thread enters `pthread_cond_wait`, it releases the mutex and sleeps. At some point in the future, it will be awoken. Once we bring a thread back from its sleep, before returning it must wait until it can lock the mutex. Notice that even if a sleeping thread wakes up early, it will check the while loop condition and re-enter wait if necessary.
+
+**The above barrier is not reusable** Meaning that if we stick it into any old calculation loop there is a good chance that the code will encounter a condition where the barrier either deadlocks or a thread races ahead one iteration faster. Think about how you can make the above barrier reusable, meaning that if mutliple threads call `barrier_wait` in a loop then one can guarantee that they are on the same iteration.
