@@ -339,3 +339,9 @@ This declares a function type comparator that accepts two `void*` params and ret
 
 ## Wow that was a lot of C
 Don't worry more to come!
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output">
+Next: C Programming, Part 2: Text Input And Output
+</a>
+</div>
