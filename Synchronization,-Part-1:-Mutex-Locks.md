@@ -199,6 +199,34 @@ while(not_stop){
 }
 ```
 
+## When can I destroy the mutex?
+You can only destroy an unlocked mutex
+
+## Can I copy a pthread_mutex_t to a new memory locaton?
+No, copying the bytes of the mutex to a new memory location and then using the copy is _not_ supported.
+
+## What would a simple implementation of a mutex look like?
+
+A simple (but incorrect!) suggestion is shown below. The `unlock` function simply unlocks the mutex and returns. The lock function first checks to see if the lock is already locked. If it is currently locked, it will keep checking again until another thread has unlocked the mutex.
+```C
+// Version 1 (Incorrect!)
+
+void lock(mutex_t *m) {
+  while(m->locked) { /*Locked? Nevermind - just loop and check again!*/ }
+
+  m->locked = 1;
+}
+void unlock(mutex_t *m) {
+  m->locked = 0;
+}
+```
+Version 1 uses 'busy-waiting' (unnecessarily wasting CPU resources) however there is a more serious problem: We have a race-condition! 
+
+If two threads both called `lock` concurrently it is possible that both threads would read 'm_locked' as zero. Thus both threads would believe they have exclusive access to the lock and both threads will continue. Ooops!
+
+We might attempt to reduce the CPU overhead a little by calling `pthread_yield()` inside the loop  - pthread_yield suggests to the operating system that the thread does not use the CPU for a short while, so the CPU may be assigned to threads that are waiting to run. But does not fix the race-condition. We need a better implementation - can you work how to prevent the race-condition?
+
+
 ## How do I find out more?
 [Play!](http://cs-education.github.io/sys) Read the man page!
 * [pthread_mutex_lock man page](http://linux.die.net/man/3/pthread_mutex_lock)
