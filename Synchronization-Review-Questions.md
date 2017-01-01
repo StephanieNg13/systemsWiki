@@ -86,7 +86,15 @@ void writer_unlock(rw_lock_t* lck);
 ```
 The only specification is that in between `reader_lock` and `reader_unlock`, no writers can write. In between the writer locks, only one writer may be writing at a time.
 
+* Write code to implement a producer consumer using ONLY three counting semaphores. Assume there can be more than one thread calling enqueue and dequeue.
+Determine the initial value of each semaphore.
+* Write code to implement a producer consumer using condition variables and a mutex. Assume there can be more than one thread calling enqueue and dequeue.
+* Use CVs to implement  add(unsigned int) and subtract(unsigned int) blocking functions that never allow the global value to be greater than 100.
+* Use CVs to implement a barrier for 15 threads.
+* How many of the following statements are true?
+     * There can be multiple active readers
+     * There can be multiple active writers
+     * When there is an active writer the number of active readers must be zero
+     * If there is an active reader the number of active writers must be zero
+     * A writer must wait until the current active readers have finished
 * Todo: Analyzing mulithreaded code snippets
-* Implementing a ring buffer
-* Using pthread_mutex
-* Implementing producer consumer
