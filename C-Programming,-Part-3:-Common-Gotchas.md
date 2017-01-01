@@ -232,3 +232,12 @@ What does the code print out?
 size: 4, a: 0
 ```
 Because sizeof is not actually evaluated at runtime. The compiler assigns the type of all expressions and discards the extra results of the expression.
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming,-Part-2:-Text-Input-And-Output">
+Back: C Programming, Part 2: Text Input And Output
+</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-4%3A-Strings-and-Structs">
+Next: C Programming, Part 4: Strings and Structs
+</a>
+</div>
