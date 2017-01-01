@@ -171,4 +171,88 @@ http://bartoszmilewski.com/2008/11/05/who-ordered-memory-fences-on-an-x86/
 http://lxr.free-electrons.com/source/Documentation/memory-barriers.txt
 
 ## How do we implement Critical Section Problem on hardware?
-Good question. Next lecture...
+
+We can use C11 Atomics to do that perfectly! A complete solution is detailed here (this is a spinlock mutex, [futex](https://locklessinc.com/articles/mutex_cv_futex/) implementations can be found online).
+
+```C
+typedef struct mutex_{
+    atomic_int_least8_t lock;
+    pthread_t owner;
+} mutex;
+
+#define UNLOCKED 0
+#define LOCKED 1
+#define UNASSIGNED_OWNER 0
+
+int mutex_init(mutex* mtx){
+    if(!mtx){
+        return 0;
+    }
+    atomic_init(&mtx->lock, UNLOCKED); // Not thread safe the user has to take care of this
+    mtx->owner = UNASSIGNED_OWNER;
+    return 1;
+}
+```
+
+This is the initialization code, nothing fancy here. We set the state of the mutex to unlocked and set the owner to locked.
+
+```C
+int mutex_lock(mutex* mtx){
+    int_least8_t zero = UNLOCKED;
+    while(!atomic_compare_exchange_weak_explicit
+            (&mtx->lock, 
+             &zero, 
+             LOCKED,
+             memory_order_relaxed,
+             memory_order_relaxed)){
+        zero = UNLOCKED;
+        sched_yield(); //Use system calls for scheduling speed
+    }
+    //We have the lock now!!!!
+    mtx->owner = pthread_self();
+    return 1;
+}
+```
+Yikes! What does this code do? Well to start it it initializes a variable that we will keep as the unlocked state. [Atomic Compare and Exchange](https://en.wikipedia.org/wiki/Compare-and-swap) is an instruction supported by most modern architectures (on x86 it's `lock cmpxchg`). The pseudocode for this operation looks like this
+
+```C
+int atomic_compare_exchange_pseudo(int* addr1, int* addr2, int val){
+    if(*addr1 == *addr2){
+        *addr1 = val;
+        return 1;
+    }else{
+        *addr2 = *addr1;
+        return 0;
+    }
+}
+```
+Except it is all done _atomically_ meaning in one uninterruptible operation. What does the _weak_ part mean? Well atomic instructions are also prone to **spurious failures** meaning that there are two versions to these atomic functions a _strong_ and a _weak_ part, strong guarantee the the success or failure while weak may fail. We are using weak because weak is faster and we are in a loop! That means we are okay if it fails a little bit more often because we will just keep spinning around anyway.
+
+What is this memory order business? We were talking about memory fences earlier, here it is! We won't go into detail because it is outside the scope of this course but not the scope of [this article](https://gcc.gnu.org/wiki/Atomic/GCCMM/AtomicSync).
+
+Inside the while loop, we have failed to grab the lock! We reset zero to unlocked and sleep for a little while. When we wake up we try to grab the lock again. Once we successfully swap, we are in the critical section! We set the mutex's owner to the current thread for the unlock method and return successful.
+
+How does this guarantee mutual exclusion, when working with atomics we are not entirely sure! But in this simple example we can because the thread that is able to successfully expect the lock to be UNLOCKED (0) and swap it to a LOCKED (1) state is considered the winner. How do we implement unlock?
+
+```C
+int mutex_unlock(mutex* mtx){
+    if(unlikely(pthread_self() != mtx->owner)){
+        return 0; //You can't unlock a mutex if you aren't the owner
+    }
+    int_least8_t one = 1;
+    //Critical section ends after this atomic
+    mtx->owner = UNASSIGNED_OWNER;
+    if(!atomic_compare_exchange_strong_explicit(
+                &mtx->lock, 
+                &one, 
+                UNLOCKED,
+                memory_order_relaxed,
+                memory_order_relaxed)){
+        //The mutex was never locked in the first place
+        return 0;
+    }
+    return 1;
+}
+```
+
+To satisfy the api, you can't unlock the mutex unless you are the one who owns it. Then we unassign the mutex owner, because critical section is over after the atomic. We want a strong exchange because we don't want to block (pthread_mutex_unlock doesn't block). We expect the mutex to be locked, and we swap it to unlock. If the swap was successful, we unlocked the mutex. If the swap wasn't, that means that the mutex was UNLOCKED and we tried to switch it from UNLOCKED to UNLOCKED, preserving the non blocking of unlock.
