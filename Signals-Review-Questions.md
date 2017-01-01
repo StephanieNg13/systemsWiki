@@ -1,12 +1,12 @@
 # Topics
-Signals
-Signal Handler Safe
-Signal Disposition
-Signal States
-Pending Signals when Forking/Exec
-Signal Disposition when Forking/Exec
-Raising Signals in C
-Raising Signals in a multithreaded program
+* Signals
+* Signal Handler Safe
+* Signal Disposition
+* Signal States
+* Pending Signals when Forking/Exec
+* Signal Disposition when Forking/Exec
+* Raising Signals in C
+* Raising Signals in a multithreaded program
 
 # Questions
 * What is a signal?
