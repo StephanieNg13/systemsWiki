@@ -6,6 +6,8 @@ There are four _necessary_ and _sufficient_ conditions for deadlock. These are k
 * Hold and Wait
 * No pre-emption
 
+If you break any of them, you cannot have deadlock!
+
 All of these conditions are required for deadlock, so let's discuss each one in turn. First the easy ones-
 * Mutual Exclusion: The resource cannot be shared
 * Circular Wait: There exists a cycle in the Resource Allocation Graph. There exists a set of processes {P1,P2,...} such that P1 is waiting for resources held by P2, which is waiting for P3,..., which is waiting for P1.
@@ -29,6 +31,12 @@ Consider the following 'solution'
 
 Livelock occurs when a process continues to execute but is unable to make progress.
 In practice Livelock may occur because the programmer has taken steps to avoid deadlock. In the above example, in a busy system, the student will continually release the first resource because they are never able to obtain the second resource. The system is not deadlock (the student process is still executing) however it's not making any progress either.
+
+## Deadlock Prevention/Avoidance vs Deadlock Detection
+
+Deadlock prevention is making sure that deadlock cannot happen, meaning that you break a coffman condition. This works the best inside a single program and the software engineer making the choice to break a certain coffman condition. Consider the [Banker's Algorithm](https://en.wikipedia.org/wiki/Banker's_algorithm). It is another algorithm for deadlock avoidance. The whole implementation is outside the scope of this class, just know that there are more generalized algorithms for operating systems.
+
+Deadlock detection on the other hand is allowing the system to enter a deadlocked state. After entering, the system uses the information that it has to break deadlock. As an example, consider multiple processes accessing files. The operating system is able to keep track of all of the files/resources through file descriptors at some level (either abstracted through an API or directly). If the operating system detects a directed cycle in the operating system file descriptor table it may break one process' hold (through scheduling for example) and let the system proceed.
 
 ## Dining Philosophers
 
