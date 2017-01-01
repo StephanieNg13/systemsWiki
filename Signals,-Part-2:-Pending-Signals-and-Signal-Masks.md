@@ -1,20 +1,25 @@
-## Where is Part 1?
-There is no official "Part 1" page. However we introduced a simple signal() callback at the beginning of the course (e.g. [[Forking, Part 2: Fork, Exec, Wait]] )
-
 ## How can I learn more about signals?
 
 The linux man pages discusses signal system calls in section 2. There is also a longer article in section 7 (though not in OSX/BSD):
 ```
 man -s7 signal
 ```
+
+## Signal Terminology
+* Generated - The signal is being created in the kernel by the kill system call.
+* Pending - Not delivered yet but soon to be delivered
+* Blocked - Not delivered because no signal disposition lets the signal be delivered
+* Delivered - Delivered to the process, the action described is being taken
+* Caught - When the process stops a signal from destroying it and does something else with it instead
+
 ## What is a process's signal disposition?
-For each process, each signal has a disposition which means what action will occur when a signal is delivered to the process. For example, the default disposition SIGINT is to terminate it. However this disposition can be changed by calling `signal()` (or as we will learn later) `sigaction()`  to install a signal handler for a particular signal. You can imagine the processes' disposition to all possible signals as a table of function pointers entries (one for each possible signal).
+For each process, each signal has a disposition which means what action will occur when a signal is delivered to the process. For example, the default disposition SIGINT is to terminate it. The signal disposition can be changed by calling signal() (which is simple but not portable as there are subtle variations in its implementation on different POSIX architectures and also not recommended for multi-threaded programs) or `sigaction` (discussed later). You can imagine the processes' disposition to all possible signals as a table of function pointers entries (one for each possible signal).
 
 The default disposition for signals can be to ignore the signal, stop the process, continue a stopped process, terminate the process, or terminate the process and also dump a 'core' file. Note a core file is a representation of the processes' memory state that can be inspected using a debugger.
 
 ## Can multiple signals be queued?
 
-No - however it is possible to have signals that are in a pending state. If a signal is pending it means it has not yet been delivered to the process. The most common reason for a signal to be pending is that the process (or thread) has currently blocked that particular signal.
+No - however it is possible to have signals that are in a pending state. If a signal is pending, it means it has not yet been delivered to the process. The most common reason for a signal to be pending is that the process (or thread) has currently blocked that particular signal.
 
 If a particular signal, e.g. SIGINT, is pending then it is not possible to queue up the same signal again.
 
@@ -35,8 +40,6 @@ pthread_create( ... ); // new thread will start with a copy of the same mask
 The child process inherits a copy of the parent's signal dispositions. In other words, if you have installed a SIGINT handler before forking, then the child process will also call the handler if a SIGINT is delivered to the child.
 
 Note pending signals for the child are _not_ inherited during forking.
-## What is signal disposition ?
-The signal disposition of a process is a table of actions. It defines what will happen when a particular signal is delivered to a process. For example, the default disposition of SIG-INT is to terminate the process. The signal disposition is per process not per thread. The signal disposition can be changed by calling signal() (which is simple but not portable as there are subtle variations in its implementation on different POSIX architectures and also not recommended for multi-threaded programs) or `sigaction` (discussed later)
 
 ## What happens during exec ?
 Remember that `exec` replaces the current image with a new program image. In addition the signal disposition is reset. Pending signals are preserved.
