@@ -1,3 +1,5 @@
+# Candidate Solutions
+
 ## What is the Critical Section Problem?
 
 As already discussed in [[Synchronization, Part 3: Working with Mutexes And Semaphores]], there are critical parts of our code that can only be executed by one thread at a time. We describe this requirement as 'mutual exclusion'; only one thread (or process) may have access to the shared resource.
@@ -108,6 +110,8 @@ Time | Turn | Thread #1 | Thread #2
 3| 2 | // Do Critical Section stuff | if your flag is raised, wait until my turn(TRUE!) 
 4| 2 | // Do Critical Section stuff | // Do Critical Section stuff - OOPS 
 
+# Working Solutions
+
 ## What is Peterson's solution?
 Peterson published his novel and surprisingly simple solution in a 2 page paper in 1981. A version of his algorithm is shown below that uses a shared variable `turn`: 
 
@@ -169,6 +173,8 @@ Further reading: we suggest the following web post that discusses implementing P
 
 http://bartoszmilewski.com/2008/11/05/who-ordered-memory-fences-on-an-x86/
 http://lxr.free-electrons.com/source/Documentation/memory-barriers.txt
+
+# Hardware Solutions
 
 ## How do we implement Critical Section Problem on hardware?
 
