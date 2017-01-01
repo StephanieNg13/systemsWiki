@@ -169,3 +169,12 @@ chars = getline(&buffer, &size, stdin);
 // Later... don't forget to free the buffer!
 free(buffer);
 ```
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming,-Part-1:-Introduction">
+Back: C Programming, Part 1: Introduction
+</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-3%3A-Common-Gotchas">
+Next: C Programming, Part 3: Common Gotchas
+</a>
+</div>
