@@ -128,7 +128,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ File System, Part 6: Memory mapped files and Shared memory ]]
 * [[ File System, Part 7: Scalable and Reliable Filesystems ]]
 * [[ File System, Part 8: Removing preinstalled malware from an Android device ]]
-* [[ File System, Part 8: Disk blocks example ]]
+* [[ File System, Part 9: Disk blocks example ]]
 * [[ File Systems Review Questions ]]
 
 ## 10. Signals
