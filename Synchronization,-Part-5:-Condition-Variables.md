@@ -1,3 +1,5 @@
+# Intro to Condition Variables
+
 ## Warm up
 Name these properties!
 * "Only one process(/thread) can be in the CS at a time"
@@ -5,21 +7,6 @@ Name these properties!
 * "If no other process is in the CS then the process can immediately enter the CS"
 
 See [[Synchronization, Part 4: The Critical Section Problem]] for answers.
-
-## What is the 'exchange instruction' ?
-The exchange instruction ('XCHG') is an atomic CPU instruction that exchanges the contents of a register with a memory location. This can be used as a basis to implement a simple mutex lock.
-```C
-// *Pseudo-C-code* for a simple busy-waiting mutex 
-// that uses an atomic exchange function
-int lock = 0; // initialization
-
-// To enter the critical section you need to read a lock value of zero. 
-// 'xchg' function doesn't exist, but imagine this function is built on the atomic XCHG CPU function
-// i.e. it writes '1' into the lock variable and returns the previous contents of the memory
-while (xchg( 1, &lock)) {/*spin spin spin*/}
-/* Do Critical Section stuff*/
-lock = 0;
-```
 
 ## What are condition variables? How do you use them? What is Spurious Wakeup?
 
@@ -33,7 +20,7 @@ lock = 0;
 
 ## What does `pthread_cond_wait` do?
 The call `pthread_cond_wait` performs three actions:
-* unlock the mutex and atomically...
+* unlock the mutex
 * waits (sleeps until `pthread_cond_signal` is called on the same condition variable)
 * Before returning, locks the mutex
 
@@ -95,7 +82,7 @@ while (1) {
   pthread_mutex_unlock(&m);
 }
 ```
-## Implementing counting semaphores
+# Implementing Counting Semphore
 * We can implement a counting semaphore using condition variables.
 * Each semaphore needs a count, a condition variable and a mutex
 ```C
@@ -145,7 +132,7 @@ sem_wait(sem_t *s) {
   pthread_mutex_unlock(&s->m);
 }
 ```
-Wait `sem_post` keeps calling `pthread_cond_signal` won't that break sem_wait? 
+**Wait `sem_post` keeps calling `pthread_cond_signal` won't that break sem_wait?**
 Answer: No! We can't get past the loop until the count is non-zero. In practice this means `sem_post` would unnecessary call `pthread_cond_signal` even if there are no waiting threads. A more efficient implementation would only call `pthread_cond_signal` when necessary i.e.
 ```C
   /* Did we increment from zero to one- time to signal a thread sleeping inside sem_post */
