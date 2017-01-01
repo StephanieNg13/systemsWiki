@@ -1,3 +1,21 @@
+## What is IPC?
+
+Inter process communication is any way for one process to talk to another process. You've already seen one form of this virtual memory! A piece of virtual memory can be shared between parent and child, leading to communication. You may want to wrap that memory in `pthread_mutexattr_setpshared(&attrmutex, PTHREAD_PROCESS_SHARED);` mutex (or a process wide mutex) to prevent race conditions.
+
+There are more standard ways of IPC, like pipes! Consider if you type the following into your terminal
+
+```bash
+$ ls -1 | cut -d'.' -f1 | uniq | sort | tee dir_contents
+```
+
+What does the following code do (It doesn't really matter so you can skip this if you want)? Well it `ls`'s the current directory (the -1 means that it outputs one entry per line). The `cut` command then takes everything before the first period. Uniq makes sure all the lines are uniq, sort sorts them and tee outputs to a file. 
+
+The important part is that bash creates **5 separate processes** and connects their standard outs/stdins with pipes the trail looks something like this.
+
+(0) ls (1)------>(0) cut (1)------->(0) uniq (1)------>(0) sort (1)------>(0) tee (1)
+
+The numbers in the pipes are the file descriptors for each process and the arrow represents the redirect or where the output of the pipe is going.
+
 ## What is a pipe?
 
 A POSIX pipe is almost like its real counterpart - you can stuff bytes down one end and they will appear at the other end in the same order. Unlike real pipes however, the flow is always in the same direction, one file descriptor is used for reading and the other for writing. The `pipe` system call is used to create a pipe.
