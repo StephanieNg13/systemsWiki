@@ -1,3 +1,19 @@
+# What is POSIX error handling?
+
+In other languages, you may see error handling implemented with exceptions. Although you technically can use them in c (You keep a stack of very try/catch block and use `setjmp` and `longjmp` to go to those blocks respectively), error handling in C is typically done with posix error handling the code typically looks like this.
+
+```C
+int ret = some_system_call()
+if(ret == ERROR_CODE){
+switch(errno){
+// Do different stuff based on the errno number.
+}
+}
+
+```
+
+In the kernel, the use of `goto` is heavily used to clean up different parts of the application. **You should not use gotos** because they make code harder to read. gotos in the kernel are there out of necessity, so don't take lessons.
+
 ## What is `errno` and when is it set?
 	
 POSIX defines a special integer `errno` that is set when a system call fails.
@@ -108,4 +124,7 @@ If a blocked call to one of the following interfaces is interrupted by a signal 
 
 Note, it is easy to believe that setting 'SA_RESTART' flag is sufficient to make this whole problem disappear. Unfortunately that's not true: there are still system calls that may return early and set `EINTR`! See [signal(7)](https://cs-education.github.io/sysassets/man_pages/html/man7/signal.7.html) for details. 
 
+## Errno exceptions?
+
+There are some POSIX utilities that have their own errno per say. One is when you call `getaddrinfo` the function to check that error and convert to a string is [gai_strerr](https://linux.die.net/man/3/gai_strerror). Don't get them mixed up!
 
