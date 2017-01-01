@@ -1,3 +1,5 @@
+# Solving Critical Sections
+
 ## What is a Critical Section?
 A critical section is a section of code that can only be executed by one thread at a time, if the program is to function correctly. If two threads (or processes) were to execute code inside the critical section at the same time then it is possible that program may no longer have correct behavior.
 
@@ -61,9 +63,34 @@ pthread_mutex_init(lock, NULL);
 pthread_mutex_destroy(lock);
 free(lock);
 ```
+Things to keep in mind about `init` and `destroy`:
+* Multiple threads init/destroy has undefined behavior
+* Destroying a locked mutex has undefined behavior
+* Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread initializing a mutex.
+
+# Mutex Gotchas
 
 ## `So pthread_mutex_lock` stops the other threads when they read the same variable?
 No. A mutex is not that smart - it works with code (threads), not data. Only when another thread calls `lock` on a locked mutex will the second thread need to wait until the mutex is unlocked.
+
+Consider
+```C
+int a;
+pthread_mutex_t m1 = PTHREAD_MUTEX_INITIALIZER,
+                 m2 = = PTHREAD_MUTEX_INITIALIZER;
+// later
+// Thread 1
+pthread_mutex_lock(&m1);
+a++;
+pthread_mutex_unlock(&m1);
+
+// Thread 2
+pthread_mutex_lock(&m2);
+a++;
+pthread_mutex_unlock(&m2);
+```
+
+Will still cause a race condition.
 
 
 ## Can I create mutex before fork-ing?
@@ -77,7 +104,7 @@ No. The same thread must unlock it.
 ## Can I use two or more mutex locks?
 Yes! In fact it's common to have one lock per data structure that you need to update.
 
-If you only have one lock then they may be significant contention for the lock between two threads that was unnecessary. For example if two threads were updating two different counters it might not be necessary to use the same lock.
+If you only have one lock, then they may be significant contention for the lock between two threads that was unnecessary. For example if two threads were updating two different counters, it might not be necessary to use the same lock.
  
 However simply creating many locks is insufficient: It's important to be able to reason about critical sections e.g. it's important that one thread can't read two data structures while they are being updated and temporarily in an inconsistent state.
 
@@ -153,6 +180,25 @@ This process runs slower because we lock and unlock the mutex a million times, w
     return NULL;
 }
 ```
+
+## What happens if I forget to unlock?
+
+Deadlock! We will talk about deadlock a little bit later but what is the problem with this loop if called by multiple threads.
+
+```C
+while(not_stop){
+    //stdin may not be thread safe
+    pthread_mutex_lock(&m);
+    char *line = getline(...);
+    if(rand() % 2) { /* randomly skip lines */
+         continue;
+    }
+    pthread_mutex_unlock(&m);
+    
+    process_line(line);
+}
+```
+
 ## How do I find out more?
 [Play!](http://cs-education.github.io/sys) Read the man page!
 * [pthread_mutex_lock man page](http://linux.die.net/man/3/pthread_mutex_lock)
