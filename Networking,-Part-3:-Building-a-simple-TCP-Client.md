@@ -1,3 +1,23 @@
+## `socket`
+
+`int socket(int domain, int type, int protocol);`
+
+Socket creates a socket with domain (usually AF_INET for IPv4), type is whether to use UDP or TCP, protocol is any addition options. This creates a socket object in the kernel with which one can communicate with the outside world/network. This returns a fd so you can use it like a normal file descriptor! Remember you want to do your reads or writes from the socketfd because that represents the socket object only as a client, otherwise you want to respect the convention of the server.
+
+## `getaddressinfo`
+
+We saw this in the last section! You're experts at this.
+
+## `connect`
+
+`int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);`
+
+Pass it the sockfd, then the address you want to go to and its length and you will be off connecting (as long as you check the error). Remember, network calls are ultra perceptible to failing.
+
+## `read`/`write`
+
+Once we have a successful connection we can read or write like any old file descriptor. Keep in mind if you are connected to a website, you want to conform to the HTTP protocol specification in order to get any sort of meaningful results back. There are libraries to do this, usually you don't connect at the socket level because there are other libraries or packages around it
+
 ## Complete Simple TCP Client Example
 
 ```C
@@ -25,7 +45,10 @@ int main(int argc, char **argv)
         	exit(1);
 	}
 
-	connect(sock_fd, result->ai_addr, result->ai_addrlen);
+	if(connect(sock_fd, result->ai_addr, result->ai_addrlen) == -1){
+                perror("connect");
+                exit(2);
+        }
 
 	char *buffer = "GET / HTTP/1.0\r\n\r\n";
 	printf("SENDING: %s", buffer);
