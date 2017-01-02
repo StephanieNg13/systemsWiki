@@ -191,3 +191,12 @@ Read the man pages!
 * [fork](http://man7.org/linux/man-pages/man2/fork.2.html)
 * [exec](http://man7.org/linux/man-pages/man3/exec.3.html)
 * [wait](http://man7.org/linux/man-pages/man2/wait.2.html)
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction">
+Back: Processes, Part 1: Introduction
+</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-2%3A-Fork%2C-Exec%2C-Wait">
+Next: Forking, Part 2: Fork, Exec, Wait
+</a>
+</div>
