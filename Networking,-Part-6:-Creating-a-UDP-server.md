@@ -33,3 +33,50 @@ byte_count = recvfrom(sockfd, buf, sizeof(buf), 0, &addr, &addrlen);
 
 The addr struct will hold sender (source) information about the arriving packet.
 Note the `sockaddr_storage` type is a sufficiently large enough to hold all possible types of socket addresses (e.g. IPv4, IPv6 and other socket types).
+
+## Full Code
+
+```C
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+
+int main(int argc, char **argv)
+{
+    int s;
+
+    struct addrinfo hints, *result;
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_INET6; // INET for IPv4
+    hints.ai_socktype =  SOCK_DGRAM;
+    hints.ai_flags =  AI_PASSIVE;
+
+    getaddrinfo(NULL, "300", &hints, &res);
+
+    int sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol);
+
+    if (bind(sockfd, res->ai_addr, res->ai_addrlen) != 0) {
+        perror("bind()");
+        exit(1);
+    }
+    struct sockaddr_storage addr;
+    int addrlen = sizeof(addr);
+
+    while(1){
+        char buffer[1000];
+        ssize_t byte_count = recvfrom(sockfd, buf, sizeof(buf), 0, &addr, &addrlen);
+        buffer[byte_count] = '\0';
+    }
+
+    printf("Read %d chars\n", len);
+    printf("===\n");
+    printf("%s\n", buffer);
+
+    return 0;
+}
+```
