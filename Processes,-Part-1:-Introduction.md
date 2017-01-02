@@ -56,3 +56,9 @@ Processes could also contain
 * State
 * File Descriptors
 * Permissions
+
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-1%3A-Introduction">
+Forking, Part 1: Introduction
+</a>
+</div>
