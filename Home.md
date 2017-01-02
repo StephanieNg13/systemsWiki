@@ -115,7 +115,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ Networking, Part 4: Building a simple TCP Server ]]
 * [[ Networking, Part 5: Shutting down ports, reusing ports and other tricks ]]
 * [[ Networking, Part 6: Creating a UDP server ]]
-* [[ Nonblocking I O, select(), and epoll ]]
+* [[ Networking, Part 7: Nonblocking I O, select(), and epoll ]]
 * [[ RPC, Part 1: Introduction to Remote Procedure Calls ]]
 * [[ Networking Review Questions ]]
 
