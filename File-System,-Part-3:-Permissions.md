@@ -1,53 +1,24 @@
+# Remind Me What do Permissions mean again?
 
-## Does a directory have an inode too?
-Yes! Though a better way to think about this, is that a directory (like a file) _is_ an inode (with some data - the directory name and inode contents). It just happens to be a special kind of inode.
+Every file and directory has a set of 9 permission bits and a type field
+* r, permission to read the file
+* w, permission to write to the file
+* x, permission to execute the file
 
-From [Wikipedia](http://en.wikipedia.org/wiki/Inode):
-> Unix directories are lists of association structures, each of which contains one filename and one inode number.
+chmod 777 <file>
+chmod 7    7     7
+01  111   111   111
+d | rwx | rwx | rwx |
+| |-----|-----|-----|
+|    |     |     | <- Everybody else's permission
+|    |     | <- Group Permissions
+|    | <- Owner Permissions
+| <- Type of the file
 
-Remember, inodes don't contain filenames--only other file metadata.
+`mknod` changes the first field, the type of the file.
+`chmod` takes a number and a file and changes the permission bits.
 
-## How can I have the same file appear in two different places in my file system?
-First remember that a file name != the file. Think of the inode as 'the file' and a directory as just a list of names with each name mapped to an inode number. Some of those inodes may be regular file inodes, others may be directory inodes.
-
-If we already have a file on a file system we can create another link to the same inode using the 'ln' command
-
-```
-$ ln file1.txt blip.txt
-```
-However blip.txt _is_ the same file; if I edit blip I'm editing the same file as 'file1.txt!'
-We can prove this by showing that both file names refer to the same inode:
-```
-$ ls -i file1.txt blip.txt
-134235 file1.txt
-134235 blip.txt
-```
-
-These kinds of links (aka directory entries) are called 'hard links'
-
-The equivalent C call is `link`
-```C
-link(const char *path1, const char *path2);
-
-link("file1.txt", "blip.txt");
-```
-
-For simplicity the above examples made hard links inside the same directory however hard links can be created anywhere inside the same filesystem.
-
-## What happens when I `rm` (remove) a file?
-When you remove a file (using `rm` or `unlink`) you are removing an inode reference from a directory.
-However the inode may still be referenced from other directories. In order to determine if the contents of the file are still required, each inode keeps a reference count that is updated whenever a new link is created or destroyed.
-
-## Case study: Back up software that minimizes file duplication
-An example use of hard-links is to efficiently create multiple archives of a file system at different points in time. Once the archive area has a copy of a particular file, then future archives can re-use these archive files rather than creating a duplicate file. Apple's "Time Machine" software does this.
-
-## Can I create hard links to directories as well as regular files?
-No. Well yes. Not really... Actually you didn't really want to do this, did you?
-The POSIX standard says no you may not! The `ln` command will only allow root to do this and only if you provide the `-d` option. However even root may not be able to perform this because most filesystems prevent it! 
-
-Why?
-The integrity of the file system assumes the directory structure (excluding softlinks which we will talk about later) is a non-cyclic tree that is reachable from the root directory. It becomes expensive to enforce or verify this constraint if directory linking is allowed. Breaking these assumptions can cause file integrity tools to not be able to repair the file system. Recursive searches potentially never terminate and directories can have more than one parent but ".." can only refer to a single parent. All in all, a bad idea.
-
+The file has an owner. If your process has the same user id as the owner (or root) then the permissions in the first triad apply to you. If you are in the same group as the file (all files are also owned by a group) then the next set of permission bits applies to you. If none of the above apply, the last triad applies to you.
 
 ## How do I change the permissions on a file?
 Use `chmod`  (short for "change the file mode bits")
