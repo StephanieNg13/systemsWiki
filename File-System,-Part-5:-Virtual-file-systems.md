@@ -6,6 +6,9 @@ Linux provides 3 main virtual filesystems
 /proc - A list of resources used by each process and (by tradition) set of system information
 /sys - An organized list of internal kernel entities
 ```
+
+For example if I want a continuous stream of 0s, I can `cat /dev/zero`.
+
 ## How do I find out what filesystems are currently available (mounted)?
 Use `mount`
 Using mount without any options generates a list (one filesystem per line) of mounted filesystems including networked, virtual and local (spinning disk / SSD-based) filesystems. Here is a typical output of mount
@@ -32,25 +35,17 @@ proc on /proc type proc (rw)
 none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
 ```
 
-##Todo
-```
-$ sudo mount /dev/cdrom /media/cdrom
-$ mount
-$ mount | grep proc
-```
-Examples of virtual files in /proc:
+## Differences between random and urandom?  
+/dev/random is a file which contains number generator where the entropy is determined from environmental noise. Random will block/wait until enough entropy is collected from the environment. 
+ 
+/dev/urandom is like random, but differs in the fact that it allows for repetition (lower entropy threshold), thus wont block.
+
+## Other Filesystems
 ```
 $ cat /proc/sys/kernel/random/entropy_avail
 $ hexdump /dev/random
 $ hexdump /dev/urandom
-```
 
-##Differences between random and urandom?  
-/dev/random is a file which contains pseudorandom number generator where the entropy is determined from environmental noise. Random will block/wait until enough entropy is collected from the environment. 
- 
-/dev/urandom is like random, but differs in the fact that it allows for repetition (lower entropy threshold), thus wont block.
-
-```
 $ cat /proc/meminfo
 $ cat /proc/cpuinfo
 $ cat /proc/cpuinfo | grep bogomips
@@ -60,6 +55,16 @@ $ cat /proc/meminfo | grep Swap
 $ cd /proc/self
 $ echo $$; cd /proc/12345; cat maps
 ```
+
+## Mounting a filesystem
+
+Let's say I have a filesystem hooked up on `/dev/cdrom` that I want to read from. I have to mound it to a directory before I can do any operations.
+```
+$ sudo mount /dev/cdrom /media/cdrom
+$ mount
+$ mount | grep proc
+```
+
 ## How do I mount a disk image?
 Suppose you had downloaded a bootable linux disk image...
 ```
