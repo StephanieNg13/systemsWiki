@@ -121,12 +121,16 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 9. File Systems
 * [[ File System, Part 1: Introduction ]]
+    * [Navigation/Terminology](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction#navigationterminology)
+    * [What's a File System?](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction#so-whats-a-file-system)
 * [[ File System, Part 2: Files are inodes (everything else is just data...) ]]
 * [[ File System, Part 3: Permissions ]]
 * [[ File System, Part 4: Working with directories ]]
 * [[ File System, Part 5: Virtual file systems ]]
 * [[ File System, Part 6: Memory mapped files and Shared memory ]]
 * [[ File System, Part 7: Scalable and Reliable Filesystems ]]
+    * [Reliability with a Single Disk](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-7%3A-Scalable-and-Reliable-Filesystems#reliable-single-disk-filesystems)
+    * [Redundancy](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-7%3A-Scalable-and-Reliable-Filesystems#redundancy)
 * [[ File System, Part 8: Removing preinstalled malware from an Android device ]]
 * [[ File System, Part 9: Disk blocks example ]]
 * [[ File Systems Review Questions ]]
