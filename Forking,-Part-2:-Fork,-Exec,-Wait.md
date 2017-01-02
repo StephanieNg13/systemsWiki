@@ -172,3 +172,11 @@ Well each process gets its own dictionary of environment variables that are copi
 
 For example, you can write a C program that loops through all of the time zones and executes the `date` command to print out the date and time in all locals. Environment variables are used for all sorts of programs so modifying them is important.
 
+<div align="center">
+<a href="https://github.com/angrave/SystemProgramming/wiki/Forking,-Part-1:-Introduction">
+Back: Forking, Part 1: Introduction
+</a> |
+<a href="https://github.com/angrave/SystemProgramming/wiki/Process-Control%2C-Part-1%3A-Wait-macros%2C-using-signals">
+Next: Process Control, Part 1: Wait macros, using signals
+</a>
+</div>
