@@ -139,28 +139,6 @@ The above code has a subtle bug: It leaks resources! If a matching filename is f
 
 The fix is to ensure we free up resources in every possible code-path. In the above code this means calling `closedir` before `return 1`. Forgetting to release resources is a common C programming bug because there is no support in the C lanaguage to ensure resources are always released with all codepaths.
 
-## An aside - A System programming pattern to clean up resources - goto considered useful!
- 
-Note If C supported exception handling this discussion would be unnecessary.
-Imagine your function required several temporary resources that need to be freed before returning.
-How can we write readable code that correctly frees resources under all code paths? Some system programs use `goto` to jump forward into the clean up code, using the following pattern:
-```C
-int f() {
-   Acquire resource r1
-   if(...) goto clean_up_r1
-   Acquire resource r2
-   if(...) goto clean_up_r2
-
-   perform work
-clean_up_r2:
-   clean up r2
-clean_up_r1:
-   clean up r1
-   return result
-}
-```
-Whether this is a good thing or not has led to long rigorous debates that have generally helped system programmers stay warm during the cold winter months. Are there alternatives? Yes! For example using conditional logic, breaking out of do-while loops and writing secondary functions that perform the innermost work. However all choices are problematic and cumbersome as we are attempting to shoe-horn in exception handling in a language that has no inbuilt support for it.
-
 ## What are the gotcha's of using readdir? For example to recursively search directories?
 There are two main gotchas and one consideration:
 The `readdir` function returns "." (current directory) and ".." (parent directory). If you are looking for sub-directories, you need to explicitly exclude these directories.
