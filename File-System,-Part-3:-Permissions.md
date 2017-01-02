@@ -6,14 +6,17 @@ Every file and directory has a set of 9 permission bits and a type field
 * x, permission to execute the file
 
 chmod 777 <file>
-chmod 7    7     7
-01  111   111   111
-d | rwx | rwx | rwx |
-| |-----|-----|-----|
-|    |     |     | <- Everybody else's permission
-|    |     | <- Group Permissions
-|    | <- Owner Permissions
-| <- Type of the file
+
+|chmod | 7 |  7  |  7  |
+|----|-----|-----|-----|
+| 01 | 111 | 111 | 111 |
+| d | rwx | rwx | rwx |
+| 1 | 2   |  3  |  4  |
+
+1. Type of the file<br />
+2. Owner Permissions<br />
+3. Group Permissions<br />
+4. Everybody else's permission<br />
 
 `mknod` changes the first field, the type of the file.
 `chmod` takes a number and a file and changes the permission bits.
