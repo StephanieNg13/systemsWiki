@@ -1,4 +1,3 @@
-
 ## Design a file system! What are your design goals?
 The design of a file system is difficult problem because there many high-level design goals that we'd like to satisfy. An incomplete list of ideal goals include:
 
@@ -15,11 +14,10 @@ The design of a file system is difficult problem because there many high-level d
 Not all filesystems natively support all of these goals. For example, many filesystems do not automatically compress rarely-used files
 
 ## What are `.`, `..`, and `...`?
-`.` represents the current directory  
-
-`..` represents the parent directory  
-
-`...` is NOT a valid representation of any directory (this not the grandparent directory)
+In standard unix file systems: 
+* `.` represents the current directory  
+* `..` represents the parent directory  
+* `...` is NOT a valid representation of any directory (this not the grandparent directory). It _could_ however be the name of a file on disk.
 
 ## What are absolute and relative paths?
 Absolute paths are paths that start from the 'root node' of your directory tree. Relative paths are paths that start from your current position in the tree.
@@ -38,6 +36,28 @@ Example: `a/b/../c/./`
 - Step 5: `cd .` (in a/c, because . represents 'current folder')
 
 Thus, this path can be simplified to `a/c`.
+
+# So what's a File System?
+
+A filesystem is how information is organized on disk. Whenever you want to access a file, the filesystem dictates how the file is read. Here is a sample image of a filesystem.
+
+![](http://tinf2.vub.ac.be/~dvermeir/manual/uintro/disk.gif)
+
+Whoa that's a lot let's break it down
+* Superblock: This block contains metadata about the filesystem, how large, last modified time, a journal, number of inodes and the first inode start, number of data block and the first data block start.
+* Inode: This is the the key abstraction. An inode is a file. 
+* Disk Blocks: These are where the data is stored. The actual contents of the file
+
+## How does inode store the file contents?
+![](https://classes.soe.ucsc.edu/cmps111/Fall08/inode_with_signatures.jpg)
+
+From [Wikipedia](http://en.wikipedia.org/wiki/Inode):
+
+> *In a Unix-style file system, an index node, informally referred to as an inode, is a data structure used to represent a filesystem object, which can be one of various things including a file or a directory. Each inode stores the attributes and disk block location(s) of the filesystem object's data. Filesystem object attributes may include manipulation metadata (e.g. change, access, modify time), as well as owner and permission data (e.g. group-id, user-id, permissions).*
+
+To read the first few bytes of the file, follow the first indirect block pointer to the first indirect block and read the first few bytes, writing is the same process. If you want to read the entire file, keep reading direct blocks until your size runs out (we will talk about indirect blocks in a bit)
+
+> "All problems in computer science can be solved by another level of indirection." - David Wheeler
 
 ## Why make disk blocks the same size as memory pages?
 To support virtual memory, so we can page stuff in and out of memory.
@@ -75,17 +95,6 @@ These are examples of permissions in octal format (base 8). Each octal digit cor
 We can read permissions in octal format as follows:  
 * 644 - R/W user permissions, R group permissions, R world permissions  
 * 755 - R/W/X user permissions, R/X group permissions, R/X world permissions
-
-## What is an inode? Which of the above items is stored in the inode?
-From [Wikipedia](http://en.wikipedia.org/wiki/Inode):
-
-> *In a Unix-style file system, an index node, informally referred to as an inode, is a data structure used to represent a filesystem object, which can be one of various things including a file or a directory. Each inode stores the attributes and disk block location(s) of the filesystem object's data. Filesystem object attributes may include manipulation metadata (e.g. change, access, modify time), as well as owner and permission data (e.g. group-id, user-id, permissions).*
-
-## How does inode store the file contents?
-![](http://upload.wikimedia.org/wikipedia/commons/a/a2/Ext2-inode.gif)
-
-Image source: http://en.wikipedia.org/wiki/Ext2  
-> "All problems in computer science can be solved by another level of indirection." - David Wheeler
 
 ## How many pointers can you store in each indirection table? 
 As a worked example, suppose we divide the disk into 4KB blocks and we want to address up to 2^32 blocks.
