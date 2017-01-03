@@ -193,6 +193,73 @@ Now our string is filled in correctly at the end of the struct
 strcmp(bhuvan_name->c_str, "bhuvan") == 0 //The strings are equal!
 ```
 
+## But not all structs are perfect
+
+Structs may require something called [padding](http://www.catb.org/esr/structure-packing/) (tutorial). **We do not expect you to pack structs in this course, just know that it is there This is because in the early days (and even now) when you have to an address from memory you have to do it in 32bit or 64bit blocks. This also meant that you could only request addresses that were multiples of that. Meaning that
+
+```C
+struct picture{
+    int height;
+    pixel** data;
+    int width;
+    char* enconding;
+}
+// You think picture looks like this
+           height      data         width     encoding
+           ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+picture = |       |               |       |               |
+           ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
+```
+
+Would conceptually may look like this
+
+```C
+struct picture{
+    int height;
+    char slop1[4];
+    pixel** data;
+    int width;
+    char slop2[4];
+    char* enconding;
+}
+           height   slop1       data        width   slop2  encoding
+           ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+picture = |       |       |               |       |       |               |
+           ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
+```
+(This is on a 64bit system)
+This is not always the case because sometimes your processor supports unaligned accesses. What does this mean? Well there are two options you can set an attribute
+
+```C
+struct __attribute__((packed, aligned(4))) picture{
+    int height;
+    pixel** data;
+    int width;
+    char* enconding;
+}
+// Will look like this
+           height       data        width     encoding
+           ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+picture = |       |               |       |               |
+           ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
+```
+But now every time I want to access `data` or `encoding`, I have to do two memory accesses. The other thing you can do is reorder the struct, although this is not always possible
+
+```C
+struct picture{
+    int height;
+    int width;
+    pixel** data;
+    char* enconding;
+}
+// You think picture looks like this
+           height   width        data         encoding
+           ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+picture = |       |       |               |               |
+           ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
+```
+
+
 <div align="center">
 <a href="https://github.com/angrave/SystemProgramming/wiki/C-Programming,-Part-3:-Common-Gotchas">
 Back: C Programming, Part 3: Common Gotchas
