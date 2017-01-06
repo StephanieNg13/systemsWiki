@@ -134,3 +134,7 @@ To shut down an epoll instance, close its file descriptor.
 In addition to nonblocking `read()` and `write()`, any calls to `connect()` on a nonblocking socket will also be
 nonblocking. To wait for the connection to complete, use `select()` or epoll to wait for the socket to be writable.
 
+
+## Interesting Blogpost about edge cases with select
+
+https://idea.popcount.org/2017-01-06-select-is-fundamentally-broken/
