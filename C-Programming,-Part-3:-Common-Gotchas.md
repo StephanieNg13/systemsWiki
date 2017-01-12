@@ -72,7 +72,7 @@ user_t * user = (user_t *) malloc(sizeof(user_t));
 Every string must have a null byte after the last characters. To store the string <code>"Hi"</code> it takes 3 bytes: <code>[H] [i] [\0]</code>.
 
 ```C
-  char *strdup(const char *s) {  /* return a copy of 'input' */
+  char *strdup(const char *input) {  /* return a copy of 'input' */
     char *copy;
     copy = malloc(sizeof(char*));     /* nope! this allocates space for a pointer, not a string */
     copy = malloc(strlen(input));     /* Almost...but what about the null terminator? */
