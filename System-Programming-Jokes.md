@@ -16,6 +16,8 @@ Why did the baby system programmer like their new colorful blankie? It was multi
 
 Why are your programs so fine and soft? I only use 400-thread-count or higher programs.
 
+Where do bad student shell processes go when they die? Forking Hell.
+
 Why are C programmers so messy? They store everything in one big heap.
 
 # System Programmer (Definition)
