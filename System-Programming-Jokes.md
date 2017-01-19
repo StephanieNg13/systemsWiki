@@ -18,7 +18,7 @@ Why are your programs so fine and soft? I only use 400-thread-count or higher pr
 
 Why are C programmers so messy? They store everything in one big heap.
 
-# Definition
+# System Programmer (Definition)
 
 A system programmer is...
 
@@ -28,6 +28,12 @@ Someone who never lets their code deadlock... but when it does, causes more prob
 
 Someone who believes zombies are real.
 
-Someone who doesn't trust their process to run correctly without testing with the same data, kernel, compiler, RAM, filesystem size,file system format, disk brand, core count, CPU load, weather, magnetic flux, orientation, pixie dust, horoscope sign, wall color, wall gloss and reflectance,illumination, backup battery, time of day, temperature, humidity, lunar position, sun-moon co-position...
+Someone who doesn't trust their process to run correctly without testing with the same data, kernel, compiler, RAM, filesystem size,file system format, disk brand, core count, CPU load, weather, magnetic flux, orientation, pixie dust, horoscope sign, wall color, wall gloss and reflectance, motherboard, vibration, illumination, backup battery, time of day, temperature, humidity, lunar position, sun-moon co-position...
 
+# System Program (Definition)
 
+A system program ...
+
+Evolves until it can send email.
+
+Evolves until it has the potential to create, connect and kill other programs and consume all possible CPU,memory,network,... resources on all possible devices but chooses not to. Today.
