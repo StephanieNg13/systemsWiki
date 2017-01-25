@@ -48,8 +48,12 @@ Given three sets of file descriptors, `select()` will wait for any of those file
 
 `select()` returns the total number of file descriptors that are ready.  If none of them become
 ready during the time defined by *timeout*, it will return 0.  After `select()` returns, the 
-caller will need to loop
-through the file descriptors in readfds and/or writefds to see which ones are ready.
+caller will need to loop through the file descriptors in readfds and/or writefds to see which
+ones are ready. As readfds and writefds act as both input and output parameters, when `select()`
+indicates that there are file descriptors which are ready, it would have overwritten them to
+reflect only the file descriptors which are ready. Unless it is the caller's intention to call
+`select()` only once, it would be a good idea to save a copy of readfds and writefds before
+calling it.
 
 ```C
     fd_set readfds, writefds;
