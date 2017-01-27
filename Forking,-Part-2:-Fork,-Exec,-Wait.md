@@ -40,7 +40,7 @@ int main(){
             break;
         }
         if(child == 0){ //I am the child
-             execlp("echo", "echo", "hello" ,NULL);
+             execlp("ehco", "echo", "hello", NULL);
         }
         else{
             children[i] = child;
@@ -56,10 +56,10 @@ int main(){
 
 ```
 
-echo is not a command so we can't `exec` it. What does this mean? Instead of creating 10 processes we just created 2**10 processes, fork bombing our machine. How could we prevent this? Put an exit right after exec so in case exec fails we won't end up fork bombing our machine.
+We misspelled `ehco`, so we can't `exec` it. What does this mean? Instead of creating 10 processes we just created 2**10 processes, fork bombing our machine. How could we prevent this? Put an exit right after exec so in case exec fails we won't end up fork bombing our machine.
 
 ## What does the child inherit from the parent?
-* Open filehandles. If the parent later seeks, say, to the back to the beginning of the file then this will affect the child too (and vice versa). 
+* Open file handles. If the parent later seeks, say, to the back to the beginning of the file then this will affect the child too (and vice versa). 
 * Signal handlers
 * Current working directory
 * Environment variables
