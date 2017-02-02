@@ -18,7 +18,7 @@ secrets++;
 printf("%d\n", secrets);
 ```
 
-On two different terminals, as you would guess they would both print out 1 not too. Even if we changed the code to do something really hacky (apart from reading the memory directly) there would be no way to change another process' state (okay maybe [this](https://en.wikipedia.org/wiki/Dirty_COW) but that is getting a little too in depth).
+On two different terminals, as you would guess they would both print out 1 not 2. Even if we changed the code to do something really hacky (apart from reading the memory directly) there would be no way to change another process' state (okay maybe [this](https://en.wikipedia.org/wiki/Dirty_COW) but that is getting a little too in depth).
 
 # Process Contents
 
