@@ -68,7 +68,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
     - Make sure to to use some interesting flags and mode for `open()`
     - ```man 2 open``` is your friend
 - Not everything is a system call
-  - Take your program from "Writing to files" and replace it with `printf()`
+  - Take your program from "Writing to files" and replace it with `printf()` (Make sure to print to the file!)
   - Name some differences from `write()` and `printf()`
 
 ### Chapter 2
