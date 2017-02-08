@@ -99,7 +99,7 @@ The main disadvantage of the Buddy allocator is that they suffer from *internal 
 
 ### Further Reading and References
 * See [Foundations of Software Technology and Theoretical Computer Science 1999 proceedings](http://books.google.com/books?id=0uHME7EfjQEC&lpg=PP1&pg=PA85#v=onepage&q&f=false) (Google books,page 85)
-* ThanksForTheMemory UIUC lecture Slides ([pptx](https://subversion.ews.illinois.edu/svn/fa14-cs241/_shared/lectures/CS241-05-ThanksForTheMemorySlides.pptx)) ([pdf](https://subversion.ews.illinois.edu/svn/fa14-cs241/_shared/lectures/CS241-05-ThanksForTheMemorySlides.pptx.pdf))
+* ThanksForTheMemory UIUC lecture Slides ([pptx](https://subversion.ews.illinois.edu/svn/sp17-cs241/_shared/wikifiles/CS241-05-ThanksForTheMemorySlides.pptx)) ([pdf](https://subversion.ews.illinois.edu/svn/sp17-cs241/_shared/wikifiles/CS241-05-ThanksForTheMemorySlides.pdf))
 and 
 * [Wikipedia's buddy memory allocation page](http://en.wikipedia.org/wiki/Buddy_memory_allocation)
 
