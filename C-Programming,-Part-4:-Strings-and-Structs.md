@@ -47,7 +47,7 @@ Forgetting to NULL terminate a string is a big affect on the strings! Bounds che
 
 `int strlen(const char *s)` returns the length of the string not including the null byte
 
-`int strcmp(const char *s1, const char *s2)` returns an integer determining the lexicographic order of the strings. If s1 where to come before s2 in a dictionary, then a -1 is returned. If the two strings are equal, then 0. Else, -1. 
+`int strcmp(const char *s1, const char *s2)` returns an integer determining the lexicographic order of the strings. If s1 where to come before s2 in a dictionary, then a -1 is returned. If the two strings are equal, then 0. Else, 1. 
 
 With most of these functions, they expect the strings to be readable and not NULL but there is undefined behavior when you pass them NULL.
 
@@ -63,7 +63,7 @@ With most of these functions, they expect the strings to be readable and not NUL
 
 `char *strchr(const char *haystack, int needle)` Returns a pointer to the first occurrence of `needle` in `haystack`. If none found, `NULL` is returned.
 
-`char *strchr(const char *haystack, const char *needle)` Same as above but this time a string!
+`char *strstr(const char *haystack, const char *needle)` Same as above but this time a string!
 
 ## String Tokenize: `strtok`
 
