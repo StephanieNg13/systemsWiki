@@ -5,7 +5,7 @@ A thread is short for 'thread-of-execution'. It represents the sequence of instr
 
 ## What is a Lightweight Process (LWP)? How does it relate to threads?
 
-Well for all intensive purposes a thread is a process (meaning that creating a thread is similar to `fork`) except there is **no copying** meaning no copy on write. What this allows is for a process to share the same address space, variables, heap, file descriptors and etc.
+Well for all intents and purposes a thread is a process (meaning that creating a thread is similar to `fork`) except there is **no copying** meaning no copy on write. What this allows is for a process to share the same address space, variables, heap, file descriptors and etc.
 
 The actual system call to create a thread is similar to `fork`; it's `clone`. We won't go into the specifics but you can read the [man pages](http://man7.org/linux/man-pages/man2/clone.2.html) keeping in mind that it is outside the direct scope of this course.
 
