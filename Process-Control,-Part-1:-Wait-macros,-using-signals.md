@@ -68,7 +68,7 @@ A signal is a construct provided to us by the kernel. It allows one process to a
 ## Can I pause my child?
 
 Yes ! You can temporarily pause a running process by sending it a SIGSTOP signal.
-If it succeeds it will freeze a process; i.e. the process will not be allocated anymore CPU time.
+If it succeeds it will freeze a process; i.e. the process will not be allocated any more CPU time.
 
 To allow a process to resume execution send it the SIGCONT signal.
 
