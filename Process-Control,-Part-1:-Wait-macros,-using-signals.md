@@ -60,7 +60,7 @@ A signal is a construct provided to us by the kernel. It allows one process to a
 |----------|----------------------------------------|--------------------------------|
 | SIGINT   | Terminate Process (Can be caught)      | Tell the process to stop nicely |
 | SIGQUIT  | Terminate Process (Can be caught)      | Tells the process to stop harshly |
-| SIGSTOP  | Stop Process (Can be caught)           | Stops the process to be continued |
+| SIGSTOP  | Stop Process (Cannot be caught)        | Stops the process to be continued |
 | SIGCONT  | Continues a Process                    | Continues to run the process |
 | SIGKILL  | Terminate Process (Cannot be Ignored)  | You want your process gone |
 
