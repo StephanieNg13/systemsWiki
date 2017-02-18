@@ -31,6 +31,7 @@ realsize = (*p) & ~1;  // mask out the lowest bit
 ```
 
 ## Alignment and rounding up considerations
+
 Many architectures expect multi-byte primitives to be aligned to some multiple of 2^n. For example, it's common to require 4-byte types to be aligned to 4-byte boundaries (and 8-byte types on 8-byte boundaries). If multi-byte primitives are not stored on a reasonable boundary (for example starting at an odd address) then the performance can be significantly impacted because it may require two memory read requests instead of one. On some architectures the penalty is even greater - the program will crash with a [bus error](http://en.wikipedia.org/wiki/Bus_error#Unaligned_access).
 
 As `malloc` does not know how the user will use the allocated memory (array of doubles? array of chars?), the pointer returned to the program needs to be aligned for the worst case, which is architecture dependent.
@@ -44,6 +45,7 @@ int s = (requested_bytes + tag_overhead_bytes + 15) / 16
 ```
 The additional constant ensures incomplete units are rounded up. Note, real code is more likely to symbol sizes e.g. `sizeof(x) - 1`, rather than coding numerical constant 15.
 
+[Here's a great article on memory alignment, if you are further interested](http://www.ibm.com/developerworks/library/pa-dalign/)
 ## A note about internal fragmentation
 
 Internal fragmentation happens when the block you give them is larger than their allocation size. Let's say that we have a free block of size 16B (not including metadata). If they allocate 7 bytes, you may want to round up to 16B and just return the entire block.
