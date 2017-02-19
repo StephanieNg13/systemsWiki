@@ -177,7 +177,7 @@ Note: The algorithm isn't actually O(N) because of how the system scheduler work
 ## What is different in the child process than the parent process?
 The key differences include:
 * The process id returned by `getpid()`. The parent process id returned by `getppid()`.
-* The parent is notified via a signal, SIGCHILD, when the child process finishes but not vice versa.
+* The parent is notified via a signal, SIGCHLD, when the child process finishes but not vice versa.
 * The child does not inherit pending signals or timer alarms.
 For a complete list see the [fork man page](http://man7.org/linux/man-pages/man2/fork.2.html)
 
