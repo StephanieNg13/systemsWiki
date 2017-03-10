@@ -7,7 +7,7 @@ Is the following code thread-safe? Redesign the following code to be thread-safe
 static char message[20];
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-void format(int v) {
+void *format(int v) {
   pthread_mutex_lock(&mutex);
   sprintf(message, ":%d:" ,v);
   pthread_mutex_unlock(&mutex);
