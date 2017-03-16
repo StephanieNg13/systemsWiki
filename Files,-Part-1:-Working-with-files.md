@@ -18,7 +18,7 @@ And so on. The linux interface is very powerful and expressive, but sometimes we
 
 But you don't get the expressiveness that linux gives you with system calls you can convert back and forth between them with `int fileno(FILE* stream)` and `FILE* fdopen(int fd...)`.
 
-Another important aspect to note is the C files are **buffered** meaning that there contents may not be written write away by default. You can can change that with C options.
+Another important aspect to note is the C files are **buffered** meaning that their contents may not be written right away by default. You can can change that with C options.
 
 ## How do I tell how large a file is?
 For files less than the size of a long, using fseek and ftell is a simple way to accomplish this:
