@@ -2,7 +2,7 @@
 
 `int socket(int domain, int type, int protocol);`
 
-Socket creates a socket with domain (usually AF_INET for IPv4), type is whether to use UDP or TCP, protocol is any addition options. This creates a socket object in the kernel with which one can communicate with the outside world/network. This returns a fd so you can use it like a normal file descriptor! Remember you want to do your reads or writes from the socketfd because that represents the socket object only as a client, otherwise you want to respect the convention of the server.
+Socket creates a socket with domain (usually AF_INET for IPv4), type is whether to use UDP or TCP, protocol is any additional options. This creates a socket object in the kernel with which one can communicate with the outside world/network. This returns a fd so you can use it like a normal file descriptor! Remember you want to do your reads or writes from the socketfd because that represents the socket object only as a client, otherwise you want to respect the convention of the server.
 
 ## `getaddressinfo`
 
