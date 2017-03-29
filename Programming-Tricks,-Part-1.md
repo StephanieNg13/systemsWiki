@@ -1,6 +1,6 @@
 ## Use `cat` as your IDE
 Who needs an editor? IDE? We can just use `cat`!
-You've seen `cat` being used to read the contents of files but it can also be used to read the  standard-input and send it back to standard output.
+You've seen `cat` being used to read the contents of files but it can also be used to read the standard-input and send it back to standard output.
 ```
 $ cat
 HELLO
@@ -51,14 +51,14 @@ $ make run
 ```
 will make sure any changes you've made are compiled, and run your program in one go. Also good for testing many inputs at once. Although you probably would just rather write a regular shell script for that.
 
-## Is your neighbor too productive? C pre-procesors to the rescue!
+## Is your neighbor too productive? C pre-processors to the rescue!
 Use the C pre-processor to redefine common keywords e.g.
 ```C
 #define if while
 ```
 Protip: Put this line inside one of the standard includes e.g. /usr/include/stdio.h
 
-## Who needs functions when you C have the preprocessor
+## Who needs functions when you C have the pre-processor
 
 OK, so this is more of a gotcha. Be careful when using macros that look like functions...
 ```C
@@ -72,7 +72,7 @@ int value = -min(2,3); // Should be -2?
 ```
 Is expanded to 
 ```
-int value = -2<3 ? 2 :3; // Ooops.. result will be 2
+int value = -2<3 ? 2 :3; // Oops.. result will be 2
 ```
 A partial fix is to wrap every argument with `()` and also the whole expression with ():
 ```C
