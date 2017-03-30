@@ -34,7 +34,7 @@ Technical Note: A realistic SJF implementation would not use the total execution
 
 # Preemptive Shortest Job First (PSJF)
 
-Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the remaining runtime of the process, run that. (If it is equal like our example our algorithm can choose). The scheduler uses the total runtime of the process, if you want the shortest _remaining_ time left, that is a variant of PSJF called Shortest Remaining Time First.
+Preemptive shortest job first is like shortest job first but if a new job comes in with a shorter runtime than the total runtime of the process, run that. (If it is equal like our example our algorithm can choose). The scheduler uses the total runtime of the process, if you want the shortest _remaining_ time left, that is a variant of PSJF called Shortest Remaining Time First.
 
 ![](http://i.imgur.com/QvoX7Ia.png)
 
