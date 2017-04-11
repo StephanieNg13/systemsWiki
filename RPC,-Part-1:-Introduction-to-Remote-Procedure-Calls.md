@@ -51,11 +51,11 @@ To marshall a linked list it is unnecessary to send the link pointers- just stre
 
 By starting at the head node/vertex, a simple tree can be recursively visited to create a serialized version of the data. A cyclic graph will usually require additional memory to ensure that each edge and vertex is processed exactly once.
 
-## What is an IDL (Interface Design Language)?
+## What is an IDL (Interface Description Language)?
 
 Writing stub code by hand is painful, tedious, error prone, difficult to maintain and difficult to reverse engineer the wire protocol from the implemented code. A better approach is specify the data objects, messages and services and automatically generate the client and server code.
 
-A modern example of an Interface Design Language is Google's Protocol Buffer .proto files.
+A modern example of an Interface Description Language is Google's Protocol Buffer .proto files.
 
 ## Complexity and challenges of RPC vs local calls?
 
