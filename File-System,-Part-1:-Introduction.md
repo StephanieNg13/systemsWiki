@@ -57,7 +57,7 @@ From [Wikipedia](http://en.wikipedia.org/wiki/Inode):
 
 > *In a Unix-style file system, an index node, informally referred to as an inode, is a data structure used to represent a filesystem object, which can be one of various things including a file or a directory. Each inode stores the attributes and disk block location(s) of the filesystem object's data. Filesystem object attributes may include manipulation metadata (e.g. change, access, modify time), as well as owner and permission data (e.g. group-id, user-id, permissions).*
 
-To read the first few bytes of the file, follow the first indirect block pointer to the first indirect block and read the first few bytes, writing is the same process. If you want to read the entire file, keep reading direct blocks until your size runs out (we will talk about indirect blocks in a bit)
+To read the first few bytes of the file, follow the first direct block pointer to the first direct block and read the first few bytes, writing is the same process. If you want to read the entire file, keep reading direct blocks until your size runs out (we will talk about indirect blocks in a bit)
 
 > "All problems in computer science can be solved by another level of indirection." - David Wheeler
 
