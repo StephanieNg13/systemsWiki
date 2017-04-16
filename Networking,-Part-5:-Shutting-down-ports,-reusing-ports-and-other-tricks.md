@@ -1,7 +1,7 @@
 ## What is the difference shutdown and close?
 
 Use the `shutdown` call when you no longer need to read any more data from the socket, write more data, or have finished doing both.
-When you shutdown a socket for further writing (or reading) that information is also sent to the other end of the connection. For example if you shutdown the socket for further writing at the server end, then a moment later,a blocked `read` call could return 0 to indicate that no more bytes are expected.
+When you shutdown a socket for further writing (or reading) that information is also sent to the other end of the connection. For example if you shutdown the socket for further writing at the server end, then a moment later, a blocked `read` call could return 0 to indicate that no more bytes are expected.
 
 Use `close` when your process no longer needs the socket file descriptor. 
 
