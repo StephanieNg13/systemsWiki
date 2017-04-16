@@ -6,7 +6,7 @@ Remember that UDP is a simple packet-based ('data-gram') protocol ; there is no 
 First, initialize the hints addrinfo struct to request an IPv6, passive datagram socket.
 ```C
 memset(&hints, 0, sizeof(hints));
-hints.ai_family = AF_INET6; // INET for IPv4
+hints.ai_family = AF_INET6; // use AF_INET instead for IPv4
 hints.ai_socktype =  SOCK_DGRAM;
 hints.ai_flags =  AI_PASSIVE;
 ```
@@ -68,14 +68,14 @@ int main(int argc, char **argv)
     int addrlen = sizeof(addr);
 
     while(1){
-        char buffer[1000];
+        char buf[1024];
         ssize_t byte_count = recvfrom(sockfd, buf, sizeof(buf), 0, &addr, &addrlen);
-        buffer[byte_count] = '\0';
-    }
+        buf[byte_count] = '\0';
 
-    printf("Read %d chars\n", len);
-    printf("===\n");
-    printf("%s\n", buffer);
+        printf("Read %d chars\n", byte_count);
+        printf("===\n");
+        printf("%s\n", buf);
+    }
 
     return 0;
 }
