@@ -1,6 +1,6 @@
 # What is POSIX error handling?
 
-In other languages, you may see error handling implemented with exceptions. Although you technically can use them in c (You keep a stack of very try/catch block and use `setjmp` and `longjmp` to go to those blocks respectively), error handling in C is typically done with posix error handling the code typically looks like this.
+In other languages, you may see error handling implemented with exceptions. Although you technically can use them in C (You keep a stack of very try/catch block and use `setjmp` and `longjmp` to go to those blocks, respectively), error handling in C is typically done with posix error handling the code typically looks like this.
 
 ```C
 int ret = some_system_call()
@@ -108,9 +108,9 @@ while ((-1 == (result = systemcall(...))) && (errno == EINTR)) { /* repeat! */}
 On Linux,calling `read` and `write` to a local disk will normally not return with EINTR (instead the function is automatically restarted for you). However, calling `read` and `write` on a file descriptor that corresponds to a network stream _can_ return with EINTR.
 
 ## Which system calls may be interrupted and need to be wrapped?
-Use man the page! The man page includes a list of errors (i.e. errno values) that may be set by the system call. A rule of thumb is 'slow' (blocking) calls (e.g. writing to a socket) may be interrupted but fast non-blocking calls (e.g. pthread_mutex_lock) will not.
+Use the man page! The man page includes a list of errors (i.e. errno values) that may be set by the system call. A rule of thumb is 'slow' (blocking) calls (e.g. writing to a socket) may be interrupted but fast non-blocking calls (e.g. pthread_mutex_lock) will not.
 
-From the linux signal 7 man page.
+From the linux signal 7 man page:
 
 "If a signal handler is invoked while a system call or library function call is blocked, then either:
 * the call is automatically restarted after the signal handler returns; or
