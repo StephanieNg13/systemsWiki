@@ -29,7 +29,7 @@ From C, call one of the stat functions (introduced below).
 Use the stat calls. For example, to find out when my 'notes.txt' file was last accessed -
 ```C
    struct stat s;
-   stat("notes.txt", & s);
+   stat("notes.txt", &s);
    printf("Last accessed %s", ctime(s.st_atime));
 ```
 There are actually three versions of `stat`;
