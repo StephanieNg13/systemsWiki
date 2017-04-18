@@ -130,9 +130,10 @@ Let's see what Valgrind will output (this program compiles and run with no error
 ==29515== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 ```
 **Invalid Write**: It detected our heap block overrun (writing outside of allocated block).
+
 **Definitely lost**: Memory leak you probably forgot freeing a memory block .
 
-Valgrind is a very effective tool to check for errors at runtime, C is very special when it comes to such behavior so after compiling your program you can use Valgrind to fix errors that usually happen when your program is running .
+Valgrind is a very effective tool to check for errors at runtime, C is very special when it comes to such behavior so after compiling your program you can use Valgrind to fix errors that your compiler may not catch and that usually happen when your program is running .
 
 For more information you can refer to the [official website](http://valgrind.org/docs/manual/quick-start.html) :
 # Tsan
