@@ -60,8 +60,81 @@ When all else fails, print like crazy! Each of your functions should have an ide
 
 # Valgrind
 
-(ToDo)
 
+Valgrind is a suite of tools designed to provide debugging and profiling tools to make your programs more correct and detect some runtime issues ,the most used of these tools is Memcheck,it can detect many memory-related errors that are common in C and C++ programs and that can lead to crashes and unpredictable behaviour (unfreed memory buffers for example ).
+
+To run Valgrind on your program : 
+
+```
+valgrind --leak-check=yes myprogram arg1 arg2
+```
+or 
+
+```
+valgrind ./myprogram
+```
+
+Arguments are optional and the default tool that will run is Memcheck,the output will be presented in form of 
+number of allocations,number of freed allocations and the number of errors
+
+**Example**
+
+![Valgrind Example](https://i.imgur.com/ZdBWDvh.png)
+
+Here's an example to help you interpret the above results,suppose we have a simple program like this : 
+```C
+  #include <stdlib.h>
+
+  void dummy_function()
+  {
+     int* x = malloc(10 * sizeof(int));
+     x[10] = 0;        // error 1:as you can see here we write to an out of bound memory address
+  }                    // error 2: memory leak the allocated x not freed
+
+  int main(void)
+  {
+     dummy_function();
+     return 0;
+  }
+```
+
+Let's see what Valgrind will output (this program compiles and run with no errors) .
+
+==29515== Memcheck, a memory error detector
+==29515== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==29515== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==29515== Command: ./a
+==29515== 
+==29515== Invalid write of size 4
+==29515==    at 0x400544: dummy_function (in /home/rafi/projects/exocpp/a)
+==29515==    by 0x40055A: main (in /home/rafi/projects/exocpp/a)
+==29515==  Address 0x5203068 is 0 bytes after a block of size 40 alloc'd
+==29515==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==29515==    by 0x400537: dummy_function (in /home/rafi/projects/exocpp/a)
+==29515==    by 0x40055A: main (in /home/rafi/projects/exocpp/a)
+==29515== 
+==29515== 
+==29515== HEAP SUMMARY:
+==29515==     in use at exit: 40 bytes in 1 blocks
+==29515==   total heap usage: 1 allocs, 0 frees, 40 bytes allocated
+==29515== 
+==29515== LEAK SUMMARY:
+==29515==    definitely lost: 40 bytes in 1 blocks
+==29515==    indirectly lost: 0 bytes in 0 blocks
+==29515==      possibly lost: 0 bytes in 0 blocks
+==29515==    still reachable: 0 bytes in 0 blocks
+==29515==         suppressed: 0 bytes in 0 blocks
+==29515== Rerun with --leak-check=full to see details of leaked memory
+==29515== 
+==29515== For counts of detected and suppressed errors, rerun with: -v
+==29515== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+**Invalid Write**: It detected our heap block overrun (writing outside of allocated block).
+**Definitely lost**: Memory leak you probably forgot freeing a memory block .
+
+Valgrind is a very effective tool to check for errors at runtime, C is very special when it comes to such behavior so after compiling your program you can use Valgrind to fix errors that usually happen when your program is running .
+
+For more information you can refer to the [official website](http://valgrind.org/docs/manual/quick-start.html) :
 # Tsan
 
 
