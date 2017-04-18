@@ -99,7 +99,7 @@ Here's an example to help you interpret the above results,suppose we have a simp
 ```
 
 Let's see what Valgrind will output (this program compiles and run with no errors) .
-
+```
 ==29515== Memcheck, a memory error detector
 ==29515== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
 ==29515== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
@@ -128,7 +128,7 @@ Let's see what Valgrind will output (this program compiles and run with no error
 ==29515== 
 ==29515== For counts of detected and suppressed errors, rerun with: -v
 ==29515== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-
+```
 **Invalid Write**: It detected our heap block overrun (writing outside of allocated block).
 **Definitely lost**: Memory leak you probably forgot freeing a memory block .
 
