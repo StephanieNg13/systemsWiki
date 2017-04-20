@@ -44,7 +44,7 @@ See the man pages for fseek and ftell for more information.
 **Note: This is not recommended in the usual case because of a quirk with the C language**. That quirk is that longs only need to be **4 Bytes big** meaning that the maximum size that ftell can return is a little under 2 Gigabytes (which we know nowadays our files could be hundreds of gigabytes or even terabytes on a distributed file system). What should we do instead? Use `stat`! We will cover stat in a later part but here is some code that will tell you the size of the file
 ```C
 struct stat buf;
-if(stat(filename, &buf) != -1){
+if(stat(filename, &buf) == -1){
 	return -1;
 }
 return (ssize_t)buf.st_size;
