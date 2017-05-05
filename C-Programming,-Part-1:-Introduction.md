@@ -64,7 +64,7 @@ Let's say that we declare a pointer `int *ptr`. For the sake of discussion, let'
 *ptr = 0; // Writes some memory.
 ``` 
 
-What C will do is take the type of the pointer which is an `int` and writes `sizeof(int)` bytes from the start of the pointer, meaning that bytes `0x1000`, `0x1004`, `0x1008`, `0x100a` will all be zero. The number of bytes written depends on the pointer type. It is the same for all primitive types but structs are a little different.
+What C will do is take the type of the pointer which is an `int` and writes `sizeof(int)` bytes from the start of the pointer, meaning that bytes `0x1000`, `0x1001`, `0x1002`, `0x1003` will all be zero. The number of bytes written depends on the pointer type. It is the same for all primitive types but structs are a little different.
 
 ## What is pointer arithmetic?
 You can add an integer to a pointer. However the pointer type is used to determine how much to increment the pointer. For char pointers this is trivial because characters are always one byte:
