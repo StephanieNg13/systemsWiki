@@ -56,7 +56,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
 - Hello World (System call style)
   - Write a program that uses `write()` to print out "Hi! My name is <Your Name>".
 - Hello Standard Error Stream
-  - Write a program that uses `write()` to print out a triangle of height `n` to Standard Error
+  - Write a function that has the signature `void write_triangle(int n)` uses `write()` to print out a triangle of height `n` to Standard Error
     - n should be a variable and the triangle should look like this for n = 3
     ```C
     *
@@ -64,7 +64,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
     ***
     ```
 - Writing to files
-  - Take your program from "Hello World" and have it write to a file
+  - Take your program from "Hello World" and have it write to a file.
     - Make sure to to use some interesting flags and mode for `open()`
     - ```man 2 open``` is your friend
 - Not everything is a system call
@@ -84,7 +84,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
   } 
   ```
   If the address of data is `0x7fbd9d40`, then what is the address of `data+2`?
-  - What is `data[3]` equivalent to in C?
+  - What is `data[3]` equivalent to in C? IE, what does C convert `data[3]` to before dereferencing the address?
 - `sizeof` character arrays, incrementing pointers
   
   Remember the type of a string constant `"abc"` is an array.
@@ -155,7 +155,7 @@ The in-browser virtual machine runs entirely in Javascript and is fastest in Chr
 ### C Development (A web search is useful here)
 - What compiler flag is used to generate a debug build?
 - You modify the makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
-- Are tabs or spaces used in Makefiles?
+- Are tabs or spaces used to specify the commands after the rule?
 - What are the differences between heap and stack memory?
 - Are there other kinds of memory in a process?
 
