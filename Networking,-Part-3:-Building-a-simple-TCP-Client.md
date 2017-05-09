@@ -1,12 +1,17 @@
 ## `socket`
 
-`int socket(int domain, int type, int protocol);`
+`int socket(int domain, int socket_type, int protocol);`
 
-Socket creates a socket with domain (usually AF_INET for IPv4), type is whether to use UDP or TCP, protocol is any additional options. This creates a socket object in the kernel with which one can communicate with the outside world/network. This returns a fd so you can use it like a normal file descriptor! Remember you want to do your reads or writes from the socketfd because that represents the socket object only as a client, otherwise you want to respect the convention of the server.
+Socket creates a socket with domain (e.g. AF_INET for IPv4 or AF_INET6 for IPv6), `socket_type` is whether to use UDP or TCP or other socket type, `protocol` is an optional choice of protocol configuration (for our examples this we can just leave this as 0 for default). This call creates a socket object in the kernel with which one can communicate with the outside world/network. 
+You can use the result of `getaddressinfo` to fill in the `socket` parameters, or provide them manually.
+
+The socket call returns an integer - a file descriptor - and, for TCP clients, you can use it like a regular file descriptor i.e. you can use `read` and `write` to receive or send packets.
+
+TCP sockets are similar to `pipes` except that they allow full duplex communication i.e. you can send and receive data in both directions independently.
 
 ## `getaddressinfo`
 
-We saw this in the last section! You're experts at this.
+We saw this in the last section! You're experts at this. 
 
 ## `connect`
 
@@ -16,7 +21,9 @@ Pass it the sockfd, then the address you want to go to and its length and you wi
 
 ## `read`/`write`
 
-Once we have a successful connection we can read or write like any old file descriptor. Keep in mind if you are connected to a website, you want to conform to the HTTP protocol specification in order to get any sort of meaningful results back. There are libraries to do this, usually you don't connect at the socket level because there are other libraries or packages around it
+Once we have a successful connection we can read or write like any old file descriptor. Keep in mind if you are connected to a website, you want to conform to the HTTP protocol specification in order to get any sort of meaningful results back. There are libraries to do this, usually you don't connect at the socket level because there are other libraries or packages around it.
+
+The number of bytes read or written may be smaller than expected. Thus it is important to check the return value of read and write. 
 
 ## Complete Simple TCP Client Example
 
@@ -53,6 +60,9 @@ int main(int argc, char **argv)
 	char *buffer = "GET / HTTP/1.0\r\n\r\n";
 	printf("SENDING: %s", buffer);
 	printf("===\n");
+
+        // For this trivial demo just assume write() sends all bytes in one go and is not interrupted
+
 	write(sock_fd, buffer, strlen(buffer));
 
 
