@@ -21,19 +21,25 @@ We also see examples of setsockopt later too.
 
 To create a endpoint for networking communication. A new socket by itself is not particularly useful; though we've specified either a packet or stream-based connections it is not bound to a particular network interface or port. Instead socket returns a network descriptor that can be used with later calls to bind,listen and accept.
 
-## What is the purpose of calling `bind`
+## What is the purpose of calling `bind`?
 
 The `bind` call associates an abstract socket with an actual network interface and port. It is possible to call bind on a TCP client however it's unusually unnecessary to specify the outgoing port.
 
-## What is the purpose of calling `listen`
+## What is the purpose of calling `listen`?
+
 The `listen` call specifies the queue size for the number of incoming, unhandled connections i.e. that have not yet been assigned a network descriptor by `accept`
 Typical values for a high performance server are 128 or more.
 
 ## Why are server sockets passive?
-Server sockets do not actively try to connect to another host; instead they wait for incoming connections. Additionally, server sockets are not closed when the peer disconnects. Instead the client communicates with a separate active socket on the server.
 
-## What is the purpose of calling `accept`
-Once the server socket has been initialized the server calls `accept` to wait for new connections. Unlike `socket` `bind` and `listen`, this call will block. i.e. if there are no new connections, this call will block and only return when a new client connects.
+Server sockets do not actively try to connect to another host; instead they wait for incoming connections. Additionally, server sockets are not closed when the peer disconnects. Instead the client communicates with a separate active socket on the server that is specific to that connection.
+
+Unique TCP connections are identified by the tuple `(source ip, source port, destination ip, destination port)`
+It is possible to have multiple connections from a web browser to the same server port (e.g. port 80) because the the source port on each arriving packet is unique. i.e. For a particular server port (e.g. port 80) there can be one passive server socket but multiple active sockets (one for each currently open connection) and the server's operating system maintains a lookup table that associates a unique tuple with active sockets, so that incoming packets can be correctly routed to the correct socket.
+
+## What is the purpose of calling `accept`?
+
+Once the server socket has been initialized the server calls `accept` to wait for new connections. Unlike `socket` `bind` and `listen`, this call will block. i.e. if there are no new connections, this call will block and only return when a new client connects. The returned TCP socket is associated with a particular tuple `(client IP, client port, server IP, server port)` and will be used for all future incoming and outgoing TCP packets that match this tuple. 
 
 Note the `accept` call returns a new file descriptor. This file descriptor is specific to a particular client. It is common programming mistake to use the original server socket descriptor for server I/O and then wonder why networking code has failed.
 
@@ -49,9 +55,10 @@ Note, ports are per machine- not per process or per user. In other words,  you c
 
 
 ## Server code example
-A working simple server example is shown below. Note this example is incomplete - for example it does not close either socket descriptor, or free up memory created by `getaddrinfo`
-```C
 
+A working simple server example is shown below. Note this example is incomplete - for example it does not close either socket descriptor, or free up memory created by `getaddrinfo`
+
+```C
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,7 +116,7 @@ int main(int argc, char **argv)
 
 ## Why can't my server re-use the port?
 
-By default a port is not immediately released when the socket is closed. Instead, the port enters a "TIMED-WAIT" state. This can lead to significant confusion during development because the timeout can make valid networking code appear to fail.
+By default a port is not immediately released when the server socket is closed. Instead, the port enters a "TIMED-WAIT" state. This can lead to significant confusion during development because the timeout can make valid networking code appear to fail.
 
  To be able to immediately re-use a port, specify `SO_REUSEPORT` before binding to the port.
 ```C
