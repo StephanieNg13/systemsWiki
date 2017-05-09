@@ -30,7 +30,7 @@ The `listen` call specifies the queue size for the number of incoming, unhandled
 Typical values for a high performance server are 128 or more.
 
 ## Why are server sockets passive?
-Server sockets do not actively try to connect to another host; instead they wait for incoming connections. Additionally, server sockets are not closed when the peer disconnects. Instead when a remote client connects, it is immediately bumped to an unused port number for future communications.
+Server sockets do not actively try to connect to another host; instead they wait for incoming connections. Additionally, server sockets are not closed when the peer disconnects. Instead the client communicates with a separate active socket on the server.
 
 ## What is the purpose of calling `accept`
 Once the server socket has been initialized the server calls `accept` to wait for new connections. Unlike `socket` `bind` and `listen`, this call will block. i.e. if there are no new connections, this call will block and only return when a new client connects.
