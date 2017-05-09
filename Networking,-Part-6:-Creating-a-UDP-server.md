@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 {
     int s;
 
-    struct addrinfo hints, *result;
+    struct addrinfo hints, *res;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET6; // INET for IPv4
     hints.ai_socktype =  SOCK_DGRAM;
