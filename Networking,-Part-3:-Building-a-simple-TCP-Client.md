@@ -15,9 +15,9 @@ We saw this in the last section! You're experts at this.
 
 ## `connect`
 
-`int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);`
+`int connectok = connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);`
 
-Pass it the sockfd, then the address you want to go to and its length and you will be off connecting (as long as you check the error). Remember, network calls are ultra perceptible to failing.
+Pass `connect` the socket file descriptor, the address you want to connect to and the length in bytes of the address structure. To help identify errors and mistakes it is good practice to check the return value of all networking calls, including `connect`
 
 ## `read`/`write`
 
