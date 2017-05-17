@@ -35,11 +35,11 @@ int main() {
   }
 
   struct addrinfo *p;
-  char host[256],service[256];
+  char host[256];
 
   for(p = infoptr; p != NULL; p = p->ai_next) {
 
-    getnameinfo(p->ai_addr, p->ai_addrlen, host, sizeof(host), service, sizeof(service), NI_NUMERICHOST);
+    getnameinfo(p->ai_addr, p->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
     puts(host);
   }
 
