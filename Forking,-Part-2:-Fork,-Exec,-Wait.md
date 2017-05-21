@@ -78,7 +78,7 @@ A common programming pattern is to call `fork` followed by `exec` and `wait`. Th
 See below for a complete code example.
 
 
-## How do I start a background process that runs as the same time?
+## How do I start a background process that runs at the same time?
 Don't wait for them! Your parent process can continue to execute code without having to wait for the child process. Note in practice background processes can also be disconnected from the parent's input and output streams by calling `close` on the open file descriptors before calling exec.
 
 However child processes that finish before their parent finishes can become zombies. See the zombie page for more information.
