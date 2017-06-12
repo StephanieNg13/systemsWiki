@@ -11,7 +11,7 @@
 * [c faq](http://c-faq.com/)
 * [C Bootcamp](http://gribblelab.org/CBootCamp/index.html)
 * [C/C++ function reference](http://www.cplusplus.com/reference/clibrary/)
-* [gdb (Gnu debugger) tutorial](http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html) Tip: run gdb with the "-tui" command line argument to get a full screen version of the debugger.
+* [gdb (Gnu debugger) tutorial](http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html) Tip: run gdb with the "-tui" command line argument to get a full-screen version of the debugger.
 * Add your favorite resources here
 
 
@@ -48,7 +48,7 @@ int *ptr1;
 char *ptr2;
 ```
 
-Due to C's grammar, a `int*` or any pointer is not actually its own type. You have to precede each pointer variable with an asterisk. As a common gotcha, the following
+Due to C's grammar, an `int*` or any pointer is not actually its own type. You have to precede each pointer variable with an asterisk. As a common gotcha, the following
 ```C
 int* ptr3, ptr4;
 ```
@@ -58,7 +58,7 @@ int *ptr3, *ptr4;
 ```
 
 ## How do you use a pointer to read/write some memory?
-Let's say that we declare a pointer `int *ptr`. For the sake of discussion, let's say that `ptr` points to memory address `0x1000`. If we want to write to a pointer, we can deference and assign `*ptr`.
+Let's say that we declare a pointer `int *ptr`. For the sake of discussion, let's say that `ptr` points to memory address `0x1000`. If we want to write to a pointer, we can dereference and assign `*ptr`.
 
 ```C
 *ptr = 0; // Writes some memory.
@@ -67,7 +67,7 @@ Let's say that we declare a pointer `int *ptr`. For the sake of discussion, let'
 What C will do is take the type of the pointer which is an `int` and writes `sizeof(int)` bytes from the start of the pointer, meaning that bytes `0x1000`, `0x1001`, `0x1002`, `0x1003` will all be zero. The number of bytes written depends on the pointer type. It is the same for all primitive types but structs are a little different.
 
 ## What is pointer arithmetic?
-You can add an integer to a pointer. However the pointer type is used to determine how much to increment the pointer. For char pointers this is trivial because characters are always one byte:
+You can add an integer to a pointer. However, the pointer type is used to determine how much to increment the pointer. For char pointers this is trivial because characters are always one byte:
 ```C
 char *ptr = "Hello"; // ptr holds the memory location of 'H'
 ptr += 2; //ptr now points to the first'l'
@@ -114,7 +114,7 @@ This does not require a cast because C automatically promotes `void*` to its app
 gcc and clang are not total ISO-C compliant, meaning that they will let you do arithmetic on a void pointer. They will treat it as a char pointer but do not do this because it may not work with all compilers!
 
 ## Does `printf` call write or does write call `printf`?
-`printf` calls `write`. `printf` includes an internal buffer so, to increase performance `printf` may not call `write` everytime you call `printf`. `printf` is a C library function. `write` is a system call and as we know system calls are expensive. On the other hand `printf` uses a buffer which suits our needs better at that point
+`printf` calls `write`. `printf` includes an internal buffer so, to increase performance `printf` may not call `write` everytime you call `printf`. `printf` is a C library function. `write` is a system call and as we know system calls are expensive. On the other hand, `printf` uses a buffer which suits our needs better at that point
 
 ## How do you print out pointer values? integers? strings?
 Use format specifiers "%p" for pointers, "%d" for integers and "%s" for Strings.
@@ -173,9 +173,9 @@ char *ptr = "Hello";
 printf("%p : %s\n", ary, ary);
 printf("%p : %s\n", ptr, ptr);
 ```
-The array is mutable, so we can change its contents (be careful not to write bytes beyond the end of the array though). Fortunately 'World' is no longer than 'Hello"
+The array is mutable, so we can change its contents (be careful not to write bytes beyond the end of the array though). Fortunately, 'World' is no longer than 'Hello"
 
-In this case, the char pointer `ptr` points to some read only memory (where the statically allocated string literal is stored), so we cannot change those contents.
+In this case, the char pointer `ptr` points to some read-only memory (where the statically allocated string literal is stored), so we cannot change those contents.
 ```C
 strcpy(ary, "World"); // OK
 strcpy(ptr, "World"); // NOT OK - Segmentation fault (crashes)
@@ -195,9 +195,9 @@ What to take away from this is that pointers * can point to any type of memory w
 
 ## `sizeof()` returns the number of bytes. So using above code, what is sizeof(ary) and sizeof(ptr)?
 `sizeof(ary)`: `ary` is an array. Returns the number of bytes required for the entire array (5 chars + zero byte = 6 bytes)
-`sizeof(ptr)`: Same as sizeof(char *). Returns the number bytes required for a pointer (e.g. 4 or 8 for a 32 bit or 64 bit machine)
+`sizeof(ptr)`: Same as sizeof(char *). Returns the number bytes required for a pointer (e.g. 4 or 8 for a 32 bit or 64-bit machine)
 
-`sizeof` is a special operator. Really it's something the compiler substitutes in before compiling the program because the size of all types is known at compile time. When you have `sizeof(char*)` that takes the size of a pointer on your machine (8 bytes for a 64 bit machine and 4 for a 32 bit and so on). When you try `sizeof(char[])`, the compiler looks at that and substitutes the number of bytes that the **entire** array contains because the total size of the array is known at compile time.
+`sizeof` is a special operator. Really it's something the compiler substitutes in before compiling the program because the size of all types is known at compile time. When you have `sizeof(char*)` that takes the size of a pointer on your machine (8 bytes for a 64-bit machine and 4 for a 32 bit and so on). When you try `sizeof(char[])`, the compiler looks at that and substitutes the number of bytes that the **entire** array contains because the total size of the array is known at compile time.
 
 ```C
 char str1[] = "will be 11";
@@ -299,8 +299,8 @@ free(p);
 free(p); // Oops! - Double free!
 ```
 
-The fix is firstly to write correct programs! Secondly, it's good programming hygiene to reset pointers
-once the memory has been freed. This ensures the pointer cant be used incorrectly without the program crashing.
+The fix is first to write correct programs! Secondly, it's good programming hygiene to reset pointers
+once the memory has been freed. This ensures the pointer can't be used incorrectly without the program crashing.
 
 Fix:
 ```C
@@ -317,7 +317,7 @@ Declares an alias for a type. Often used with structs to reduce the visual clutt
 typedef float real; 
 real gravity = 10;
 // Also typedef gives us an abstraction over the underlying type used. 
-// For example in the future we only need to change this typedef if we
+// In the future, we only need to change this typedef if we
 // wanted our physics library to use doubles instead of floats.
 
 typedef struct link link_t; 
