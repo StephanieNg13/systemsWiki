@@ -15,7 +15,7 @@ printf("Debug: The string and int are stored at: %p and %p\n", name, &score );
 By default, for performance, `printf` does not actually write anything out (by calling write) until its buffer is full or a newline is printed. 
 
 ## How else can I print strings and single characters?
-Use `puts( name );` and `putchar( c )`  where name is a pointer to a C string and c is just a `char`
+Use `puts( name )` and `putchar( c )`  where name is a pointer to a C string and c is just a `char`
 
 ## How do I print to other file streams?
 Use `fprintf( _file_ , "Hello %s, score: %d", name, score);`
@@ -30,7 +30,7 @@ Use `sprintf` or better `snprintf`.
 char result[200];
 int len = snprintf(result, sizeof(result), "%s:%d", name, score);
 ```
-snprintf returns the number of characters written excluding the terminating byte. In the above example this would be a maximum of 199.
+snprintf returns the number of characters written excluding the terminating byte. In the above example, this would be a maximum of 199.
 
 ## What if I really really want `printf` to call `write` without a newline?
 
@@ -45,7 +45,7 @@ int main(){
 ```
 
 ## How is `perror` helpful?
-Let's say that you have a function call that just failed (because you checked the man page and it is a failing return code). `perror(const char* message)` will print the english version of the error to stderr
+Let's say that you have a function call that just failed (because you checked the man page and it is a failing return code). `perror(const char* message)` will print the English version of the error to stderr
 ```C
 int main(){
     int ret = open("IDoNotExist.txt", O_RDONLY);
@@ -101,7 +101,7 @@ char type;
 int ok = 2 == sscanf(line, "%c %d", &type, &data); // pointer error
 ```
 We wanted to write the character value into c and the integer value into the malloc'd memory.
-However we passed the address of the data pointer, not what the pointer is pointing to! So `sscanf` will change the pointer itself. i.e. the pointer will now point to address 10 so this code will later fail e.g. when free(data) is called.
+However, we passed the address of the data pointer, not what the pointer is pointing to! So `sscanf` will change the pointer itself. i.e. the pointer will now point to address 10 so this code will later fail e.g. when free(data) is called.
  
 ## How do I stop scanf from causing a buffer overflow?
 The following code assumes the scanf won't read more than 10 characters (including the terminating byte) into the buffer.
@@ -112,7 +112,7 @@ scanf("%s",buffer);
 You can include an optional integer to specify how many characters EXCLUDING the terminating byte:
 ```C
 char buffer[10];
-scanf("%9s", buffer); // reads upto 9 charactes from input (leave room for the 10th byte to be the terminating byte)
+scanf("%9s", buffer); // reads up to 9 charactes from input (leave room for the 10th byte to be the terminating byte)
 ```
 
 ## Why is `gets` dangerous? What should I use instead?
@@ -123,7 +123,7 @@ gets(buf); // Remember the array name means the first byte of the array
 ``` 
 `gets` is deprecated in C99 standard and has been removed from the latest C standard (C11). Programs should use `fgets` or `getline` instead. 
 
-Where each have the following structure respectively:
+Where each has the following structure respectively:
 ```C 
 char *fgets (char *str, int num, FILE *stream); 
 
