@@ -10,7 +10,7 @@ In C we have [Null Terminated](https://en.wikipedia.org/wiki/Null-terminated_str
 
 Whenever you define a constant string (ie one in the form `char* str = "constant"`) That string is stored in the _data_ or _code_ segment that is **read-only** meaning that any attempt to modify the string will cause a segfault.
 
-If one however `malloc`'s space, one can change that string to be whatever they want.
+If one, however, `malloc`'s space, one can change that string to be whatever they want.
 
 ## Memory Mismanagement
 
@@ -37,7 +37,7 @@ strcpy(hello_string, "Hello Bhuvan!");
 
 ## Remember the NULL byte!
 
-Forgetting to NULL terminate a string is a big affect on the strings! Bounds checking is important. The heartbleed bug mentioned earlier in the wikibook is partially because of this.
+Forgetting to NULL terminate a string is a big affect on the strings! Bounds checking is important. The heart bleed bug mentioned earlier in the wiki book is partially because of this.
 
 ## Where can I find an In-Depth and Assignment-Comprehensive explanation of all of these functions?
 
@@ -61,13 +61,13 @@ With most of these functions, they expect the strings to be readable and not NUL
 
 ## String Search: `strchr` `strstr`
 
-`char *strchr(const char *haystack, int needle)` Returns a pointer to the first occurrence of `needle` in `haystack`. If none found, `NULL` is returned.
+`char *strchr(const char *haystack, int needle)` Returns a pointer to the first occurrence of `needle` in the `haystack`. If none found, `NULL` is returned.
 
 `char *strstr(const char *haystack, const char *needle)` Same as above but this time a string!
 
 ## String Tokenize: `strtok`
 
-A dangerous but useful function strtok takes a string and tokenizes it. Meaning that it will transform the strings into separate strings. This function has a lot of specs so please read the man pages a contrived examples is below.
+A dangerous but useful function strtok takes a string and tokenizes it. Meaning that it will transform the strings into separate strings. This function has a lot of specs so please read the man pages a contrived example is below.
 
 ```C
 #include <stdio.h>
@@ -100,7 +100,7 @@ char* upped = strdup("strtok,is,tricky,,,!!");
 
 Why are `memcpy` and `memmove` both in `<string.h>`? Because strings are essentially raw memory with a null byte at the end of them!
 
-`void *memcpy(void *dest, const void *src, size_t n)` moves `n` bytes starting at `str` to `dest`. **Be careful** There is undefined behavior when the memory regions overlap. This is one of the classic works on my machine examples because many times valgrind won't be able to pick it up because it will look like it works on your machine. When the autograder hits, fail. Consider the safer version which is.
+`void *memcpy(void *dest, const void *src, size_t n)` moves `n` bytes starting at `str` to `dest`. **Be careful**, there is undefined behavior when the memory regions overlap. This is one of the classic works on my machine examples because many times valgrind won't be able to pick it up because it will look like it works on your machine. When the autograder hits, fail. Consider the safer version which is.
 
 `void *memmove(void *dest, const void *src, size_t n)` does the same thing as above, but if the memory regions overlap then it is guaranteed that all the bytes will get copied over correctly.
 
@@ -108,7 +108,7 @@ Why are `memcpy` and `memmove` both in `<string.h>`? Because strings are essenti
 
 ![Struct Example](http://www.it.uc3m.es/abel/as/DSP/M2/PointerStructDeclaration.png)
 
-In low level terms, a struct is just a piece of contiguous memory, nothing more. Just like an array, a struct has enough space to keep all of its members. But unlike an array, it can store different types. Consider the contact struct declared above
+In low-level terms, a struct is just a piece of contiguous memory, nothing more. Just like an array, a struct has enough space to keep all of its members. But unlike an array, it can store different types. Consider the contact struct declared above
 
 ```C
 struct contact {
@@ -211,7 +211,7 @@ picture = |       |               |       |               |
            ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
 ```
 
-Would conceptually may look like this
+Would conceptually look like this
 
 ```C
 struct picture{
@@ -227,8 +227,7 @@ struct picture{
 picture = |       |       |               |       |       |               |
            ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
 ```
-(This is on a 64bit system)
-This is not always the case because sometimes your processor supports unaligned accesses. What does this mean? Well there are two options you can set an attribute
+This is on a 64-bit system. This is not always the case because sometimes your processor supports unaligned accesses. What does this mean? Well there are two options you can set an attribute
 
 ```C
 struct __attribute__((packed, aligned(4))) picture{
@@ -243,7 +242,7 @@ struct __attribute__((packed, aligned(4))) picture{
 picture = |       |               |       |               |
            ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾ ‾‾‾
 ```
-But now every time I want to access `data` or `encoding`, I have to do two memory accesses. The other thing you can do is reorder the struct, although this is not always possible
+But now, every time I want to access `data` or `encoding`, I have to do two memory accesses. The other thing you can do is reorder the struct, although this is not always possible
 
 ```C
 struct picture{
