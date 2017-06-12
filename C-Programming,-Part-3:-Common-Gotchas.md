@@ -12,8 +12,8 @@ strcpy(ptr, "Will not work");
 String literals are character arrays stored in the code segment of the program, which is immutable. Two string literals may share the same space in memory. An example follows:
 
 ```C
-char * str1 = "Brandon Chong is the best TA";
-char * str2 = "Brandon Chong is the best TA";
+char *str1 = "Brandon Chong is the best TA";
+char *str2 = "Brandon Chong is the best TA";
 ```
 The strings pointed to by `str1` and `str2` may actually reside in the same location in memory.
 
@@ -57,7 +57,7 @@ typedef struct User user_t;
 
 user_t *user = (user_t *) malloc(sizeof(user));
 ```
-In the above example, we needed to allocate enough bytes for the struct. Instead we allocated enough bytes to hold a pointer. Once we start using the user pointer we will corrupt memory. Correct code is shown below.
+In the above example, we needed to allocate enough bytes for the struct. Instead, we allocated enough bytes to hold a pointer. Once we start using the user pointer we will corrupt memory. The correct code is shown below.
 ```C
 struct User {
    char name[100];
@@ -138,7 +138,7 @@ switch(flag) {
   case 3: printf("Me three\n");
 }
 ```
-Case statements without a break will just continue onto the code of the next case statement. Correct code is show below. The break for the last statements is unnecessary because there are no more cases to be executed after the last one. However if more are added, it can cause some bugs.
+Case statements without a break will just continue onto the code of the next case statement. The correct code is shown below. The break for the last statements is unnecessary because there are no more cases to be executed after the last one. If more are added, it can cause some bugs.
 ```C
 int flag = 1; // Will print only "I'm printed\n"
 switch(flag) {
@@ -217,7 +217,7 @@ int static_array[10]; // ARRAY_LENGTH(static_array) = 10
 int* dynamic_array = malloc(10); // ARRAY_LENGTH(dynamic_array) = 2 or 1
 ```
 
-What is wrong with the macro? Well it works if we have a static array like the first array because sizeof a static array returns the bytes that array takes up, and dividing it by the sizeof(an_element) would give you the number of entries. But if we use a pointer to a piece of memory, taking the sizeof the pointer and dividing it by the size of the first entry won't always give us the size of the array.
+What is wrong with the macro? Well, it works if we have a static array like the first array because sizeof a static array returns the bytes that array takes up, and dividing it by the sizeof(an_element) would give you the number of entries. But if we use a pointer to a piece of memory, taking the sizeof the pointer and dividing it by the size of the first entry won't always give us the size of the array.
 
 ## Does `sizeof` do anything?
 
