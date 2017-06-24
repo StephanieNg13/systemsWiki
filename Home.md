@@ -5,7 +5,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 
 ## 0. HW0/Resources
 * [[HW0]]
-* [[Informal Glossary of basic terms|#Informal Glossary]]
+* [[Informal Glossary]]
 * [[#Piazza: When And How to Ask For Help]]
 * [[ Programming Tricks, Part 1 ]]
 * [[ System Programming Short Stories and Songs ]]
