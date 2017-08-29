@@ -13,7 +13,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 ## 1. Learning C
 * [[C Programming, Part 1: Introduction]]
 * [[C Programming, Part 2: Text Input And Output]]
-   * [Printing to Streams](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output#printing-to-streams)
+   * [Printing to/Reading from Streams](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output#printing-to-streams)
    * [Parsing Input](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-2%3A-Text-Input-And-Output#parsing-input)
 * [[C Programming, Part 3: Common Gotchas]]
    * [Memory Mistakes](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-3%3A-Common-Gotchas#memory-mistakes)
