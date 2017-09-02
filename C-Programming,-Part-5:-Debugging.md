@@ -61,9 +61,9 @@ When all else fails, print like crazy! Each of your functions should have an ide
 # Valgrind
 
 
-Valgrind is a suite of tools designed to provide debugging and profiling tools to make your programs more correct and detect some runtime issues ,the most used of these tools is Memcheck,it can detect many memory-related errors that are common in C and C++ programs and that can lead to crashes and unpredictable behaviour (unfreed memory buffers for example ).
+Valgrind is a suite of tools designed to provide debugging and profiling tools to make your programs more correct and detect some runtime issues. The most used of these tools is Memcheck, which can detect many memory-related errors that are common in C and C++ programs and that can lead to crashes and unpredictable behaviour (for example, unfreed memory buffers).
 
-To run Valgrind on your program : 
+To run Valgrind on your program: 
 
 ```
 valgrind --leak-check=yes myprogram arg1 arg2
@@ -74,14 +74,14 @@ or
 valgrind ./myprogram
 ```
 
-Arguments are optional and the default tool that will run is Memcheck,the output will be presented in form of 
-number of allocations,number of freed allocations and the number of errors
+Arguments are optional and the default tool that will run is Memcheck. The output will be presented in form of 
+number of allocations, number of freed allocations, and the number of errors.
 
 **Example**
 
 ![Valgrind Example](https://i.imgur.com/ZdBWDvh.png)
 
-Here's an example to help you interpret the above results,suppose we have a simple program like this : 
+Here's an example to help you interpret the above results. Suppose we have a simple program like this: 
 ```C
   #include <stdlib.h>
 
@@ -98,7 +98,7 @@ Here's an example to help you interpret the above results,suppose we have a simp
   }
 ```
 
-Let's see what Valgrind will output (this program compiles and run with no errors) .
+Let's see what Valgrind will output (this program compiles and run with no errors).
 ```
 ==29515== Memcheck, a memory error detector
 ==29515== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
@@ -129,15 +129,15 @@ Let's see what Valgrind will output (this program compiles and run with no error
 ==29515== For counts of detected and suppressed errors, rerun with: -v
 ==29515== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 ```
-**Invalid Write**: It detected our heap block overrun (writing outside of allocated block).
+**Invalid write**: It detected our heap block overrun (writing outside of allocated block)
 
-**Definitely lost**: Memory leak you probably forgot freeing a memory block .
+**Definitely lost**: Memory leak—you probably forgot to free a memory block
 
-Valgrind is a very effective tool to check for errors at runtime, C is very special when it comes to such behavior so after compiling your program you can use Valgrind to fix errors that your compiler may not catch and that usually happen when your program is running .
+Valgrind is a very effective tool to check for errors at runtime. C is very special when it comes to such behavior, so after compiling your program you can use Valgrind to fix errors that your compiler may not catch and that usually happen when your program is running.
 
-For more information you can refer to the [official website](http://valgrind.org/docs/manual/quick-start.html) :
+For more information, you can refer to the [official website](http://valgrind.org/docs/manual/quick-start.html).
+
 # Tsan
-
 
 ThreadSanitizer is a tool from Google, built into clang (and gcc), to help you detect race conditions in your code. For more information about the tool, see the Github wiki.
 
@@ -163,7 +163,7 @@ int main() {
 // compile with gcc -fsanitize=thread -pie -fPIC -ltsan -g simple_race.c
 ```
 
-We can see that there is a race condition on the variable Global. Both the main thread and the thread created with pthread_create will try to changethe value at the same time. But, does ThreadSantizer catch it?
+We can see that there is a race condition on the variable `Global`. Both the main thread and the thread created with pthread_create will try to change the value at the same time. But, does ThreadSantizer catch it?
 
 ```
 $ ./a.out
