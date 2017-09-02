@@ -7,7 +7,7 @@ This is going to be a massive guide to helping you debug your C programs. There 
 
 ## Clean code
 
-Make your code modular using helper functions. If there is a repeated task (getting the pointers to contiguous blocks in MP2 for example), make them helper functions. And make sure each function does one thing very well, so that you don't have to debug twice.
+Make your code modular using helper functions. If there is a repeated task (getting the pointers to contiguous blocks in the malloc MP, for example), make them helper functions. And make sure each function does one thing very well, so that you don't have to debug twice.
 
 Let's say that we are doing selection sort by finding the minimum element each iteration like so,
 
@@ -38,14 +38,14 @@ void selection_sort(int *a, long len);
 
 And the error is specifically in one function.
 
-In the end, we are not a class about refactoring/debugging your code -- In fact most systems code is so atrocious that you don't want to read it. But for the sake of debugging, it may benefit you in the long run to adopt some practices.
+In the end, we are not a class about refactoring/debugging your code. In fact, most systems code is so atrocious that you don't want to read it. But for the sake of debugging, it may benefit you in the long run to adopt some practices.
 
 ## Asserts!
 
-Use assertions to make sure your code works up to a certain point -- and importantly, to make sure you don't break it later. For example, if your data structure is a doubly linked list, you can do something like, assert(node->size == node->next->prev->size) to assert that the next node has a pointer to the current node. You can also check the pointer is pointing to an expected range of memory address, not null, ->size is reasonable etc.
-The NDEBUG macro will disable all assertions, so don't forget to set that once you finish debugging. http://www.cplusplus.com/reference/cassert/assert/
+Use assertions to make sure your code works up to a certain point -- and importantly, to make sure you don't break it later. For example, if your data structure is a doubly linked list, you can do something like `assert(node->size == node->next->prev->size)` to assert that the next node has a pointer to the current node. You can also check the pointer is pointing to an expected range of memory address, not null, ->size is reasonable etc.
+The `NDEBUG` macro will disable all assertions, so don't forget to set that once you finish debugging. http://www.cplusplus.com/reference/cassert/assert/
 
-A quick example with assert is let's say that I'm writing code using memcpy
+Here's a quick example with assert. Let's say that I'm writing code using memcpy
 
 ```C
 assert(!(src < dest+n && dest < src+n)); //Checks overlap
