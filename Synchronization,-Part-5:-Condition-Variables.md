@@ -82,7 +82,7 @@ while (1) {
   pthread_mutex_unlock(&m);
 }
 ```
-# Implementing Counting Semphore
+# Implementing Counting Semaphore
 * We can implement a counting semaphore using condition variables.
 * Each semaphore needs a count, a condition variable and a mutex
 ```C
