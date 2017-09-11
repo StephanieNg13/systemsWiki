@@ -17,9 +17,9 @@
 * Print formatting.
 * memory out of bounds errors
 * static memory
-* fileio POSIX v C library
+* fileio POSIX vs. C library
 * C io fprintf and printf
-* POSIX file io (read|write|open)
+* POSIX file IO (read, write, open)
 * Buffering of stdout
 
 # Questions/Exercises
