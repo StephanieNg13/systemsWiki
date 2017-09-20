@@ -148,8 +148,8 @@ Whichever hole is chosen, the allocator will need to split the hole into two: Th
 
 A perfect-fit strategy finds the smallest hole that is of sufficient size (at least 2KB):
 
-16KB free | 10KB allocated | 1KB free | 1KB allocated | 30KB free | 4KB allocated | `2KB HERE!`
----|---|---|---|---|---|---|---
+16KB free | 10KB allocated | 1KB free | 1KB allocated | 30KB free | 4KB allocated | '2KB HERE!'
+---|---|---|---|---|---|---
 
 A worst-fit strategy finds the largest hole that is of sufficient size (so break the 30KB hole into two):
 
