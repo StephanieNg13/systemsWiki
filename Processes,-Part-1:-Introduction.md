@@ -24,7 +24,7 @@ On two different terminals, as you would guess they would both print out 1 not 2
 
 ## Memory Layout
 
-![Address Space](http://flylib.com/books/2/830/1/html/2/images/09fig9_3.jpg)
+![Address Space](https://i.imgur.com/amSsBlJ.png)
 
 When a process starts, it gets its own address space. Meaning that each process gets :
 * **A Stack**. The Stack is the place where automatic variable and function call return addresses are stored. Every time a new variable is declared, the program moves the stack pointer down to reserve space for the variable. This segment of the stack is Writable but not executable. If the stack grows too far (meaning that it either grows beyond a preset boundary or intersects the heap) you will get a stackoverflow most likely resulting in a SEGFAULT or something similar. **The stack is statically allocated by default meaning that there is only a certain amount of space to which one can write**
