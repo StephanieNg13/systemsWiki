@@ -46,7 +46,7 @@ For example you can use `fstat` to find out the meta-information about a file if
    int fd = fileno(file); /* Just for fun - extract the file descriptor from a C FILE struct */
    struct stat s;
    fstat(fd, & s);
-   printf("Last accessed %s", ctime(s.st_atime));
+   printf("Last accessed %s", ctime(&s.st_atime));
 ```
 
 The third call 'lstat' we will discuss when we introduce symbolic links.
