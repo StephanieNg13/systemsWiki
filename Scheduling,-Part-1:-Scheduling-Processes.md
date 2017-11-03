@@ -77,13 +77,12 @@ As of February 2016, Linux by default uses the *Completely Fair Scheduler* for C
 Here is how the CFS schedules
 
 * The CPU creates a Red-Black tree with the processes virtual runtime (runtime / nice\_value) and sleeper fairness (if the process is waiting on something give it the CPU when it is done waiting).
-* (Nice values are the kernel's way of giving priority to certain processes, the lower the higher priority)
+* (Nice values are the kernel's way of giving priority to certain processes, the lower nice value the higher priority)
 * The kernel chooses the lowest one based on this metric and schedules that process to run next, taking it off the queue. Since the red-black tree is self balancing this operation is guaranteed $O(log(n))$ (selecting the min process is the same runtime)
-
 
 Although it is called the Fair Scheduler there are a fair bit of problems.
 
 * Groups of processes that are scheduled may have imbalanced loads so the scheduler roughly distributes the load. When another CPU gets free it can only look at the average load of a group schedule not the individual cores. So the free CPU may not take the work from a CPU that is burning so long as the average is fine.
-* If a group of processes is running, on non adjacent cores then there is a bug. If the two cores are more than a hop away, the load balancing algorithm won't even consider that core. Meaning if a CPU is free and a CPU that is doing more work is more than a hop away, it won't take the work (may have been patched).
-* After a thread goes to sleep on a subset of cores, when it wakes up it can only be scheduled on the cores that it was sleeping on. If those cores are now bus
-
+* If a group of processes is running on non-adjacent cores then there is a bug. If the two cores are more than a hop away, the load balancing algorithm won't even consider that core. Meaning if a CPU is free and a CPU that is doing more work is more than a hop away, it won't take the work (may have been patched).
+* After a thread goes to sleep on a subset of cores, when it wakes up it can only be scheduled on the cores that it was sleeping on. If those cores are now busy, the thread will have to wait on them, wasting opportunities to use other idle cores.
+* To read more on the problems of the Fair Scheduler, read here[https://blog.acolyer.org/2016/04/26/the-linux-scheduler-a-decade-of-wasted-cores/].
