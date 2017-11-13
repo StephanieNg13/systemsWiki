@@ -49,7 +49,7 @@ void* philosopher(void* forks){
 }
 ````
 
-Now our philosopher picks up the left fork and tries to grab the right. If it's available, they eats. If it's not available, they put the left fork down and try again. No deadlock!
+Now our philosopher picks up the left fork and tries to grab the right. If it's available, they eat. If it's not available, they put the left fork down and try again. No deadlock!
 
 But, there is a problem. What if all the philosophers pick up their left at the same time, try to grab their right, put their left down, pick up their left, try to grab their right.... We have now livelocked our solution! Our poor philosopher are still starving, so let's give them some proper solutions.
 
