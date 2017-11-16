@@ -123,7 +123,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ File System, Part 1: Introduction ]]
     * [Navigation/Terminology](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction#navigationterminology)
     * [What's a File System?](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction#so-whats-a-file-system)
-* [  File System, Part 2: Files are inodes (everything else is just data...) ](http://cs241.cs.illinois.edu/wikibook/file-system-part-2-files-are-inodes-(everything-else-is-just-data...).html#)
+* [[ File System, Part 2: Files are inodes (everything else is just data...) ]]
 * [[ File System, Part 3: Permissions ]]
 * [[ File System, Part 4: Working with directories ]]
 * [[ File System, Part 5: Virtual file systems ]]
