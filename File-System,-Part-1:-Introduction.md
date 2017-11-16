@@ -1,4 +1,4 @@
-# Navig  ation/Terminology
+# Navigation/Terminology
 
 ## Design a file system! What are your design goals?
 The design of a file system is difficult problem because there many high-level design goals that we'd like to satisfy. An incomplete list of ideal goals include:
