@@ -48,7 +48,7 @@ Note that the permissions will output in the format 'drwxrwxrwx'. The first char
 Possible values for the first character:
 * (-) regular file
 * (d) directory
-* (c) character device file\
+* (c) character device file
 * (l) symbolic link
 * (p) pipe
 * (b) block device
