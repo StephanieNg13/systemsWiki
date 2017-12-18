@@ -18,7 +18,7 @@ if(!fork()) { execlp("make","make", "snowman", (char*)0); execlp("make","make", 
 exit(0);
 ```
 
-# So you want to master System Programming? And get a better grade than B?
+## So you want to master System Programming? And get a better grade than B?
 ```C
 int main(int argc, char** argv) {
  puts("Great! We have plenty of useful resources for you but it's up to you to");
@@ -52,135 +52,140 @@ https://piazza.com/illinois/fall2017/cs241
 
 The in-browser virtual machine runs entirely in Javascript and is fastest in Chrome. Note the VM and any code you write is reset when you reload the page, *so copy your code to a separate document.* The post-video challenges (e.g. Haiku poem) are not part of homework 0. 
 
-### Chapter 1
+## Chapter 1
 
 In which our intrepid hero battles standard out, standard error, file descriptors and writing to files
 
-- Hello, World! (system call style)
-  - Write a program that uses `write()` to print out "Hi! My name is `<Your Name>`".
-- Hello, Standard Error Stream!
-  - Write a function to print out a triangle of height `n` to standard error.
-    - Your function should have the signature `void write_triangle(int n)` and should use `write()`.
-    - The triangle should look like this, for n = 3:
-    ```C
-    *
-    **
-    ***
-    ```
-- Writing to files
-  - Take your program from "Hello, World!" modify it write to a file called `hello_world.txt`.
-    - Make sure to to use correct flags and a correct mode for `open()` (`man 2 open` is your friend).
-- Not everything is a system call
-  - Take your program from "Writing to files" and replace `write()` with `printf()`.
-    - Make sure to print to the file instead of standard out!
-  - What are some differences between `write()` and `printf()`?
+### Hello, World! (system call style)
+1. Write a program that uses `write()` to print out "Hi! My name is `<Your Name>`".
+### Hello, Standard Error Stream!
+2. Write a function to print out a triangle of height `n` to standard error.
+   - Your function should have the signature `void write_triangle(int n)` and should use `write()`.
+   - The triangle should look like this, for n = 3:
+   ```C
+   *
+   **
+   ***
+   ```
+### Writing to files
+3. Take your program from "Hello, World!" modify it write to a file called `hello_world.txt`.
+   - Make sure to to use correct flags and a correct mode for `open()` (`man 2 open` is your friend).
+### Not everything is a system call
+4. Take your program from "Writing to files" and replace `write()` with `printf()`.
+   - Make sure to print to the file instead of standard out!
+5. What are some differences between `write()` and `printf()`?
 
-### Chapter 2
+## Chapter 2
 
 Sizing up C types and their limits, int, char arrays and incrementing pointers
 
-- Not all bytes are 8 bits?
-  - How many bits are there in a byte?
-  - How many bytes are there in a `char`?
-  - How many bytes the following are on your machine?
-    - `int`, `double`, `float`, `long`, and `long long`
-- Follow the int pointer
-  - On a machine with 8 byte integers:
-  ```C
-  int main(){
-      int data[8];
-  } 
-  ```
-  If the address of data is `0x7fbd9d40`, then what is the address of `data+2`?
-  - What is `data[3]` equivalent to in C?
-    - Hint: what does C convert `data[3]` to before dereferencing the address?
-- `sizeof` character arrays, incrementing pointers
-  
-  Remember the type of a string constant `"abc"` is an array.
-  - Why does this segfault?
-  ```C
-  char *ptr = "hello";
-  *ptr = 'J';
-  ```
-  - What does `sizeof("Hello\0World")` return?
-  - What does `strlen("Hello\0World")` return?
-  - Give an example of X such that `sizeof(X)` is 3.
-  - Give an example of Y such that `sizeof(Y)` might be 4 or 8 depending on the machine.
+### Not all bytes are 8 bits?
+1. How many bits are there in a byte?
+2. How many bytes are there in a `char`?
+3. How many bytes the following are on your machine?
+   - `int`, `double`, `float`, `long`, and `long long`
+### Follow the int pointer
+4. On a machine with 8 byte integers:
+```C
+int main(){
+    int data[8];
+} 
+```
+If the address of data is `0x7fbd9d40`, then what is the address of `data+2`?
+5. What is `data[3]` equivalent to in C?
+   - Hint: what does C convert `data[3]` to before dereferencing the address?
 
-### Chapter 3
+### `sizeof` character arrays, incrementing pointers
+  
+Remember the type of a string constant `"abc"` is an array.
+
+6. Why does this segfault?
+```C
+char *ptr = "hello";
+*ptr = 'J';
+```
+7. What does `sizeof("Hello\0World")` return?
+   - What does `strlen("Hello\0World")` return?
+   - Give an example of X such that `sizeof(X)` is 3.
+   - Give an example of Y such that `sizeof(Y)` might be 4 or 8 depending on the machine.
+
+## Chapter 3
 
 Program arguments, environment variables, and working with character arrays (strings)
 
-- Program arguments, `argc`, `argv`
-  - What are two ways to find the length of `argv`?
-  - What does `argv[0]` represent?
-- Environment Variables
-  - Where are the pointers to environment variables stored?
-- String searching (strings are just char arrays)
-  - On a machine where pointers are 8 bytes, and with the following code:
-  ```C
-  char *ptr = "Hello";
-  char array[] = "Hello";
-  ```
-  What are the values of `sizeof(ptr)` and `sizeof(array)`? Explain why.
+### Program arguments, `argc`, `argv`
+1. What are two ways to find the length of `argv`?
+2. What does `argv[0]` represent?
+### Environment Variables
+3. Where are the pointers to environment variables stored (on the stack, the heap, somewhere else)?
+### String searching (strings are just char arrays)
+4. On a machine where pointers are 8 bytes, and with the following code:
+```C
+char *ptr = "Hello";
+char array[] = "Hello";
+```
+What are the values of `sizeof(ptr)` and `sizeof(array)`? Why?
 
-- Lifetime of automatic variables
-  - What data structure manages the lifetime of automatic variables?
+### Lifetime of automatic variables
+5. What data structure manages the lifetime of automatic variables?
 
-### Chapter 4
+## Chapter 4
 
 Heap and stack memory, and working with structs
 
-- Memory allocation using `malloc`, the heap, and time
-  - If I want to use data after the lifetime of the function it was created in ends, where should I put it? How do I put it there?
-  - Fill in the blank: "In a good C program, for every malloc, there is a ___".
-- Heap allocation gotchas
-  - What is one reason `malloc` can fail?
-  - What are some differences between `time()` and `ctime()`?
-  - What is wrong with this code snippet?
-  ```C
-  free(ptr);
-  free(ptr);
-  ```
-  - What is wrong with this code snippet?
-  ```C
-  free(ptr);
-  printf("%s\n", ptr);
-  ```
-  - How can one avoid the previous two mistakes? 
-- struct, typedefs, and a linked list
-  - Create a struct that represents a `Person`, and then make a typedef, so that `struct Person` can be replaced with a single word.
-    - A person should contain the following information: their name (a string), their age (an integer), and a list of their friends (stored as a pointer to an array of pointers to `Person`s).
-  - Now make two persons on the heap, "Agent Smith" and "Sonny Moore", who are 128 and 256 years old respectively and are friends with each other.
-- Duplicating strings, memory allocation and deallocation of structures
-  - Create functions to create and destroy a Person (Person's and their names should live on the heap).
-    - `create()` should take a name and age. The name should be copied onto the heap. Use malloc to reserve sufficient memory for everyone having up to ten friends. Be sure initialize all fields (why?).
-    - `destroy()` should free up not only the memory of the person struct, but also free all of its attributes that are stored on the heap. Destroying one person should not destroy any others.
+### Memory allocation using `malloc`, the heap, and time
+1. If I want to use data after the lifetime of the function it was created in ends, where should I put it? How do I put it there?
+2. What are the differences between heap and stack memory?
+3. Are there other kinds of memory in a process?
+4. Fill in the blank: "In a good C program, for every malloc, there is a ___".
+### Heap allocation gotchas
+5. What is one reason `malloc` can fail?
+6. What are some differences between `time()` and `ctime()`?
+7. What is wrong with this code snippet?
+```C
+free(ptr);
+free(ptr);
+```
+8. What is wrong with this code snippet?
+```C
+free(ptr);
+printf("%s\n", ptr);
+```
+How can one avoid the previous two mistakes? 
+### `struct`, `typedef`s, and a linked list
+9. Create a `struct` that represents a `Person`. Then make a `typedef`, so that `struct Person` can be replaced with a single word.
+10. A person should contain the following information: their name (a string), their age (an integer), and a list of their friends (stored as a pointer to an array of pointers to `Person`s). Now, make two persons on the heap, "Agent Smith" and "Sonny Moore", who are 128 and 256 years old respectively and are friends with each other.
+### Duplicating strings, memory allocation and deallocation of structures
+Create functions to create and destroy a Person (Person's and their names should live on the heap).
+11. `create()` should take a name and age. The name should be copied onto the heap. Use malloc to reserve sufficient memory for everyone having up to ten friends. Be sure initialize all fields (why?).
+12. `destroy()` should free up not only the memory of the person struct, but also free all of its attributes that are stored on the heap. Destroying one person should not destroy any others.
 
-### Chapter 5 
+## Chapter 5 
 
 Text input and output and parsing using getchar, gets, getline
 
-- Reading characters, trouble with gets
-  - What functions can be used for getting characters from `stdin` and writing them to `stdout`?
-  - Name one issue with `gets()`.
-- Introducing `sscanf` and friends
-  - Write code that parses the string "Hello 5 World" and initializes 3 variables to "Hello", 5, and "World".
-- `getline` is useful
-  - What does one need to define before including `getline()`?
-  - Write a C program to print out the content of a file line-by-line using `getline()`.
+### Reading characters, trouble with gets
+1. What functions can be used for getting characters from `stdin` and writing them to `stdout`?
+2. Name one issue with `gets()`.
+### Introducing `sscanf` and friends
+3. Write code that parses the string "Hello 5 World" and initializes 3 variables to "Hello", 5, and "World".
+### `getline` is useful
+4. What does one need to define before including `getline()`?
+5. Write a C program to print out the content of a file line-by-line using `getline()`.
 
-### C Development
+## C Development
 
-A web search is useful here
+These are general tips for compiling/developing. A web search is useful here
 
-- What compiler flag is used to generate a debug build?
-- You modify the makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
-- Are tabs or spaces used to indent the commands after the rule in a Makefile?
-- What are the differences between heap and stack memory?
-- Are there other kinds of memory in a process?
+1. What compiler flag is used to generate a debug build?
+2. You modify the makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
+3. Are tabs or spaces used to indent the commands after the rule in a Makefile?
+4. What is the difference between `git add` and `git commit`?
+5. If I `git commit`, is my assignment submitted? Why or why not?
+6. What does `git log` show you?
 
-### Optional (Just for fun)
+## Optional (Just for fun)
 - Convert your a song lyrics into System Programming and C code covered in this wiki book and share on Piazza.
 - Find, in your opinion, the best and worst C code on the web and post the link to Piazza.
 - Write a short C program with a deliberate subtle C bug and post it on Piazza to see if others can spot your bug.
+- Do you have any cool/disastrous system programming bugs you've heard about? Feel free to share with your peers and the course staff on piazza.
