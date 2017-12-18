@@ -1,6 +1,4 @@
 # Welcome!
-If you are taking CS 241, you should submit this homework at the [Google Form](https://goo.gl/forms/ceDM7n4nJ5qK9L8m2).
-
 ```C
 // First, can you guess which lyrics have been transformed into this C-like system code?
 char q[] = "Do you wanna build a C99 program?";
