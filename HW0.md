@@ -92,6 +92,7 @@ int main(){
 } 
 ```
 If the address of data is `0x7fbd9d40`, then what is the address of `data+2`?
+
 5. What is `data[3]` equivalent to in C?
    - Hint: what does C convert `data[3]` to before dereferencing the address?
 
@@ -127,6 +128,7 @@ char array[] = "Hello";
 What are the values of `sizeof(ptr)` and `sizeof(array)`? Why?
 
 ### Lifetime of automatic variables
+
 5. What data structure manages the lifetime of automatic variables?
 
 ## Chapter 4
