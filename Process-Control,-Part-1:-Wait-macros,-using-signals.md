@@ -62,8 +62,14 @@ A signal is a construct provided to us by the kernel. It allows one process to a
 | SIGQUIT  | Terminate Process (Can be caught)      | Tells the process to stop harshly |
 | SIGSTOP  | Stop Process (Cannot be caught)        | Stops the process to be continued |
 | SIGCONT  | Continues a Process                    | Continues to run the process |
-| SIGKILL  | Terminate Process (Cannot be Ignored)  | You want your process gone |
+| SIGKILL  | Terminate Process (Cannot be caught)   | You want your process gone |
 
+## When are signals generated?
+
+* When the user sends a signal. For example, you are at the terminal, and you send `CTRL-C`
+* When a system event happens. For example, you get a `SIGCHILD` after forking to notice when one of your children have exited.
+* When another program sends it. For example, when you execute `kill -9 PID`, it sends `SIGKILL`
+* When an appropriate hardware interrupt is triggered. For example, if you access a page that you aren't supposed to, the hardware generates a segfault interrupt which gets intercepted by the kernel. The kernel finds the process that caused this and sends a software interrupt signal `SIGSEGV`.
 
 ## Can I pause my child?
 
