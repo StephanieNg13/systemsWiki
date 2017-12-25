@@ -30,6 +30,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[C Programming, Review Questions]]
 
 ## 2. Processes
+* [[Kernel, Shells, Terminals Oh My!]]
 * [[Processes, Part 1: Introduction]]
    * [Overview](https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction#overview)
    * [Process Contents](https://github.com/angrave/SystemProgramming/wiki/Processes,-Part-1:-Introduction#process-contents)
