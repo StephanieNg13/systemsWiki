@@ -1,6 +1,6 @@
 # What is POSIX error handling?
 
-In other languages, you may see error handling implemented with exceptions. Although you technically can use them in C (You keep a stack of very try/catch block and use `setjmp` and `longjmp` to go to those blocks, respectively), error handling in C is typically done with posix error handling the code typically looks like this.
+In other languages, you may see error handling implemented with exceptions. Although you technically can use them in C --You keep a stack of very try/catch block and use `setjmp` and `longjmp` to go to those blocks, respectively -- error handling in C is typically done with POSIX error handling the code typically looks like this.
 
 ```C
 int ret = some_system_call()
@@ -63,6 +63,7 @@ Use `strerror` to get a short (English) description of the error value
 char *mesg = strerror(errno);
 fprintf(stderr, "An error occurred (errno=%d): %s", errno, mesg);
 ```
+
 ## How are perror and strerror related?
 
 In previous pages we've used perror to print out the error to standard error. Using `strerror`, we can now write a simple implementation of `perror`:
@@ -86,13 +87,13 @@ fprintf(stderr, "An error occurred (errno=%d): %s", errno, message);
 free(message);
 ```
 
-Alternatively use the less portable but thread-safe `strerror_r`
+Alternatively, use the less portable but thread-safe `strerror_r`. `perror` is thread safe, which is why it is preferred in multi-threading environments if possible.
 
-## What is EINTR? What does it mean for sem_wait? read? write?
+## What is `EINTR`? What does it mean for `sem_wait`? `read`? `write`?
 
 Some system calls can be interrupted when a signal (e.g SIGCHLD, SIGPIPE,...) is delivered to the process. At this point the system call may return without performing any action! For example, bytes may not have been read/written, semaphore wait may not have waited.
 
-This interruption can be detected by checking the return value and if `errno` is EINTR. In which case the system call should be retried. It's common to see the following kind of loop that wraps a system call (such as sem_wait).
+This interruption can be detected by checking the return value and if `errno` is `EINTR`. In which case the system call should be retried. It's common to see the following kind of loop that wraps a system call (such as sem_wait).
 
 ```C
 while ((-1 == systemcall(...)) && (errno == EINTR)) { /* repeat! */}
