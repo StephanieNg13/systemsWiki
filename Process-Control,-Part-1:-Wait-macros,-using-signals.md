@@ -25,9 +25,8 @@ A process can only have 256 return values, the rest of the bits are informationa
 
 Note there is no need to memorize this, this is just a high level overview of how information is stored inside the status variables
 
-[Android source code](https://android.googlesource.com/platform/prebuilts/gcc/linuxx86/host/i686-linux-glibc2.7-
-4.6/+/tools_r20/sysroot/usr/include/bits/waitstatus.h)
-
+From Android source code:
+```C
 /* If WIFEXITED(STATUS), the low-order 8 bits of the status. */
 
 \#define __WEXITSTATUS(status) (((status) & 0xff00) >> 8)
@@ -43,6 +42,7 @@ Note there is no need to memorize this, this is just a high level overview of ho
 /* Nonzero if STATUS indicates normal termination. */
 
 \#define __WIFEXITED(status) (__WTERMSIG(status) == 0)
+```
 
 The kernel has an internal way of keeping track of signaled, exited, or stopped. That API is abstracted so that that the kernel developers are free to change at will.
 
