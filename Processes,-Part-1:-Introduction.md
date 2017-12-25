@@ -33,20 +33,6 @@ When a process starts, it gets its own address space. Meaning that each process 
 * **A Text Segment**. This is, arguably, the most important section of the address. This is where all your code is stored. Since assembly compiles to 1's and 0's, this is where the 1's and 0's get stored. The program counter moves through this segment executing instructions and moving down the next instruction. It is important to note that this is the only Executable section of the code. If you try to change the code while it's running, most likely you will segfault (there are ways around it but just assume that it segfaults).
 * Why doesn't it start at zero? It is outside the [scope](https://en.wikipedia.org/wiki/Address_space_layout_randomization) of this class but it is for security.
 
-## File Descriptors
-
-![Fds](https://drawings.jvns.ca/drawings/file-descriptors.svg)
-
-As the little zine shows, the OS keeps track of the file descriptors and what they point to. We will see later that file descriptors need not point to actual files and the OS keeps track of them for you. Also, notice that between processes file descriptors may be reused but inside of a process they are unique.
-
-File descriptors also have a notion of position. You can read a file on disk completely because the OS keeps track of the position in the file, and that belongs to your process as well.
-
-## Security/Permissions
-
-# Process Functions/Limitations (Bonus)
-
-When you are reviewing for the final, you can come back and see that a process also has all of these things. The first time around -- it won't make much sense.
-
 ## Process ID (PID)
 
 To keep track of all these processes, your operating system gives each process a number and that process is called the PID, process ID.
