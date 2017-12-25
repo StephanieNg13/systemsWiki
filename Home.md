@@ -83,6 +83,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[Synchronization, Part 6: Implementing a barrier]]
 * [[Synchronization, Part 7: The Reader Writer Problem]]
 * [[Synchronization, Part 8: Ring Buffer Example]]
+* [[Synchronization, Part 9: Synchronization Across Processes]]
 * [[Synchronization Review Questions]]
 
 ## 6. Deadlock
