@@ -1,14 +1,24 @@
 # Overview
 
-A process is program that is running (kinda). A process is also just one instance of that computer program running. Processes have a lot of things at their disposal. At the start of each program you get one process, but each program can make more processes. In fact, your operating system starts up with only one process and all other processes are forked off of that -- all of that is done under the hood when booting up.
+A process is program that is running, kinda. A process is also just one instance of that computer program running. Processes have a lot of things at their disposal. At the start of each program you get one process, but each program can make more processes. In fact, your operating system starts up with only one process and all other processes are forked off of that -- all of that is done under the hood when booting up.
+
+## Okay, but what's a program?
+
+Programs usually contain the following
+* A binary format: This tells the operating system which set of bits in the binary are what -- which part is executable, which parts are constants, which libraries to include etc.
+* A set of machine instructions
+* A number denoting which instruction to start from
+* Constants
+* Libraries to link and where to fill in the address of those libraries
 
 ## In the beginning
 
 When your operating system starts on a linux machine, there is a process called `init.d` that gets created. That process is a special one handling signals, interrupts, and a persistence module for certain kernel elements. Whenever you want to make a new process, you call `fork` (to be discussed in a later section) and use another function to load another program.
 
+
 ## Process Isolation
 
-Processes are very powerful but they are isolated! That means that by default, no process can communicate with another process. This is very important because if you have a large system (let's say EWS) then you want some processes to have higher privilages (monitoring, admin) than your average user, and one certainly doesn't want the average user to be able to bring down the entire system either on purpose or accidentally by modifying a process.
+Processes are very powerful but they are isolated! That means that by default, no process can communicate with another process. This is very important because if you have a large system (let's say EWS) then you want some processes to have higher privileges (monitoring, admin) than your average user, and one certainly doesn't want the average user to be able to bring down the entire system either on purpose or accidentally by modifying a process.
 
 If I run the following code,
 
@@ -35,13 +45,14 @@ When a process starts, it gets its own address space. Meaning that each process 
 
 ## Process ID (PID)
 
-To keep track of all these processes, your operating system gives each process a number and that process is called the PID, process ID.
+To keep track of all these processes, your operating system gives each process a number and that process is called the PID, process ID. Processes also have a `ppid` which is short for parent process id. Every process has a parent, that parent could be `init.d`
 
 Processes could also contain
-* Mappings
-* State
-* File Descriptors
-* Permissions
+* Running State - Whether a process is getting ready, running, stopped, terminated etc.
+* File Descriptors - List of mappings from integers to real devices (files, usb sticks, sockets)
+* Permissions - What `user` the file is running on and what `group` the process belongs to. The process can then only do this admissible to the `user` or `group` like opening a file that the `user` has made exclusives. There are tricks to make a program not be the user who started the program i.e. `sudo` takes a program that a `user` starts and executes it as `root`.
+* Arguments - a list of strings that tell your program what parameters to run under
+* Environment List - a list of strings in the form `NAME=VALUE` that one can modify.
 
 <div align="center">
 <a href="https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-1%3A-Introduction">
