@@ -2,7 +2,7 @@
 
 # So what's a string?
 
-![Crash String](https://koenig-media.raywenderlich.com/uploads/2012/02/C-string.png)
+![String](https://i.imgur.com/CgsxyZb.png)
 
 In C we have [Null Terminated](https://en.wikipedia.org/wiki/Null-terminated_string) strings rather than [Length Prefixed](https://en.wikipedia.org/wiki/String_(computer_science)#Length-prefixed) for historical reasons. What that means for your average everyday programming is that you need to remember the null character! A string in C is defined as a bunch of bytes until you reach '\0' or the Null Byte.
 
@@ -105,8 +105,6 @@ Why are `memcpy` and `memmove` both in `<string.h>`? Because strings are essenti
 `void *memmove(void *dest, const void *src, size_t n)` does the same thing as above, but if the memory regions overlap then it is guaranteed that all the bytes will get copied over correctly.
 
 # So what's a `struct`?
-
-![Struct Example](http://www.it.uc3m.es/abel/as/DSP/M2/PointerStructDeclaration.png)
 
 In low-level terms, a struct is just a piece of contiguous memory, nothing more. Just like an array, a struct has enough space to keep all of its members. But unlike an array, it can store different types. Consider the contact struct declared above
 
