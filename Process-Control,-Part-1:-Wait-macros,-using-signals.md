@@ -29,19 +29,19 @@ From Android source code:
 ```C
 /* If WIFEXITED(STATUS), the low-order 8 bits of the status. */
 
-\#define __WEXITSTATUS(status) (((status) & 0xff00) >> 8)
+#define __WEXITSTATUS(status) (((status) & 0xff00) >> 8)
 
 /* If WIFSIGNALED(STATUS), the terminating signal. */
 
-\#define __WTERMSIG(status) ((status) & 0x7f)
+#define __WTERMSIG(status) ((status) & 0x7f)
 
 /* If WIFSTOPPED(STATUS), the signal that stopped the child. */
 
-\#define __WSTOPSIG(status) __WEXITSTATUS(status)
+#define __WSTOPSIG(status) __WEXITSTATUS(status)
 
 /* Nonzero if STATUS indicates normal termination. */
 
-\#define __WIFEXITED(status) (__WTERMSIG(status) == 0)
+#define __WIFEXITED(status) (__WTERMSIG(status) == 0)
 ```
 
 The kernel has an internal way of keeping track of signaled, exited, or stopped. That API is abstracted so that that the kernel developers are free to change at will.
