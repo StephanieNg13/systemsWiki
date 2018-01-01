@@ -19,6 +19,8 @@ ___
 A System Programming parody by Angrave (November 2015). 
 Lyrics released under Creative Commons attribution 3.0 license.
 
+Forever immortalized on the web [youtube link](https://www.youtube.com/watch?v=awFuyfL-IeY)
+
 Original song “Blank Space” from Taylor Swift’s “1989” album.
 
 [Verse 1]
@@ -90,3 +92,30 @@ Don't say I didn't say I didn't -Wall you
 [Pre-Chorus]
 
 [Chorus]
+
+## A parody on Yesterday (Beatles song) by Angrave
+
+Yesterday, all my mallocs seemed all OK
+Now my core dump seems here to stay
+Oh I believe in yesterday
+
+
+Suddenly I read the man page and I checked my C.
+There's a seg fault hanging over me.
+Oh, yesterday crashed suddenly.
+
+Why C had to crash, I don't know, C wouldn't say.
+I wrote some pointers wrong, now I long for yesterday.
+
+Yesterday C was such an easy game to play.
+Now I need a place to hide away.
+Oh, I believe in yesterday.
+
+Why C had to crash, I don't know, C wouldn't say.
+I wrote some pointers wrong, now I long for yesterday.
+
+Yesterday C was such an easy game to play.
+Now I need a place to hide away.
+Oh, I believe in yesterday.
+
+Mm mm mm mm mm mm mm
