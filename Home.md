@@ -9,6 +9,7 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[#Piazza: When And How to Ask For Help]]
 * [[ Programming Tricks, Part 1 ]]
 * [[ System Programming Short Stories and Songs ]]
+* [[Systems Programming Bugs in Industry]]
 
 ## 1. Learning C
 * [[C Programming, Part 1: Introduction]]
