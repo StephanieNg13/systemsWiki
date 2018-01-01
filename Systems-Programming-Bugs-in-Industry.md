@@ -1,6 +1,8 @@
 # Be Careful!
 
-Below are all famous bugs that have brought down systems. If you want to experiment with any of the starter code that they give, take caution as you could lose important files or even usability of your system
+Below are all famous bugs that have brought down systems. If you want to experiment with any of the starter code that they give, take caution as you could lose important files or even usability of your system.
+
+You may not be able to understand much of this at the beginning of the course. As we go through, more and more of these bugs will become clear. Systems programming doesn't have to be in C only!
 
 ## Basic Memory/C Bugs
 [Vulnerabilities in IOHIDeous, Mac OS X](https://siguza.github.io/IOHIDeous/)
