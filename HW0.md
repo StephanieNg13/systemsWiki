@@ -19,23 +19,23 @@ exit(0);
 ## So you want to master System Programming? And get a better grade than B?
 ```C
 int main(int argc, char** argv) {
- puts("Great! We have plenty of useful resources for you but it's up to you to");
- puts("be an active learner and learn how to solve problems and debug code.");
- puts("Bring your near-completed answers the problems below");
- puts(" to the first lab to show that you've been working on this");
- printf("A few \"don't knows\" or \"unsure\" is fine for lab 1"); 
- puts("Warning: your peers will be working hard for this class");
- puts("This is not CS225; you will be pushed much harder to");
- puts(" work things out on your own");
- fprintf(stdout,"the point is that this homework is a stepping stone to all future assignments");
- char p[] = "so you will want to clear up any confusions or misconceptions.";
- write(1, p, strlen(p) );
- char buffer[1024];
- sprintf(buffer,"For grading purposes, this homework 0 will be graded as part of your lab %d work.", 1);
- write(1, buffer, strlen(buffer));
- printf("Press Return to continue\n");
- read(0, buffer, sizeof(buffer));
- return 0;
+	puts("Great! We have plenty of useful resources for you, but it's up to you to");
+	puts(" be an active learner and learn how to solve problems and debug code.");
+	puts("Bring your near-completed answers the problems below");
+	puts(" to the first lab to show that you've been working on this.");
+	printf("A few \"don't knows\" or \"unsure\" is fine for lab 1.\n"); 
+	puts("Warning: you and your peers will work hard in this class.");
+	puts("This is not CS225; you will be pushed much harder to");
+	puts(" work things out on your own.");
+	fprintf(stdout,"This homework is a stepping stone to all future assignments.\n");
+	char p[] = "So, you will want to clear up any confusions or misconceptions.\n";
+	write(1, p, strlen(p) );
+	char buffer[1024];
+	sprintf(buffer,"For grading purposes, this homework 0 will be graded as part of your lab %d work.\n", 1);
+	write(1, buffer, strlen(buffer));
+	printf("Press Return to continue\n");
+	read(0, buffer, sizeof(buffer));
+	return 0;
 }
 ```
 ## Watch the videos and write up your answers to the following questions
@@ -46,7 +46,7 @@ The course wikibook:
 https://github.com/angrave/SystemProgramming/wiki
 
 Questions? Comments? Use Piazza:
-https://piazza.com/illinois/fall2017/cs241
+https://piazza.com/illinois/spring2018/cs241
 
 The in-browser virtual machine runs entirely in Javascript and is fastest in Chrome. Note the VM and any code you write is reset when you reload the page, *so copy your code to a separate document.* The post-video challenges (e.g. Haiku poem) are not part of homework 0. 
 
@@ -75,7 +75,7 @@ In which our intrepid hero battles standard out, standard error, file descriptor
 
 ## Chapter 2
 
-Sizing up C types and their limits, int, char arrays and incrementing pointers
+Sizing up C types and their limits, `int` and `char` arrays, and incrementing pointers
 
 ### Not all bytes are 8 bits?
 1. How many bits are there in a byte?
@@ -96,7 +96,7 @@ If the address of data is `0x7fbd9d40`, then what is the address of `data+2`?
 
 ### `sizeof` character arrays, incrementing pointers
   
-Remember the type of a string constant `"abc"` is an array.
+Remember, the type of a string constant `"abc"` is an array.
 
 6. Why does this segfault?
 ```C
@@ -162,7 +162,7 @@ Create functions to create and destroy a Person (Person's and their names should
 
 ## Chapter 5 
 
-Text input and output and parsing using getchar, gets, getline
+Text input and output and parsing using `getchar`, `gets`, and `getline`.
 
 ### Reading characters, trouble with gets
 1. What functions can be used for getting characters from `stdin` and writing them to `stdout`?
@@ -178,11 +178,10 @@ Text input and output and parsing using getchar, gets, getline
 These are general tips for compiling/developing. A web search is useful here
 
 1. What compiler flag is used to generate a debug build?
-2. You modify the makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
+2. You modify the Makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
 3. Are tabs or spaces used to indent the commands after the rule in a Makefile?
-4. What is the difference between `git add` and `git commit`?
-5. If I `git commit`, is my assignment submitted? Why or why not?
-6. What does `git log` show you?
+4. What does `svn commit` do? What's a revision number?
+6. What does `svn log` show you?
 
 ## Optional (Just for fun)
 - Convert your a song lyrics into System Programming and C code covered in this wiki book and share on Piazza.
