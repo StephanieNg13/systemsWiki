@@ -43,7 +43,7 @@ Some common ways to initialize a string include:
 ```C
 char *str = "ABC";
 char str[] = "ABC";
-char str[]={'A','B','C'};
+char str[]={'A','B','C','\0'};
 ```
 
 ## How do you declare a pointer? 
