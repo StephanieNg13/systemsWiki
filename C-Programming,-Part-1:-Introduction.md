@@ -39,7 +39,12 @@ When you write a string literal `"ABC"` in an expression the string literal eval
 ```C
 char *ptr = "ABC"
 ```
-
+Some common ways to initialize a string include:
+```C
+char *str = "ABC";
+char str[] = "ABC";
+char str[]={'A','B','C'};
+```
 
 ## How do you declare a pointer? 
 A pointer refers to a memory address. The type of the pointer is useful - it tells the compiler how many bytes need to be read/written. You can declare a pointer as follows.
