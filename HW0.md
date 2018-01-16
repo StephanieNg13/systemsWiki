@@ -104,9 +104,9 @@ char *ptr = "hello";
 *ptr = 'J';
 ```
 7. What does `sizeof("Hello\0World")` return?
-   - What does `strlen("Hello\0World")` return?
-   - Give an example of X such that `sizeof(X)` is 3.
-   - Give an example of Y such that `sizeof(Y)` might be 4 or 8 depending on the machine.
+8. What does `strlen("Hello\0World")` return?
+9. Give an example of X such that `sizeof(X)` is 3.
+10. Give an example of Y such that `sizeof(Y)` might be 4 or 8 depending on the machine.
 
 ## Chapter 3
 
@@ -151,14 +151,14 @@ free(ptr);
 free(ptr);
 printf("%s\n", ptr);
 ```
-How can one avoid the previous two mistakes? 
+9. How can one avoid the previous two mistakes? 
 ### `struct`, `typedef`s, and a linked list
-9. Create a `struct` that represents a `Person`. Then make a `typedef`, so that `struct Person` can be replaced with a single word.
-10. A person should contain the following information: their name (a string), their age (an integer), and a list of their friends (stored as a pointer to an array of pointers to `Person`s). Now, make two persons on the heap, "Agent Smith" and "Sonny Moore", who are 128 and 256 years old respectively and are friends with each other.
+10. Create a `struct` that represents a `Person`. Then make a `typedef`, so that `struct Person` can be replaced with a single word. A person should contain the following information: their name (a string), their age (an integer), and a list of their friends (stored as a pointer to an array of pointers to `Person`s).
+11. Now, make two persons on the heap, "Agent Smith" and "Sonny Moore", who are 128 and 256 years old respectively and are friends with each other.
 ### Duplicating strings, memory allocation and deallocation of structures
 Create functions to create and destroy a Person (Person's and their names should live on the heap).
-11. `create()` should take a name and age. The name should be copied onto the heap. Use malloc to reserve sufficient memory for everyone having up to ten friends. Be sure initialize all fields (why?).
-12. `destroy()` should free up not only the memory of the person struct, but also free all of its attributes that are stored on the heap. Destroying one person should not destroy any others.
+12. `create()` should take a name and age. The name should be copied onto the heap. Use malloc to reserve sufficient memory for everyone having up to ten friends. Be sure initialize all fields (why?).
+13. `destroy()` should free up not only the memory of the person struct, but also free all of its attributes that are stored on the heap. Destroying one person should not destroy any others.
 
 ## Chapter 5 
 
@@ -181,7 +181,7 @@ These are general tips for compiling/developing. A web search is useful here
 2. You modify the Makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
 3. Are tabs or spaces used to indent the commands after the rule in a Makefile?
 4. What does `svn commit` do? What's a revision number?
-6. What does `svn log` show you?
+5. What does `svn log` show you?
 
 ## Optional (Just for fun)
 - Convert your a song lyrics into System Programming and C code covered in this wiki book and share on Piazza.
