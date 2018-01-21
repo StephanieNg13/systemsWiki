@@ -86,8 +86,8 @@ However child processes that finish before their parent finishes can become zomb
 # Zombies
 
 ## Good parents don't let their children become zombies!
-When a child finishes (or terminates) it still takes up a slot in the kernel process table. 
-Only when the child has been 'waited on' will the slot be available again.
+Note, the word 'zombie' in this instance sheds some light as to what they actually represent. When a child finishes (or terminates) it still takes up a slot in the kernel process table. Furthermore, they still contain information about the process that got terminated, such as process id, exit status, etc. (i.e. a skeleton of the original process still remains).
+Only when the child has been 'waited on' will the slot be available and the remaining information can be accessed by the parent.
 
 A long running program could create many zombies by continually creating processes and never `wait`-ing for them.
 
