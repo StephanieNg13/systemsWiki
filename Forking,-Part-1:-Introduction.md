@@ -12,6 +12,7 @@ TL;DR: Fork can be **extremely** dangerous if you aren't prepared for it. **You 
 
 The `fork` system call clones the current process to create a new process. It creates a new process (the child process) by duplicating the state of the existing process with a few minor differences (discussed below). The child process does not start from main. Instead it returns from `fork()` just as the parent process does.
 
+Just as a side remark, in older UNIX systems, the entire address space of the parent process was directly copied (regardless of whether the resource was modified or not). These days, kernel performs [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write), which saves a lot of resources, while being very time efficient.
 ## What is the simplest `fork()` example?
 Here's a very simple example...
 ```C
@@ -40,7 +41,13 @@ When `fork()` is executed the entire process memory is duplicated including the 
 
 ## How do you write code that is different for the parent and child process?
 
-Check the return value of `fork()`. Return value `-1` = failed; `0` = in child process; positive = in parent process (and the return value is the child process id).  Here's one way to remember which is which:
+Check the return value of `fork()`. 
+
+If fork() returns -1, that implies something went wrong in the process of creating a new child. One should check the value stored in _errno_ to determine what kind of error occurred; commons one include EAGAIN and ENOMEM (check [this page](http://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html) to get a description of the errors).
+
+Similarly, a return value of 0 indicates that we are in the child process, while a positive integer shows that we are in parent process. The positive value returned by fork() gives as the process id (_pid_) of the child.
+
+Here's one way to remember which is which:
 
 The child process can find its parent - the original process that was duplicated -  by calling `getppid()` - so does not need any additional return information from `fork()`. The parent process however can only find out the id of the new child process from the return value of `fork`:
 ```C
