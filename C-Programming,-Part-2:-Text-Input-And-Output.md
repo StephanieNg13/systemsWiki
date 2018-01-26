@@ -63,27 +63,27 @@ int main(){
 
 Use `long int strtol(const char *nptr, char **endptr, int base);` or `long long int strtoll(const char *nptr, char **endptr, int base);`.
 
-What these functions do is take the pointer to your string `*nptr` and a `base` (ie binary, octal, decimal, hexadecimal etc) and an optional pointer `endptr` and returns a parsed int.
+What these functions do is take the pointer to your string `*nptr` and a `base` (ie binary, octal, decimal, hexadecimal etc) and an optional pointer `endptr` and returns a parsed value.
 
 ```C
 int main(){
-    const char *num = "1A2436";
+    const char *nptr = "1A2436";
     char* endptr;
-    long int parsed = strtol(num, &endptr, 16);
+    long int result = strtol(nptr, &endptr, 16);
     return 0;
 }
 ```
 
-Be careful though! Error handling is kinda tricky because the function won't return an error code. On error, it'll return 0, and you have to manually check errno, but that could lead to trouble.
+Be careful though! Error handling is tricky because the function won't return an error code. If you give it a string that is not a number it will return 0. This means you cant differentiate between a valid "0" and an invalid string. See the man page for more details on strol behavior with invalid and out of bounds values. A safer alternative is use to `sscanf` (and check the return value).
 
 ```C
 int main(){
-    const char *zero = "0";
+    const char *input = "0"; // or "!##@" or ""
     char* endptr;
-    printf("Parsing number"); //printf sets errno
-    long int parsed = strtol(num, &endptr, 16);
+    long int parsed = strtol(input, &endptr, 10);
     if(parsed == 0){
-        perror("Error: "); //oops strtol actually worked!
+        // Either the input string was not a valid base-10 number or it really was zero!
+
     }
     return 0;
 }
