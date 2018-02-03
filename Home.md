@@ -160,5 +160,5 @@ Warning these are good practice but not comprehensive. The UIUC CS241 final assu
 * [[Pipe: Review Questions]]
 * [[Filesystem: Review Questions]]
 * [[Networking: Review Questions]]
-* [[Signals: Review Questions]] (todo)
+* [[Signals: Review Questions]]
 * [[System Programming Jokes]]
