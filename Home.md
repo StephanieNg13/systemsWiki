@@ -1,14 +1,14 @@
 Welcome to Angrave's crowd-sourced System Programming wiki-book!
 This wiki is being built by students and faculty from the University of Illinois and is a crowd-source authoring experiment by Lawrence Angrave from CS @ Illinois.
 
-Rather than requiring an existing paper-based book this semester, we will build our own set of resources here.
+This book is an introduction to programming in C, and system programming (processes, threads, synchronization, networking and more!). We assume you've already had some programming experience, in an earlier computer science course.
 
-## 0. HW0/Resources
+## 0. Introduction (and resources for UIUC students)
 * [[HW0]]
 * [[Informal Glossary]]
 * [[#Piazza: When And How to Ask For Help]]
-* [[ Programming Tricks, Part 1 ]]
-* [[ System Programming Short Stories and Songs ]]
+* [[Programming Tricks, Part 1 ]]
+* [[System Programming Short Stories and Songs ]]
 * [[Systems Programming Bugs in Industry]]
 
 ## 1. Learning C
@@ -149,8 +149,8 @@ Rather than requiring an existing paper-based book this semester, we will build 
 * [[ Signals, Part 4: Sigaction ]]
 * [[ Signals Review Questions ]]
 
-## Exam Practice Questions
-Warning these are good practice but not comprehensive. The CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
+## UIUC Exam Practice Questions
+Warning these are good practice but not comprehensive. The UIUC CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
 
 * [[Exam Topics]]
 * [[C Programming: Review Questions]]
