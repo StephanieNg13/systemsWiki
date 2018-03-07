@@ -19,6 +19,6 @@ As a possibility matrix. Then we can draw arrows and see if there is a directed 
 
 ![RAG Deadlock](http://i.imgur.com/6duq0PD.png)
 
-Consider the following resource allocation graph (assume that the processes ask for exclusive access to the file). If you have a bunch of processes running and they request resources and the operating system ends up in this state, you deadlock! You may not see this because the operating system may **preempt* some processes breaking the cycle but there is still a change that your three lonely processes could deadlock. You can also make these kind of graphs with `make` and rule dependencies (with our parmake MP for example).
+Consider the following resource allocation graph (assume that the processes ask for exclusive access to the file). If you have a bunch of processes running and they request resources and the operating system ends up in this state, you deadlock! You may not see this because the operating system may **preempt* some processes breaking the cycle but there is still a chance that your three lonely processes could deadlock. You can also make these kind of graphs with `make` and rule dependencies (with our parmake MP for example).
 
 ![](http://cs241.cs.illinois.edu/images/ColorfulDeadlock.svg)
