@@ -28,6 +28,22 @@ Yes! In fact outgoing TCP connections are automatically bound to an unused port 
 
 To explicitly bind to an ethernet interface and port, call `bind` before `connect`
 
+## I built a simple TCP client or server but my process sometimes just quits! Why?
+
+If your process writes to a socket that has already been shutdown by the other end of the TCP connection, then your process will be sent a SIGPIPE signal. From our previous discussion on pipes, you might remember the default action is to shutdown the process. A workaround to this is to ignore SIGPIPE signals or to implement your own signal handler.
+
+```C
+void handle_sigpipe(int signal) {
+  char mesg[1000];
+  sprintf(mesg, "\n****** SIGPIPE  - no one is listening :-( ******\n");
+  write(1, mesg, strlen(mesg));
+}
+```
+And register the signal handler using `signal` (or the newer `sigaction` or `pthread_sigmask`)...
+
+```C
+signal(SIGPIPE,handle_sigpipe)
+```
 ## Who connected to my server?
 
 The `accept` system call can optionally provide information about the remote client, by passing in a sockaddr struct. Different protocols have differently variants of the  `struct sockaddr`, which are different sizes. The simplest struct to use is the `sockaddr_storage` which is sufficiently large to represent all possible types of sockaddr. Notice that C does not have any model of inheritance. Therefore we need to explicitly cast our struct to the 'base type' struct sockaddr.
