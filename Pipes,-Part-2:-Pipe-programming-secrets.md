@@ -189,7 +189,7 @@ Reads and writes hang on Named Pipes until there is at least one reader and one 
 2$ cat fifo
 Hello
 ```
-Any `open` is called on a named pipe the kernel blocks until another process calls the opposite open. Meaning, echo calls `open(.., O_RDONLY)` but that blocks until cat calls `open(.., O_WRONLY)`, then the programs are allowed to continue.
+Any `open` is called on a named pipe the kernel blocks until another process calls the opposite open. Meaning, echo calls `open(.., O_WRONLY)` but that blocks until cat calls `open(.., O_RDONLY)`, then the programs are allowed to continue.
 
 ## Race condition with named pipes.
 What is wrong with the following program?
