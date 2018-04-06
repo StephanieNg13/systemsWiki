@@ -210,8 +210,10 @@ An example use of hard-links is to efficiently create multiple archives of a fil
 No. Well yes. Not really... Actually you didn't really want to do this, did you?
 The POSIX standard says no you may not! The `ln` command will only allow root to do this and only if you provide the `-d` option. However even root may not be able to perform this because most filesystems prevent it! 
 
-## Why?
+## Why does POSIX prevent hard links to directories?
+
 The integrity of the file system assumes the directory structure (excluding softlinks which we will talk about later) is a non-cyclic tree that is reachable from the root directory. It becomes expensive to enforce or verify this constraint if directory linking is allowed. Breaking these assumptions can cause file integrity tools to not be able to repair the file system. Recursive searches potentially never terminate and directories can have more than one parent but ".." can only refer to a single parent. All in all, a bad idea.
+
 ---
 <div align="center">
 <a href="https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-1%3A-Introduction">
