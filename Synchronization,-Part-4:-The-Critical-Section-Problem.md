@@ -209,7 +209,7 @@ int mutex_lock(mutex* mtx){
             (&mtx->lock, 
              &zero, 
              LOCKED,
-             memory_order_relaxed,
+             memory_order_acq_rel,
              memory_order_relaxed)){
         zero = UNLOCKED;
         sched_yield(); //Use system calls for scheduling speed
@@ -246,13 +246,14 @@ int mutex_unlock(mutex* mtx){
         return 0; //You can't unlock a mutex if you aren't the owner
     }
     int_least8_t one = 1;
-    //Critical section ends after this atomic
     mtx->owner = UNASSIGNED_OWNER;
+    //Critical section ends after this atomic
+    //Also this may fail, but that is fine
     if(!atomic_compare_exchange_strong_explicit(
                 &mtx->lock, 
                 &one, 
                 UNLOCKED,
-                memory_order_relaxed,
+                memory_order_acq_rel,
                 memory_order_relaxed)){
         //The mutex was never locked in the first place
         return 0;
