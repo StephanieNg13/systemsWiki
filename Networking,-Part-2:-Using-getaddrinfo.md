@@ -118,5 +118,5 @@ The old function `gethostbyname` is deprecated; it's the old way convert a host 
 
 ## Is it that easy!?
 Yes and no. It's easy to create a simple TCP client - however network communications offers many different levels of abstraction and several attributes and options that can be set at each level of abstraction (for example we haven't talked about `setsockopt` which can manipulate options for the socket).
-For more information see this [guide](http://www.beej.us/guide/bgnet/output/html/multipage/getaddrinfoman.html).
+For more information see [Beej's guide](https://beej.us/guide/bgnet/html/multi/index.html).
 
