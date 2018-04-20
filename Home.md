@@ -149,6 +149,10 @@ This book is an introduction to programming in C, and system programming (proces
 * [[ Signals, Part 4: Sigaction ]]
 * [[ Signals Review Questions ]]
 
+## 11. Distributed Computing
+
+* [[ Introduction to Distributed Computing ]]
+
 ## UIUC Exam Practice Questions
 Warning these are good practice but not comprehensive. The UIUC CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
 
