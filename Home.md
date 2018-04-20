@@ -119,6 +119,7 @@ This book is an introduction to programming in C, and system programming (proces
 * [[ Networking, Part 5: Shutting down ports, reusing ports and other tricks ]]
 * [[ Networking, Part 6: Creating a UDP server ]]
 * [[ Networking, Part 7: Nonblocking I O, select(), and epoll ]]
+* [[ Networking, Part 8: Protocols (TCP Handshaking, HTTP latency, Heart Bleed) ]]
 * [[ RPC, Part 1: Introduction to Remote Procedure Calls ]]
 * [[ Networking Review Questions ]]
 
