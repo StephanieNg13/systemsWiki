@@ -8,12 +8,19 @@ Simple distributed computing problems might span just a handful machines or even
 
 Distributed Computing is interesting for the very same reasons that make it difficult! So far with system programming we've already introduced three foundational concepts - concurrency, networking and data flow, fault-tolerant computing and communication - that are important in Distributed Computing problems. The _distributed_ part however also means we need to study messaging, coordination and synchronicity (timing) between our systems and how we can best partition the computation and data of a particular kind of computing problem across multiple systems that are physically separated. 
 
+# Models of distributed computing
+
+_todo talk about shared memory vs message-passing models_
+
 # Example Timing and Coordination and Fault Tolerant Problems
 
 _Todo introduce 3 examples_
+(e.g. 
 
-# Example data and algorithm problems
+# Example Data and Algorithm Problems
 
 _Todo introduce 3 examples_
 
 # Example Exam Review Questions
+
+_Todo write some review questions based on the above topics_
