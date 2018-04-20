@@ -14,11 +14,11 @@ _todo talk about shared memory vs message-passing models_
 
 # Example Timing and Coordination and Fault Tolerant Problems
 
-_Todo introduce 3 examples_
-Here's my suggestions
-Leader election,
-Logical clock- Use of vector clock for mutli-edit document versioning
-Fault tolerance??
+_Todo introduce 3 examples_. For discussion purposes here 3 somewhat arbitrarily chosen.
+
+## Leader election
+## Logical clock- Use of vector clock for mutli-edit document versioning
+## Why clock synchronization is hard
 
 # Example Data and Algorithm Problems
 
