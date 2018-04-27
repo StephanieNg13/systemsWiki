@@ -113,13 +113,15 @@ Time | Turn | Thread #1 | Thread #2
 # Working Solutions
 
 ## What is Peterson's solution?
-Peterson published his novel and surprisingly simple solution in a 2 page paper in 1981. A version of his algorithm is shown below that uses a shared variable `turn`: 
+Peterson published his novel and surprisingly simple solution in a 2 page paper in 1981. 
+A C-like code implementation is available on Wikipedia [here](https://en.wikipedia.org/wiki/Peterson%27s_algorithm#The_algorithm)
+A version of his algorithm is shown below that uses a shared variable `turn`: 
 
 ```
 \\ Candidate #5
 raise my flag
 turn = your_id
-wait until your flag is lowered and turn is yourid
+wait while your flag is raised and turn is your_id
 // Do Critical Section stuff
 lower my flag
 ```
