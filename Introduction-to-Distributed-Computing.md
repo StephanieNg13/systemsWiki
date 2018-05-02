@@ -1,4 +1,4 @@
-An introduction to Distributed Computing will be added to Fall 2018
+An introduction to Distributed Computing will be added to the course in Fall 2018
 
 # What is Distributed Computing?
 
