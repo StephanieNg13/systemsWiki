@@ -8,27 +8,4 @@ Simple distributed computing problems might span just a handful machines or even
 
 Distributed Computing is interesting for the very same reasons that make it difficult! So far in this system programming book we've already introduced three core areas - concurrency, networking and data flow, fault-tolerant computing and communication - that are foundational in many Distributed Computing problems. The _distributed_ part however also means we need to study messaging, coordination and synchronicity (timing) between our systems and how we can best partition the computation and data of a particular kind of computing problem across multiple systems that are physically separated. We can also develop and evaluate algorithms and protocols that use distributed computing resources efficiently (or not!). For this we will also need to decide what are the important details that we need to include in our theoretical mode of our distributed system.
 
-# Models of distributed computing
 
-_todo talk about shared memory vs message-passing models_
-
-# Example Timing and Coordination and Fault Tolerant Problems
-
-_Todo introduce 3 examples_. For discussion purposes here are 3 somewhat arbitrarily chosen.
-
-## Leader election
-## Logical clock- Use of vector clock for mutli-edit document versioning
-## Why clock synchronization is hard
-
-# Example Data and Algorithm Problems
-
-_Todo introduce 3 examples_
-
-
-# Example Exam Review Questions
-
-_Todo write some review questions based on the above topics_
-
-# Where can I find out more?
-
-_Todo Include links to relevant UIUC Course content, books etc_
