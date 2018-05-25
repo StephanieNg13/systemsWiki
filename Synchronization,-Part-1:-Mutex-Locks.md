@@ -43,8 +43,8 @@ If one thread is currently inside a critical section we would like another threa
 For simple examples the smallest amount of code we need to add is just three lines:
 ```C
 pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER; // global variable
-pthread_mutex_lock(&m); // start of Critical Section
-pthread_mutex_unlock(&m); //end of Critical Section
+pthread_mutex_lock(&m);   // start of Critical Section
+pthread_mutex_unlock(&m); // end of Critical Section
 ```
 Once we are finished with the mutex we should also call `pthread_mutex_destroy(&m)` too. Note, you can only destroy an unlocked mutex. Calling destroy on a destroyed lock, initializing an initialized lock, locking an already locked lock, unlocking an unlocked lock etc are unsupported (at least for default mutexes) and usually result in undefined behavior.
 
@@ -52,8 +52,8 @@ Once we are finished with the mutex we should also call `pthread_mutex_destroy(&
 No, the other threads will continue. It's only when a thread attempts to lock a mutex that is already locked, will the thread have to wait. As soon as the original thread unlocks the mutex, the second (waiting) thread will acquire the lock and be able to continue.
 
 ## Are there other ways to create a mutex?
-Yes. You can use the macro PTHREAD_MUTEX_INITIALIZER only for global ('static') variables.
-m = PTHREAD_MUTEX_INITIALIZER is equivalent to the more general purpose
+Yes. You can use the macro `PTHREAD_MUTEX_INITIALIZER` only for global ('static') variables.
+`m = PTHREAD_MUTEX_INITIALIZER` is equivalent to the more general purpose
 `pthread_mutex_init(&m,NULL)`. The init version includes options to trade performance for additional error-checking and advanced sharing options.
 
 ```C
@@ -70,14 +70,14 @@ Things to keep in mind about `init` and `destroy`:
 
 # Mutex Gotchas
 
-## `So pthread_mutex_lock` stops the other threads when they read the same variable?
+## So `pthread_mutex_lock` stops the other threads when they read the same variable?
 No. A mutex is not that smart - it works with code (threads), not data. Only when another thread calls `lock` on a locked mutex will the second thread need to wait until the mutex is unlocked.
 
 Consider
 ```C
 int a;
 pthread_mutex_t m1 = PTHREAD_MUTEX_INITIALIZER,
-                 m2 = = PTHREAD_MUTEX_INITIALIZER;
+                m2 = PTHREAD_MUTEX_INITIALIZER;
 // later
 // Thread 1
 pthread_mutex_lock(&m1);
@@ -96,7 +96,7 @@ Will still cause a race condition.
 ## Can I create mutex before fork-ing?
 Yes - however the child and parent process will not share virtual memory and each one will have a mutex independent of the other.
 
-(Advanced note: There are advanced options using shared memory that allow a child and parent to share a mutex if it's created with the correct options and uses a shared memory segment. See [stackoverflow example](http://stackoverflow.com/questions/19172541/procs-fork-and-mutexes) )
+(Advanced note: There are advanced options using shared memory that allow a child and parent to share a mutex if it's created with the correct options and uses a shared memory segment. See [stackoverflow example](http://stackoverflow.com/questions/19172541/procs-fork-and-mutexes))
 
 ## If one thread locks a mutex can another thread unlock it?
 No. The same thread must unlock it.
@@ -126,10 +126,10 @@ int sum = 0;
 void *countgold(void *param) {
     int i;
     
-    //Same thread that locks the mutex must unlock it
-    //Critical section is just 'sum += 1'
-    //However locking and unlocking a million times
-    //has significant overhead in this simple answer
+    // Same thread that locks the mutex must unlock it
+    // Critical section is just 'sum += 1'
+    // However locking and unlocking a million times
+    // has significant overhead in this simple answer
     
     pthread_mutex_lock(&m);
 
@@ -156,7 +156,7 @@ int main() {
 }
 ```
 
-In the code above, the thread gets the lock to the counting house before entering. The critical section is only the `sum+=1` so the following version is also correct but slower - 
+In the code above, the thread gets the lock to the counting house before entering. The critical section is only the `sum += 1` so the following version is also correct but slower - 
 ```C
     for (i = 0; i < 10000000; i++) {
         pthread_mutex_lock(&m);
@@ -186,11 +186,11 @@ This process runs slower because we lock and unlock the mutex a million times, w
 Deadlock! We will talk about deadlock a little bit later but what is the problem with this loop if called by multiple threads.
 
 ```C
-while(not_stop){
-    //stdin may not be thread safe
+while (not_stop) {
+    // stdin may not be thread safe
     pthread_mutex_lock(&m);
     char *line = getline(...);
-    if(rand() % 2) { /* randomly skip lines */
+    if (rand() % 2) { /* randomly skip lines */
          continue;
     }
     pthread_mutex_unlock(&m);
@@ -200,7 +200,7 @@ while(not_stop){
 ```
 
 ## When can I destroy the mutex?
-You can only destroy an unlocked mutex
+You can only destroy an unlocked mutex.
 
 ## Can I copy a pthread_mutex_t to a new memory locaton?
 No, copying the bytes of the mutex to a new memory location and then using the copy is _not_ supported.
@@ -212,12 +212,13 @@ A simple (but incorrect!) suggestion is shown below. The `unlock` function simpl
 // Version 1 (Incorrect!)
 
 void lock(mutex_t *m) {
-  while(m->locked) { /*Locked? Nevermind - just loop and check again!*/ }
+    while(m->locked) { /*Locked? Nevermind - just loop and check again!*/ }
 
-  m->locked = 1;
+    m->locked = 1;
 }
+
 void unlock(mutex_t *m) {
-  m->locked = 0;
+    m->locked = 0;
 }
 ```
 Version 1 uses 'busy-waiting' (unnecessarily wasting CPU resources) however there is a more serious problem: We have a race-condition! 
