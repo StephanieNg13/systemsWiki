@@ -29,7 +29,7 @@ Condition variables need a mutex for three reasons. The simplest to understand i
 
 Thread 1                 | Thread 2
 -------------------------|---------
-`while( answer < 42) {`  | &nbsp;
+`while (answer < 42) {`  | &nbsp;
 &nbsp;                   | `answer++`
 &nbsp;                   | `p_cond_signal(cv)`
 `p_cond_wait(cv, m) `    | &nbsp;
