@@ -76,7 +76,7 @@ A condition variable version is usually very similar to a busy loop incorrect so
 pthread_mutex_t m;
 pthread_cond_t cv;
 
-main() {
+int main() {
     pthread_mutex_init(&m, NULL);
     pthread_cond_init(&cv, NULL);
 ```
