@@ -67,7 +67,7 @@ while (count < 10) {
 }
 pthread_mutex_unlock(&m);
 
-//later clean up with pthread_cond_destroy(&cv); and mutex_destroy 
+// later clean up with pthread_cond_destroy(&cv); and mutex_destroy 
 
 
 // In another thread increment count:
