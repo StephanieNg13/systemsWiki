@@ -19,7 +19,7 @@ We also see examples of setsockopt later too.
 
 ## What is the purpose of calling `socket`?
 
-To create a endpoint for networking communication. A new socket by itself is not particularly useful; though we've specified either a packet or stream-based connections it is not bound to a particular network interface or port. Instead socket returns a network descriptor that can be used with later calls to bind,listen and accept.
+To create a endpoint for networking communication. A new socket by itself is not particularly useful; though we've specified either a packet or stream-based connections it is not bound to a particular network interface or port. Instead socket returns a network descriptor that can be used with later calls to bind, listen and accept.
 
 ## What is the purpose of calling `bind`?
 
@@ -74,15 +74,15 @@ int main(int argc, char **argv)
     int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct addrinfo hints, *result;
-    memset(&hints, 0, sizeof(struct addrinfo));
+    memset(&hints, 0, sizeof (struct addrinfo));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_flags = AI_PASSIVE;
 
     s = getaddrinfo(NULL, "1234", &hints, &result);
     if (s != 0) {
-            fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
-            exit(1);
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+        exit(1);
     }
 
     if (bind(sock_fd, result->ai_addr, result->ai_addrlen) != 0) {
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
     printf("Connection made: client_fd=%d\n", client_fd);
 
     char buffer[1000];
-    int len = read(client_fd, buffer, sizeof(buffer) - 1);
+    int len = read(client_fd, buffer, sizeof (buffer) - 1);
     buffer[len] = '\0';
 
     printf("Read %d chars\n", len);
