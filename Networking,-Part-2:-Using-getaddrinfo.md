@@ -26,25 +26,25 @@ It's very easy to use. For example, suppose you wanted to find out the numeric I
 struct addrinfo hints, *infoptr; // So no need to use memset global variables
 
 int main() {
-  hints.ai_family = AF_INET; // AF_INET means IPv4 only addresses
+    hints.ai_family = AF_INET; // AF_INET means IPv4 only addresses
 
-  int result = getaddrinfo("www.bbc.com", NULL, &hints, &infoptr);
-  if (result) {
-    fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(result));
-    exit(1);
-  }
+    int result = getaddrinfo("www.bbc.com", NULL, &hints, &infoptr);
+    if (result) {
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(result));
+        exit(1);
+    }
 
-  struct addrinfo *p;
-  char host[256];
+    struct addrinfo *p;
+    char host[256];
 
-  for(p = infoptr; p != NULL; p = p->ai_next) {
+    for (p = infoptr; p != NULL; p = p->ai_next) {
 
-    getnameinfo(p->ai_addr, p->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
-    puts(host);
-  }
+        getnameinfo(p->ai_addr, p->ai_addrlen, host, sizeof (host), NULL, 0, NI_NUMERICHOST);
+        puts(host);
+    }
 
-  freeaddrinfo(infoptr);
-  return 0;
+    freeaddrinfo(infoptr);
+    return 0;
 }
 ```
 Typical output:
@@ -55,13 +55,14 @@ Typical output:
 
 ## How is www.cs.illinois.edu converted into an IP address?
 
-Magic! No seriously, a system called "DNS" (Domain Name Service) is used. If a machine does not hold the answer locally then it sends a UDP packet to a local DNS server. This server in turn may query other upstream DNS servers. 
-## Is DNS secure?
+Magic! No seriously, a system called "DNS" (Domain Name Service) is used. If a machine does not hold the answer locally then it sends a UDP packet to a local DNS server. This server in turn may query other upstream DNS servers.
 
+## Is DNS secure?
 DNS by itself is fast but not secure. DNS requests are not encrypted and susceptible to 'man-in-the-middle' attacks. For example, a coffee shop internet connection could easily subvert your DNS requests and send back different IP addresses for a particular domain
 
 ## How do I connect to a TCP server (e.g. web server?)
 TODO
+
 There are three basic system calls you need to connect to a remote machine:
 ```
 getaddrinfo -- Determine the remote addresses of a remote host
@@ -77,7 +78,7 @@ Finally the connect call attempts the connection to the remote machine. We pass 
 
 ```C
 // Pull out the socket address info from the addrinfo struct:
-connect(sockfd, p->ai_addr, p->ai_addrlen)
+connect(sockfd, p->ai_addr, p->ai_addrlen);
 ```
 
 ## How do I free the memory allocated for the linked-list of addrinfo structs?
@@ -94,7 +95,7 @@ No. Error handling with `getaddrinfo` is a little different:
 
 ```C
 int result = getaddrinfo(...);
-if(result) { 
+if (result) { 
    const char *mesg = gai_strerror(result); 
    ...
 }
@@ -119,4 +120,3 @@ The old function `gethostbyname` is deprecated; it's the old way convert a host 
 ## Is it that easy!?
 Yes and no. It's easy to create a simple TCP client - however network communications offers many different levels of abstraction and several attributes and options that can be set at each level of abstraction (for example we haven't talked about `setsockopt` which can manipulate options for the socket).
 For more information see [Beej's guide](https://beej.us/guide/bgnet/html/multi/index.html).
-
