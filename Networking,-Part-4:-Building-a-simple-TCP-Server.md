@@ -68,8 +68,7 @@ A working simple server example is shown below. Note this example is incomplete 
 #include <unistd.h>
 #include <arpa/inet.h>
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     int s;
     int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -121,7 +120,7 @@ By default a port is not immediately released when the server socket is closed. 
  To be able to immediately re-use a port, specify `SO_REUSEPORT` before binding to the port.
 ```C
 int optval = 1;
-setsockopt(sfd, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof(optval));
+setsockopt(sfd, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof (optval));
 
 bind(....
 ```
