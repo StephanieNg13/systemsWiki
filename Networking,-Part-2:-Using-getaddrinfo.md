@@ -66,8 +66,8 @@ TODO
 There are three basic system calls you need to connect to a remote machine:
 ```
 getaddrinfo -- Determine the remote addresses of a remote host
-socket  -- Create a socket
-connect  -- Connect to the remote host using the socket and address information
+socket      -- Create a socket
+connect     -- Connect to the remote host using the socket and address information
 ```
 The `getaddrinfo` call if successful, creates a linked-list of `addrinfo` structs and sets the given pointer to point to the first one.
 
@@ -96,8 +96,8 @@ No. Error handling with `getaddrinfo` is a little different:
 ```C
 int result = getaddrinfo(...);
 if (result) { 
-   const char *mesg = gai_strerror(result); 
-   ...
+    const char *mesg = gai_strerror(result); 
+    ...
 }
 ```
 
@@ -107,7 +107,7 @@ Yes! Use the addrinfo structure that is passed into `getaddrinfo` to define the 
 For example, to specify stream-based protocols over IPv6:
 ```C
 struct addrinfo hints;
-memset(&hints, 0, sizeof(hints));
+memset(&hints, 0, sizeof (hints));
 
 hints.ai_family = AF_INET6; // Only want IPv6 (use AF_INET for IPv4)
 hints.ai_socktype = SOCK_STREAM; // Only want stream-based connection
