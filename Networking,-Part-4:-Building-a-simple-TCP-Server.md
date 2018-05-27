@@ -11,7 +11,7 @@ Summary: Whenever you read or write the low level C network structures (e.g. por
 
 ## What are the 'big 4' network calls used to create a server?
 
-The four system calls required to create a TCP server are: `socket`, `bind` `listen` and `accept`. Each has a specific purpose and should be called in the above order
+The four system calls required to create a TCP server are: `socket`, `bind`, `listen` and `accept`. Each has a specific purpose and should be called in the above order
 
 The port information (used by bind) can be set manually (many older IPv4-only C code examples do this), or be created using `getaddrinfo`
 
