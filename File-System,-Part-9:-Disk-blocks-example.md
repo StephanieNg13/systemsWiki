@@ -24,7 +24,7 @@ struct inode {
     int[10] directblocks; // indices for the block array i.e. where to the find the file's content
     long size;
     // ... standard inode meta-data e.g.
-    int mode, userid,groupid;
+    int mode, userid, groupid;
     time_t ctime, atime, mtime;
 }
 ```
