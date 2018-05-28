@@ -20,10 +20,10 @@ Identify when Dining Philosophers code causes a deadlock (or not). For example, 
 
 ```
 // Get both locks or none.
-pthread_mutex_lock( a );
-if( pthread_mutex_trylock( b ) ) { /*failed*/
-   pthread_mutex_unlock( a );
-   ...
+pthread_mutex_lock(a);
+if (pthread_mutex_trylock(b)) { /* failed */
+    pthread_mutex_unlock(a);
+    ...
 }
 ```
 
