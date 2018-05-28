@@ -8,14 +8,14 @@ int status;
 pid_t child = fork();
 if (child == -1) return 1; //Failed
 if (child > 0) { /* I am the parent - wait for the child to finish */
-  pid_t pid = waitpid(child, &status, 0);
-  if (pid != -1 && WIFEXITED(status)) {
-     int low8bits = WEXITSTATUS(status);
-     printf("Process %d returned %d" , pid, low8bits);
-  }
+    pid_t pid = waitpid(child, &status, 0);
+    if (pid != -1 && WIFEXITED(status)) {
+        int low8bits = WEXITSTATUS(status);
+        printf("Process %d returned %d" , pid, low8bits);
+    }
 } else { /* I am the child */
- // do something interesting
-  execl("/bin/ls", "/bin/ls", ".", (char *) NULL); // "ls ."
+    // do something interesting
+    execl("/bin/ls", "/bin/ls", ".", (char *) NULL); // "ls ."
 }
 ```
 
@@ -84,14 +84,14 @@ Here's program that slowly prints a dot every second, up to 59 dots.
 #include <unistd.h>
 #include <stdio.h>
 int main() {
-  printf("My pid is %d\n", getpid() );
-  int i = 60;
-  while(--i) { 
-    write(1, ".",1);
-    sleep(1);
-  }
-  write(1, "Done!",5);
-  return 0;
+    printf("My pid is %d\n", getpid());
+    int i = 60;
+    while (--i) { 
+        write(1, ".", 1);
+        sleep(1);
+    }
+    write(1, "Done!", 5);
+    return 0;
 }
 ```
 We will first start the process in the background (notice the & at the end).
@@ -130,24 +130,26 @@ There are strict limitations on the executable code inside a signal handler. Mos
 
 One common use of signal handlers is to set a boolean flag that is occasionally polled (read) as part of the normal running of the program. For example,
 ```C
-int pleaseStop ; // See notes on why "volatile sig_atomic_t" is better
+int pleaseStop; // See notes on why "volatile sig_atomic_t" is better
 
 void handle_sigint(int signal) {
-  pleaseStop = 1;
+    pleaseStop = 1;
 }
 
 int main() {
-  signal(SIGINT, handle_sigint);
-  pleaseStop = 0;
-  while ( ! pleaseStop) { 
-     /* application logic here */ 
-   }
-  /* cleanup code here */
+    signal(SIGINT, handle_sigint);
+    pleaseStop = 0;
+    while (! pleaseStop) { 
+        /* application logic here */ 
+    }
+    /* cleanup code here */
 }
 ```
+
 The above code might appear to be correct on paper. However, we need to provide a hint to the compiler and to the CPU core that will execute the `main()` loop. We need to prevent a compiler optimization: The expression `! pleaseStop` appears to be a loop invariant i.e. true forever, so can be simplified to `true`.  Secondly, we need to ensure that the value of `pleaseStop` is not cached using a CPU register and instead always read from and written to main memory. The `sig_atomic_t` type implies that all the bits of the variable can be read or modified as an "atomic operation" - a single uninterruptable operation. It is impossible to read a value that is composed of some new bit values and old bit values.
 
 By specifying `pleaseStop` with the correct type `volatile sig_atomic_t` we can write portable code where the main loop will be exited after the signal handler returns. The `sig_atomic_t` type can be as large as an `int` on most modern platforms but on embedded systems can be as small as a `char` and only able to represent (-127 to 127) values.
+
 ```C
 volatile sig_atomic_t pleaseStop;
 ```
