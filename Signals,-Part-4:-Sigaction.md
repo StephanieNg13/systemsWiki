@@ -12,10 +12,10 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 The sigaction struct includes two callback functions (we will only look at the 'handler' version), a signal mask and a flags field -
 ```C
 struct sigaction {
-               void     (*sa_handler)(int);
-               void     (*sa_sigaction)(int, siginfo_t *, void *);
-               sigset_t   sa_mask;
-               int        sa_flags;
+    void     (*sa_handler)(int);
+    void     (*sa_sigaction)(int, siginfo_t *, void *);
+    sigset_t   sa_mask;
+    int        sa_flags;
 }; 
 ```
 ## How do I convert a `signal` call into the equivalent `sigaction` call?
@@ -51,29 +51,26 @@ Based on `http://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_sigma
 ```C
 static sigset_t   signal_mask;  /* signals to block         */
 
-int main (int argc, char *argv[])
-{
+int main (int argc, char *argv[]) {
     pthread_t sig_thr_id;      /* signal handler thread ID */
-    sigemptyset (&signal_mask);
-    sigaddset (&signal_mask, SIGINT);
-    sigaddset (&signal_mask, SIGTERM);
-    pthread_sigmask (SIG_BLOCK, &signal_mask, NULL);
+    sigemptyset(&signal_mask);
+    sigaddset(&signal_mask, SIGINT);
+    sigaddset(&signal_mask, SIGTERM);
+    pthread_sigmask(SIG_BLOCK, &signal_mask, NULL);
 
     /* New threads will inherit this thread's mask */
-    pthread_create (&sig_thr_id, NULL, signal_thread, NULL);
+    pthread_create(&sig_thr_id, NULL, signal_thread, NULL);
 
     /* APPLICATION CODE */
     ...
 }
 
-void *signal_thread (void *arg)
-{
+void *signal_thread (void *arg) {
     int       sig_caught;    /* signal caught       */
 
     /* Use same mask as the set of signals that we'd like to know about! */
     sigwait(&signal_mask, &sig_caught);
-    switch (sig_caught)
-    {
+    switch (sig_caught) {
     case SIGINT:     /* process SIGINT  */
         ...
         break;
@@ -81,7 +78,7 @@ void *signal_thread (void *arg)
         ...
         break;
     default:         /* should normally not happen */
-        fprintf (stderr, "\nUnexpected signal %d\n", sig_caught);
+        fprintf(stderr, "\nUnexpected signal %d\n", sig_caught);
         break;
     }
 }
