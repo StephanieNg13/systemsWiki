@@ -21,25 +21,25 @@ Note for clarity we will not use 'unsigned' in this code example. Our fixed-size
 
 ```C
 struct inode {
- int[10] directblocks; // indices for the block array i.e. where to the find the file's content
- long size;
- // ... standard inode meta-data e.g.
- int mode, userid,groupid;
- time_t ctime,atime,mtime;
+    int[10] directblocks; // indices for the block array i.e. where to the find the file's content
+    long size;
+    // ... standard inode meta-data e.g.
+    int mode, userid,groupid;
+    time_t ctime, atime, mtime;
 }
 ```
 Now we can work out how to read a byte at offset `position` of our file:
 ```C
-char readbyte(inode*inode,long position) {
-  if(position <0 || position >= inode->size) return -1; // invalid offset
+char readbyte(inode *inode, long position) {
+  if (position < 0 || position >= inode->size) return -1; // invalid offset
 
-  int  block_count = position / 4096,offset = position % 4096;
+  int block_count = position / 4096, offset = position % 4096;
   
   // block count better be 0..9 !
   int physical_idx = lookup_physical_block_index(inode, block_count );
 
   // sanity check that the disk block index is reasonable...
-  assert(physical_idx >=0 && physical_idx < MAX_BLOCK);
+  assert (physical_idx >= 0 && physical_idx < MAX_BLOCK);
 
 
   // read the disk block from our virtual disk 'blocks' and return the specific byte
@@ -49,10 +49,10 @@ char readbyte(inode*inode,long position) {
 Our initial version of lookup_physical_block is simple - we can use our table of 10 direct blocks!
 
 ```C
-int lookup_physical_block_index(inode*inode, int block_count) {
-  assert(block_count>=0 && block_count < 10);
+int lookup_physical_block_index(inode *inode, int block_count) {
+  assert (block_count >= 0 && block_count < 10);
 
-  return inode->directblocks[ block_count ]; // returns an index value between [0,MAX_BLOCK)
+  return inode->directblocks[block_count]; // returns an index value between [0,MAX_BLOCK)
 }
 ```
 
@@ -62,10 +62,10 @@ This simple representation is reasonable provided we can represent all possible 
 
 ```C
 struct inode {
- int[10] directblocks; // if size<4KB then only the first one is valid
- int indirectblock; // valid value when size >= 40KB
- int size;
- ...
+    int[10] directblocks; // if size<4KB then only the first one is valid
+    int indirectblock; // valid value when size >= 40KB
+    int size;
+    ...
 }
 ```
 
@@ -73,23 +73,23 @@ The indirect block is just a regular disk block of 4096 bytes, but we will use i
 
 
 ```C
-int lookup_physical_block_index(inode*inode, int block_count) {
-  assert(sizeof(int)==4); // Warning this code assumes an index is 4 bytes!
-  assert(block_count>=0 && block_count < 1024 + 10); // 0 <= block_count< 1034
+int lookup_physical_block_index(inode *inode, int block_count) {
+    assert (sizeof (int) == 4); // Warning this code assumes an index is 4 bytes!
+    assert (block_count >= 0 && block_count < 1024 + 10); // 0 <= block_count< 1034
 
-  if( block_count < 10)
-     return inode->directblocks[ block_count ];
+    if (block_count < 10)
+        return inode->directblocks[block_count];
   
-  // read the indirect block from disk:
-  block_t* oneblock = & blocks[ inode->indirectblock ];
+    // read the indirect block from disk:
+    block_t* oneblock = &blocks[inode->indirectblock];
 
-  // Treat the 4KB as an array of 1024 pointers to other disk blocks
-  int* table = (int*) oneblock;
+    // Treat the 4KB as an array of 1024 pointers to other disk blocks
+    int *table = (int *) oneblock;
   
- // Look up the correct entry in the table
- // Offset by 10 because the first 10 blocks of data are already 
- // accounted for
-  return table[ block_count - 10 ];
+    // Look up the correct entry in the table
+    // Offset by 10 because the first 10 blocks of data are already 
+    // accounted for
+    return table[block_count - 10];
 }
 ```
 
@@ -104,29 +104,26 @@ For even larger files, we could use two indirect blocks. However there's a bette
 (source: http://uw714doc.sco.com/en/FS_admin/graphics/s5chain.gif)
 
 ```C
-int lookup_physical_block_index(inode*inode, int block_count) {
-  if( block_count < 10)
-     return inode->directblocks[ block_count ];
+int lookup_physical_block_index(inode *inode, int block_count) {
+    if (block_count < 10)
+        return inode->directblocks[block_count];
 
-  // Use indirect block for the next 1024 blocks:
-  // Assumes 1024 ints can fit inside each block!
-  if( block_count < 1024 + 10) {   
-      int* table = (int*) & blocks[ inode->indirectblock ];
-      return table[ block_count - 10 ];
-  }
-  // For huge files we will use a table of tables
-  int i = (block_count - 1034) / 1024 , j = (block_count - 1034) % 1024;
-  assert(i<1024); // triple-indirect is not implemented here!
+    // Use indirect block for the next 1024 blocks:
+    // Assumes 1024 ints can fit inside each block!
+    if (block_count < 1024 + 10) {   
+        int *table = (int *) &blocks[inode->indirectblock];
+        return table[block_count - 10];
+    }
+    // For huge files we will use a table of tables
+    int i = (block_count - 1034) / 1024 , j = (block_count - 1034) % 1024;
+    assert (i < 1024); // triple-indirect is not implemented here!
 
-  int* table1 = (int*) & blocks[ inode->doubleindirectblock ];
-   // The first table tells us where to read the second table ...
-  int* table2 = (int*) & blocks[   table1[i]   ];
-  return table2[j];
+    int *table1 = (int *) &blocks[inode->doubleindirectblock];
+    // The first table tells us where to read the second table ...
+    int *table2 = (int *) &blocks[table1[I]];
+    return table2[j];
  
-   // For gigantic files we will need to implement triple-indirect (table of tables of tables)
+    // For gigantic files we will need to implement triple-indirect (table of tables of tables)
 }
 ```
 Notice that reading a byte using double indirect requires 3 disk block reads (two tables and the actual data block).
-
-
-
