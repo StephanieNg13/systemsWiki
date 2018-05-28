@@ -45,10 +45,10 @@ The child process inherits a copy of the parent's signal dispositions. In other 
 
 Note pending signals for the child are _not_ inherited during forking.
 
-## What happens during exec ?
+## What happens during exec?
 Both the signal mask and the signal disposition carries over to the exec-ed program. [https://www.gnu.org/software/libc/manual/html_node/Executing-a-File.html#Executing-a-File](Source) Pending signals are preserved as well.  Signal handlers are reset, because the original handler code has disappeared along with the old process.
 
-## What happens during fork ?
+## What happens during fork?
 The child process inherits a copy of the parent process's signal disposition and a copy of the parent's signal mask.
 
 For example if `SIGINT` is blocked in the parent it will be blocked in the child too.
