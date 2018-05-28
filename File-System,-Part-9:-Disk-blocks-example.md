@@ -31,28 +31,28 @@ struct inode {
 Now we can work out how to read a byte at offset `position` of our file:
 ```C
 char readbyte(inode *inode, long position) {
-  if (position < 0 || position >= inode->size) return -1; // invalid offset
+    if (position < 0 || position >= inode->size) return -1; // invalid offset
 
-  int block_count = position / 4096, offset = position % 4096;
+    int block_count = position / 4096, offset = position % 4096;
   
-  // block count better be 0..9 !
-  int physical_idx = lookup_physical_block_index(inode, block_count );
+    // block count better be 0..9 !
+    int physical_idx = lookup_physical_block_index(inode, block_count );
 
-  // sanity check that the disk block index is reasonable...
-  assert (physical_idx >= 0 && physical_idx < MAX_BLOCK);
+    // sanity check that the disk block index is reasonable...
+    assert (physical_idx >= 0 && physical_idx < MAX_BLOCK);
 
 
-  // read the disk block from our virtual disk 'blocks' and return the specific byte
-  return blocks[physical_idx][offset];
+    // read the disk block from our virtual disk 'blocks' and return the specific byte
+    return blocks[physical_idx][offset];
 }
 ```
 Our initial version of lookup_physical_block is simple - we can use our table of 10 direct blocks!
 
 ```C
 int lookup_physical_block_index(inode *inode, int block_count) {
-  assert (block_count >= 0 && block_count < 10);
+    assert (block_count >= 0 && block_count < 10);
 
-  return inode->directblocks[block_count]; // returns an index value between [0,MAX_BLOCK)
+    return inode->directblocks[block_count]; // returns an index value between [0,MAX_BLOCK)
 }
 ```
 
