@@ -1,7 +1,7 @@
 ## How do I send a signal to a process from the shell?
 You already know one way to send a `SIG_INT` just type `CTRL-C` 
 From the shell you can use `kill` (if you know the process id) and `killall` (if you know the process name)
-```
+```sh
 # First let's use ps and grep to find the process we want to send a signal to
 $ ps au | grep myprogram
 angrave  4409   0.0  0.0  2434892    512 s004  R+    2:42PM   0:00.00 myprogram 1 2 3
@@ -15,7 +15,7 @@ $ kill -9 4409
 ```
 
 `killall` is similar except that it matches by program name. The next two example, sends a `SIGINT` and then `SIGKILL` to terminate the processes that are running `myprogram`
-```
+```sh
 # Send SIGINT (SIGINT can be ignored)
 $ killall -SIGINT myprogram
 
@@ -49,7 +49,7 @@ pthread_kill(pthread_self(), SIGKILL); // send SIGKILL to myself
 It will kill the entire process. Though individual threads can set a signal mask, the signal disposition (the table of handlers/action performed for each signal) is *per-proces*s not *per-thread*. This means 
 `sigaction` can be called from any thread because you will be setting a signal handler for all threads in the process.
 
-## How do I catch (handle) a signal ?
+## How do I catch (handle) a signal?
 You can choose a handle pending signals asynchronously or synchronously.
 
 Install a signal handler to asynchronously handle signals use `sigaction` (or, for simple examples, `signal` ).
