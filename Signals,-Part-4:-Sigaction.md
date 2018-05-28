@@ -1,6 +1,6 @@
 ## How and why do I use `sigaction` ?
 
-You should use `sigaction` instead of `signal` because it has better defined semantics. `signal` on different operating system does different things which is **bad** `sigaction` is more portable and is better defined for threads if need be.
+You should use `sigaction` instead of `signal` because it has better defined semantics. `signal` on different operating system does different things which is **bad**. `sigaction` is more portable and is better defined for threads if need be.
 
 To change the "signal disposition" of a process - i.e. what happens when a signal is delivered to your process - use `sigaction`
 
