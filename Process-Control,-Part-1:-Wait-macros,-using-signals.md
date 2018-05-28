@@ -6,7 +6,7 @@ You can find the lowest 8 bits of the child's exit value (the return value of `m
 ```C
 int status;
 pid_t child = fork();
-if (child == -1) return 1; //Failed
+if (child == -1) return 1; // Failed
 if (child > 0) { /* I am the parent - wait for the child to finish */
     pid_t pid = waitpid(child, &status, 0);
     if (pid != -1 && WIFEXITED(status)) {
