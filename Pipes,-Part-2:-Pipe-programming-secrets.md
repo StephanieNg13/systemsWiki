@@ -10,7 +10,7 @@ Here's a complete example that doesn't work! The child reads one byte at a time 
 int main() {
     int fd[2];
     pipe(fd);
-    //You must read from fd[0] and write from fd[1]
+    // You must read from fd[0] and write from fd[1]
     printf("Reading from %d, writing to %d\n", fd[0], fd[1]);
 
     pid_t p = fork();
@@ -58,7 +58,7 @@ If you already have a file descriptor then you can 'wrap' it yourself into a FIL
 #include <fcntl.h>
 
 int main() {
-    char *name="Fred";
+    char *name = "Fred";
     int score = 123;
     int filedes = open("mydata.txt", "w", O_CREAT, S_IWUSR | S_IRUSR);
 
@@ -195,23 +195,23 @@ Any `open` is called on a named pipe the kernel blocks until another process cal
 What is wrong with the following program?
 
 ```C
-//Program 1
+// Program 1
 
-int main(){
-	int fd = open("fifo", O_RDWR | O_TRUNC);
-	write(fd, "Hello!", 6);
-	close(fd);
-	return 0;
+int main() {
+    int fd = open("fifo", O_RDWR | O_TRUNC);
+    write(fd, "Hello!", 6);
+    close(fd);
+    return 0;
 }
 
 //Program 2
 int main() {
-	char buffer[7];
-	int fd = open("fifo", O_RDONLY);
-	read(fd, buffer, 6);
-	buffer[6] = '\0';
-	printf("%s\n", buffer);
-	return 0;
+    char buffer[7];
+    int fd = open("fifo", O_RDONLY);
+    read(fd, buffer, 6);
+    buffer[6] = '\0';
+    printf("%s\n", buffer);
+    return 0;
 }
 ```
 
