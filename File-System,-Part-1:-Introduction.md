@@ -47,7 +47,7 @@ A filesystem is how information is organized on disk. Whenever you want to acces
 
 Whoa that's a lot let's break it down
 * Superblock: This block contains metadata about the filesystem, how large, last modified time, a journal, number of inodes and the first inode start, number of data block and the first data block start.
-* Inode: This is the the key abstraction. An inode is a file. 
+* Inode: This is the key abstraction. An inode is a file. 
 * Disk Blocks: These are where the data is stored. The actual contents of the file
 
 ## How does inode store the file contents?
