@@ -40,9 +40,18 @@ int main(int argc, char** argv) {
 ```
 ## Watch the videos and write up your answers to the following questions
 
+**Important!**
+
+Make sure to set up your github repository at. This is important because otherwise we won't be able to grade your assignments!
+
+[Create Repository](https://edu.cs.illinois.edu/ghe/createRepo/)
+
+The course materials are here:
+
 http://cs-education.github.io/sys/
 
 The course wikibook:
+
 https://github.com/angrave/SystemProgramming/wiki
 
 Questions? Comments? Use Piazza:
