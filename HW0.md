@@ -42,11 +42,7 @@ int main(int argc, char** argv) {
 
 **Important!**
 
-Make sure to set up your github repository at. This is important because otherwise we won't be able to grade your assignments!
-
-[Create Repository](https://edu.cs.illinois.edu/ghe/createRepo/)
-
-The course materials are here:
+The virtual machine-in-your-browser and the videos you need for HW0 are here:
 
 http://cs-education.github.io/sys/
 
@@ -55,9 +51,11 @@ The course wikibook:
 https://github.com/angrave/SystemProgramming/wiki
 
 Questions? Comments? Use Piazza:
-https://piazza.com/illinois/spring2018/cs241
+https://piazza.com/illinois/fall2018/cs241
 
-The in-browser virtual machine runs entirely in Javascript and is fastest in Chrome. Note the VM and any code you write is reset when you reload the page, *so copy your code to a separate document.* The post-video challenges (e.g. Haiku poem) are not part of homework 0. 
+The in-browser virtual machine runs entirely in Javascript and is fastest in Chrome. Note the VM and any code you write is reset when you reload the page, *so copy your code to a separate document.* The post-video challenges (e.g. Haiku poem) are not part of homework 0 but you learn the most by doing (rather than just passively watching) - so we suggest you have some fun with each end-of-video challenge.
+
+HW0 questions are below. Copy your answers into a text document sd you'll need to submit them later in the course.
 
 ## Chapter 1
 
