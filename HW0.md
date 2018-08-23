@@ -182,15 +182,16 @@ Text input and output and parsing using `getchar`, `gets`, and `getline`.
 
 ## C Development
 
-These are general tips for compiling/developing. A web search is useful here
+These are general tips for compiling and developing using a compiler and git. Some web searches will be useful here
 
 1. What compiler flag is used to generate a debug build?
 2. You modify the Makefile to generate debug builds and type `make` again. Explain why this is insufficient to generate a new build.
 3. Are tabs or spaces used to indent the commands after the rule in a Makefile?
 4. What does `git commit` do? What's a `sha` in the context of git?
 5. What does `git log` show you?
-6. What does `git push` do? Why is it not just sufficient to `git commit`?
-7. What does a non-fast-forward error `git push` reject mean? What is the most common way of dealing with this?
+6. What does `git status` tell you and how would the contents of `.gitignore` change its output?
+7. What does `git push` do? Why is it not just sufficient to commit with `git commit -m 'fixed all bugs' `?
+8. What does a non-fast-forward error `git push` reject mean? What is the most common way of dealing with this?
 
 ## Optional (Just for fun)
 - Convert your a song lyrics into System Programming and C code covered in this wiki book and share on Piazza.
