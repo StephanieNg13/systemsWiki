@@ -3,8 +3,9 @@ This wiki is being built by students and faculty from the University of Illinois
 
 This book is an introduction to programming in C, and system programming (processes, threads, synchronization, networking and more!). We assume you've already had some programming experience, in an earlier computer science course.
 
-## 0. Introduction (and resources for UIUC students)
+## 0. Introduction (resources for UIUC students)
 * [[HW0]]
+* [Lecture Code and handouts](https://github-dev.cs.illinois.edu/angrave/cs241-lectures/)
 * [[Informal Glossary]]
 * [[#Piazza: When And How to Ask For Help]]
 * [[Programming Tricks, Part 1 ]]
