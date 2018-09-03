@@ -109,4 +109,4 @@ For the same disk configuration, a double indirect block stores 1024 pointers to
 
 Similarly, a triple indirect block can refer up to 4TB of data.
 
-[Go to File System: Part 2](https://github.com/angrave/SystemProgramming/wiki/File-System,-Part-2:-Files-are-inodes-(everything-else-is-just-data...))
+[Go to File System: Part 2](https://github.com/angrave/SystemProgramming/wiki/File-System,-Part-2:-Files-are-inodes)
