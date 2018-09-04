@@ -30,7 +30,14 @@ Use `sprintf` or better `snprintf`.
 char result[200];
 int len = snprintf(result, sizeof(result), "%s:%d", name, score);
 ```
-snprintf returns the number of characters written excluding the terminating byte. In the above example, this would be a maximum of 199.
+~~snprintf returns the number of characters written excluding the terminating byte. In the above example, this would be a maximum of 199.~~
+The return value of snprintf is the length that would have been written given enough space, excluding the ending NULL byte.
+```C
+char x[5];
+int size = snprintf(x, 5, "%s%s%s", "12", "34", "56"); // writes "1234" + null
+printf("%d\n", size); // output 6
+```
+Source: [this StackOverflow post](https://stackoverflow.com/questions/12746885/why-use-asprintf) and man page.
 
 ## What if I really really want `printf` to call `write` without a newline?
 
