@@ -56,7 +56,7 @@ struct User {
 };
 typedef struct User user_t;
 
-user_t *user = (user_t *) malloc(sizeof (user));
+user_t *user = (user_t *) malloc(sizeof (user_t *));
 ```
 In the above example, we needed to allocate enough bytes for the struct. Instead, we allocated enough bytes to hold a pointer. Once we start using the user pointer we will corrupt memory. The correct code is shown below.
 ```C
