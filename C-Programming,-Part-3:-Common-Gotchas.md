@@ -150,7 +150,7 @@ Since `getline` reuses a buffer, all pointers in the `strings` array are actuall
 ```C
    strings[i] = getline(&line, &linecap, stdin) >= 0 ? strdup(line) : "";
 ```
-Fun fact: providing "1\n123456789abcdef\n3\n" to the broken version of the program causes it to print out "3\n3\n1\n" instead of "3\n3\n3". Now why might that be? 
+Fun fact: providing "1\n123456789abcdef\n3\n" to the broken version of the program causes it to print out "3\n3\n1\n" instead of "3\n3\n3\n". Now why might that be? 
 *Hint: use Valgrind*
 
 # Logic and Program flow mistakes
