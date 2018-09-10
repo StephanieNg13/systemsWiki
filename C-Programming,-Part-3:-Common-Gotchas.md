@@ -128,6 +128,30 @@ ${2}
 endsnippet
 ```
 
+## Forgetting to copy `getline` Buffer
+```C
+#include <stdio.h>
+  
+int main(void){
+  char *line = NULL;
+  size_t linecap = 0;
+  char *strings[3];
+
+  // assume stdin contains "1\n2\n\3\n"
+  for (size_t i = 0; i < 3; ++i)
+    strings[i] = getline(&line, &linecap, stdin) >= 0 ? line : "";
+
+  // this prints out "3\n3\n\3" instead of "3\n\2\n1\n"
+  for (size_t i = 3; i--;) // i=2,1,0
+    printf("%s", strings[i]);
+}
+```
+Since `getline` reuses a buffer, all pointers in the `strings` array are actually pointing to the same memory. We can fix this by modifying the assignment to `strings[i]` as follows.
+```C
+   strings[i] = getline(&line, &linecap, stdin) >= 0 ? strdup(line) : "";
+```
+Fun fact: providing "1\n123456789abcdef\n3\n" to the broken version of the program causes it to print out "3\n3\n1\n" instead of "3\n3\n3". Now why might that be? 
+*Hint: use Valgrind*
 
 # Logic and Program flow mistakes
 ## Forgetting break
