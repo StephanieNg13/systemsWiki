@@ -36,7 +36,7 @@ int getHiscore(char* game) {
 ````
 
 ## What is server stub code? What is unmarshalling?
-The server stub code will receive the request, unmarshall the request into a valid in-memory data call the underlying implementation and send the result back to the caller.
+The server stub code will receive the request, unmarshall the request into a valid in-memory data, call the underlying implementation, and send the result back to the caller.
 
 ## How do you send an int? float? a struct?  A linked list? A graph?
 To implement RPC you need to decide (and document) which conventions you will use to serialize the data into a byte sequence. Even a simple integer has several common choices:
