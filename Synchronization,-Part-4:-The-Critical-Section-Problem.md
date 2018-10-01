@@ -171,16 +171,41 @@ A related challenge is that CPU cores include a data cache to store recently rea
 
 But there is happy ending. Fortunately, modern hardware addresses these issues using 'memory fences' (also known as memory barrier) CPU instructions to ensure that main memory and the CPUs' cache is in a reasonable and coherent state. Higher level synchronization primitives, such as `pthread_mutex_lock` are will call these CPU instructions as part of their implementation. Thus, in practice, surrounding critical section with a mutex lock and unlock calls is sufficient to ignore these lower-level problems.
 
-Further reading: we suggest the following web post that discusses implementing Peterson's algorithm on an x86 process and the linux documentation on memory barriers.
+Advanced Further reading: we suggest the following web post that discusses implementing Peterson's algorithm on an x86 process and the linux documentation on memory barriers.
 
 http://bartoszmilewski.com/2008/11/05/who-ordered-memory-fences-on-an-x86/
 http://lxr.free-electrons.com/source/Documentation/memory-barriers.txt
 
 # Hardware Solutions
 
-## How do we implement Critical Section Problem on hardware?
+##  How would you implement the Critical Section Problem in hardware?
+On a simple single CPU machine, a process with access to all CPU instructions, could temporarily disable interrupts.
+```C
+disable_interrupts
+// Critical section code
+enable_interrupts
+```
+If interrupts are disabled then the current thread cannot be interrupted! i.e. the CPU instructions of the critical section will complete.
 
-We can use C11 Atomics to do that perfectly! A complete solution is detailed here (this is a spinlock mutex, [futex](https://locklessinc.com/articles/mutex_cv_futex/) implementations can be found online).
+However most systems today have more than one CPU core and disabling interrupts is a privileged instruction - so the above technique is rarely appropriate.
+
+Instead, suppose the CPU provided us with a special atomic instruction `__exch` that swaps the values at two memory locations. We could support Critical sections by implementing mutex locks using the following pseudo code.
+````C
+my_mutex_init(int* m)  { *m= 0; }
+
+my_mutex_lock(int* m) {
+  for(int q = 1; q ; ) {  __exch(&m , &q); }
+} // when this returns it is safe to enter your critical section
+
+// After you critical section is finished,call unlock...
+my_mutex_unlock(int* m)  { *m= 0; }
+```
+The exchange instruction must be atomic i.e. it behaves as a single __uninterruptable__ and indivisible instruction. For example, if two threads both call `my_mutex_lock` (and then __exch) at the same time, then one thread _will_receive a value of 0, and the other thread will loose and get the newer value of 1 (so will continue to poll).
+
+
+## How do we really implement the Critical Section Problem on real hardware? (Advanced topic)
+
+A complete solution using C11 atomics is detailed here (this is a spinlock mutex, [futex](https://locklessinc.com/articles/mutex_cv_futex/) implementations can be found online).
 
 ```C
 typedef struct mutex_{
