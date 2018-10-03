@@ -1,20 +1,20 @@
 # Topics
-Virtual Memory
-Page Table
-MMU/TLB
-Address Translation
-Page Faults
-Frames/Pages
-Single level vs multi level page table
-Calculating offsets for multi-level page table
-Pipes
-Pipe read write ends
-Writing to a zero reader pipe
-Reading from a zero writer pipe
-Named pipe and Unnamed Pipes
-Buffer Size/Atomicity
-Scheduling Algorithms
-Measures of Efficiency
+* Virtual Memory
+* Page Table
+* MMU/TLB
+* Address Translation
+* Page Faults
+* Frames/Pages
+* Single level vs multi level page table
+* Calculating offsets for multi-level page table
+* Pipes
+* Pipe read write ends
+* Writing to a zero reader pipe
+* Reading from a zero writer pipe
+* Named pipe and Unnamed Pipes
+* Buffer Size/Atomicity
+* Scheduling Algorithms
+* Measures of Efficiency
 
 # Questions
 * What is virtual memory?
