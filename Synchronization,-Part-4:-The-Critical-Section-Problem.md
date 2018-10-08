@@ -126,7 +126,20 @@ wait while your flag is raised and turn is your_id
 lower my flag
 ```
 
-This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 2 and is currently inside the critical section. Thread #1 arrives, _sets the turn back to 1_ and now waits until thread 2 lowers the flag.
+Equivalent pseudo-C version
+````C
+\\ Candidate #5
+bool flag1, flag2; //both initially false
+int flag = 1
+
+thread1:                          thread2:
+  flag1 = true                      flag2 = true
+  turn = 2                          turn = 1
+  while(flag2 && turn == 2) {}      while(flag1 && turn == 1) {}
+  Critical Section                  Critical Section
+  flag1 = false                     flag2 = false
+````
+This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 1 and is currently inside the critical section. Thread #1 arrives, _sets the turn back to 2_ and now waits until thread 2 lowers the flag.
 
 
 Link to Peterson's original article pdf:
@@ -199,7 +212,7 @@ my_mutex_lock(int* m) {
 
 // After you critical section is finished,call unlock...
 my_mutex_unlock(int* m)  { *m= 0; }
-```
+````
 
 The exchange instruction must be atomic i.e. it behaves as a single __uninterruptable__ and indivisible instruction. For example, if two threads both call `my_mutex_lock` (and then __exch) at the same time, then one thread _will_receive a value of 0, and the other thread will loose and get the newer value of 1 (so will continue to poll).
 
