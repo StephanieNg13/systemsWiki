@@ -114,7 +114,6 @@ Time | Turn | Thread #1 | Thread #2
 
 ## What is Peterson's solution?
 Peterson published his novel and surprisingly simple solution in a 2 page paper in 1981. 
-A C-like code implementation is available on Wikipedia [here](https://en.wikipedia.org/wiki/Peterson%27s_algorithm#The_algorithm)
 A version of his algorithm is shown below that uses a shared variable `turn`: 
 
 ```
@@ -126,10 +125,10 @@ wait while your flag is raised and turn is your_id
 lower my flag
 ```
 
-Equivalent pseudo-C version
+An equivalent pseudo-C version is below.
 ````C
 \\ Candidate #5
-bool flag1, flag2; //both initially false
+bool flag1, flag2  //both initially false
 int flag = 1
 
 thread1:                          thread2:
@@ -139,8 +138,9 @@ thread1:                          thread2:
   Critical Section                  Critical Section
   flag1 = false                     flag2 = false
 ````
-This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 1 and is currently inside the critical section. Thread #1 arrives, _sets the turn back to 2_ and now waits until thread 2 lowers the flag.
+This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 1 and is currently inside the critical section. Thread #1 arrives, _sets the turn back to 2_ and now waits until thread 2 lowers the flag. 
 
+A similar C-like version of Peterson's implementation is discussed at Wikipedia [here](https://en.wikipedia.org/wiki/Peterson%27s_algorithm#The_algorithm).
 
 Link to Peterson's original article pdf:
 [G. L. Peterson: "Myths About the Mutual Exclusion Problem", Information Processing Letters 12(3) 1981, 115–116](http://dl.acm.org/citation.cfm?id=945527)
