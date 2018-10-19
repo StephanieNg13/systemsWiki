@@ -270,6 +270,6 @@ void push(double v) {
 * Locking/unlocking the wrong mutex (due to a silly typo)
 * Not unlocking a mutex (due to say an early return during an error condition)
 * Resource leak (not calling `pthread_mutex_destroy`)
-* Using an unitialized mutex (or using a mutex that has already been destroyed)
+* Using an uninitialized mutex (or using a mutex that has already been destroyed)
 * Locking a mutex twice on a thread (without unlocking first)
 * Deadlock and Priority Inversion (we will talk about these later)
