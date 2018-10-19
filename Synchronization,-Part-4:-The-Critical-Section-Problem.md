@@ -25,7 +25,7 @@ Time | Thread 1 | Thread 2
 1 | `while(lock) {}`
 2 | | `while(lock) {} ` | 
 3 | lock = 1 | lock = 1 |
-Ooops! There is a race condition. In the unfortunate case both threads checked the lock and read a false value and so were able to continue. 
+Ooops! There is a race condition. In the unfortunate case both threads checked the lock and read a false value and so we are unable to continue. 
 
 ## Candidate solutions to the critical section problem.
 To simplify the discussion we consider only two threads. Note these arguments work for threads and processes and the classic CS literature discusses these problem in terms of two processes that need exclusive access (i.e. mutual exclusion) to a critical section or shared resource.
