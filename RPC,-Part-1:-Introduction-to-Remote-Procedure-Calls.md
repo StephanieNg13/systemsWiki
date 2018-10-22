@@ -18,7 +18,7 @@ The stub code is the necessary code to hide the complexity of performing a remot
 int getHiscore(char* game) {
   // Marshall the request into a sequence of bytes:
   char* buffer;
-  asprintf(&buffer,"getHiscore(%s)!", name);
+  asprintf(&buffer,"getHiscore(%s)!", game);
 
   // Send down the wire (we do not send the zero byte; the '!' signifies the end of the message)
   write(fd, buffer, strlen(buffer) );
