@@ -61,7 +61,6 @@ Magic! No seriously, a system called "DNS" (Domain Name Service) is used. If a m
 DNS by itself is fast but not secure. DNS requests are not encrypted and susceptible to 'man-in-the-middle' attacks. For example, a coffee shop internet connection could easily subvert your DNS requests and send back different IP addresses for a particular domain
 
 ## How do I connect to a TCP server (e.g. web server?)
-TODO
 
 There are three basic system calls you need to connect to a remote machine:
 ```
@@ -119,4 +118,6 @@ The old function `gethostbyname` is deprecated; it's the old way convert a host 
 
 ## Is it that easy!?
 Yes and no. It's easy to create a simple TCP client - however network communications offers many different levels of abstraction and several attributes and options that can be set at each level of abstraction (for example we haven't talked about `setsockopt` which can manipulate options for the socket).
+
+## Further reading
 For more information see [Beej's guide](https://beej.us/guide/bgnet/html/multi/index.html).
