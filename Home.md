@@ -151,9 +151,13 @@ This book is an introduction to programming in C, and system programming (proces
 * [[ Signals, Part 4: Sigaction ]]
 * [[ Signals Review Questions ]]
 
-## 11. Container-based Computing
+## 11. Virtualization, emulation, and containers
 
-* [[ Introduction to Container-based Computing ]]
+* [[ Virtualization, Part 1: Machine emulation ]]
+* [[ Virtualization, Part 2: Virtual machines ]]
+* [[ Virtualization, Part 3: Linux namespaces ]]
+* [[ Virtualization, Part 4: Docker and Singularity ]]
+
 
 ## UIUC Exam Practice Questions
 Warning these are good practice but not comprehensive. The UIUC CS241 final assumes you fully understand and can apply all topics of the course. Questions will focus mostly but not entirely on topics that you have used in the lab and programming assignments.
