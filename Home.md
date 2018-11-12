@@ -156,7 +156,7 @@ This book is an introduction to programming in C, and system programming (proces
 * [[ Virtualization, Part 1: Machine emulation ]]
 * [[ Virtualization, Part 2: Virtual machines ]]
 * [[ Virtualization, Part 3: Linux namespaces ]]
-* [[ Virtualization, Part 4: Docker and Singularity ]]
+* [[ Virtualization, Part 4: Docker and Singularity containers]]
 
 
 ## UIUC Exam Practice Questions
