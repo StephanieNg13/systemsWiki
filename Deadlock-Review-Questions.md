@@ -40,7 +40,7 @@ What happens and why? What happens if a third thread calls `pthread_mutex_lock(m
      * P1 acquires R3
      * P2 waits for R3
      * P3 acquires R5
-     * P1 waits for R4
+     * P1 acquires  R4
      * P3 waits for R1
      * P4 waits for R5
      * P5 waits for R1
